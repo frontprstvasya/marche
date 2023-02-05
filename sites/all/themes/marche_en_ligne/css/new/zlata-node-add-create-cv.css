@@ -1,0 +1,380 @@
+.node-create_cv-form {
+    margin: 0 auto 20px;
+    background: #fff;
+    box-shadow: 1px 2px 4px 2px rgb(0 0 0 / 15%);
+    border-radius: 12px;
+    padding: 16px 0;
+}
+
+.page-node-add-create-cv #edit-field-categories-und {
+    pointer-events: none;
+}
+
+.page-node-add-create-cv .form-item-field-categories-und.form-type-select:after {
+    display: none;
+}
+
+.page-node-add-create-cv .form-field-type-text-long {
+    padding: 0 10px 0 0;
+}
+
+.page-node-add-create-cv .form-item-field-describe-experience-und-0-value label,
+.page-node-add-create-cv .form-item-field-tell-about-yourself-und-0-value label {
+    position: absolute;
+    color: #777777;
+    margin: 10px 0 0 30px;
+}
+
+.page-node-add-create-cv .form-field-type-text-long textarea {
+    padding: 30px 0 20px 30px;
+    width: calc(100% - 24px);
+    border-radius: 12px;
+    border-color: #017A61;
+}
+
+.page-node-add-create-cv #edit-field-categories-und-0-tid-select-2 {
+    display: none;
+}
+
+.page-node-add .hide-banner .easy-breadcrumb span,
+.page-node-add .hide-banner .easy-breadcrumb a {
+    color: #017A61;
+}
+
+.section-node-add .form-type-select {
+    position: relative;
+}
+
+.section-node-add .form-type-select:after {
+    content: "\e919";
+    position: absolute;
+    font-family: "new-marche";
+    display: flex;
+    align-items: center;
+    width: 10px;
+    height: calc(100% - 41px);
+    font-size: 17px;
+    color: #94B6AF;
+    background: #fff;
+    right: 15px;
+    bottom: 7px;
+    pointer-events: none;
+    border-radius: 9px;
+    outline: none;
+    border: none;
+    padding-right: 15px;
+    z-index: 2;
+    font-weight: bold;
+}
+
+.node-create_cv-form .required-fields {
+    padding: 0 10px 30px;
+}
+
+.node-create_cv-form .required-fields .required-fields,
+.node-create_cv-form #edit-field-description,
+.node-create_cv-form .form-item-field-communication-und {
+    padding: 0;
+}
+
+.node-create_cv-form .form-field-type-taxonomy-term-reference {
+    padding: 0 0 10px;
+}
+
+.node-create-cv_form .form-type-select {
+    position: relative;
+    padding: 0 10px;
+    margin-bottom: 20px;
+}
+
+.node-create_cv-form .form-type-textfield {
+    margin: 0 auto 20px;
+    position: relative;
+}
+
+.node-create_cv-form .form-item-field-age-und-0-value {
+    border: 1px solid #017A61;
+    border-radius: 12px;
+}
+
+.node-create_cv-form .form-item-field-age-und-0-value label {
+    color: #171718;
+    font-weight: 100;
+}
+
+.node-create_cv-form .form-item-field-salaire-und-0-value {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #017A61;
+    border-radius: 12px;
+}
+
+.node-create_cv-form #field-salaire-add-more-wrapper label {
+    position: absolute;
+    color: #171718;
+    font-weight: 100;
+}
+
+.node-create_cv-form .form-item-field-salaire-und-0-value #edit-field-salaire-und-0-value {
+    padding-left: 60px;
+}
+
+.node-create_cv-form .tabledrag-toggle-weight-wrapper,
+.node-create_cv-form thead,
+.node-create_cv-form .field-multiple-drag {
+    display: none;
+}
+
+.node-create_cv-form #field-languages-values {
+    width: 100%;
+}
+
+.node-create_cv-form .form-item-title label,
+.node-create_cv-form .text-format-wrapper label {
+    color: #017A61;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.node-create_cv-form label span,
+.node-create_cv-form label span {
+    color: red;
+}
+
+.node-create_cv-form .form-type-select label,
+.node-create_cv-form .field-widget-text-textfield label {
+    display: block;
+    width: 100%;
+    color: #017A61;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.node-create_cv-form .form-type-select .form-select {
+    border: 0.5px solid #017A61;
+    color: #017A61;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 10px 10px 10px 30px;
+    margin-top: 8px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.node-create_cv-form #edit-field-sub-categories-und-0-tid-select-2,
+.node-create_cv-form #edit-field-location-und-0-tid-select-2 {
+    width: 100%;
+    left: 0;
+}
+
+.node-create_cv-form .form-type-textfield input {
+    margin-top: 10px;
+    display: inline-block;
+    border: 0.5px solid #017a61;
+    border-radius: 12px;
+    color: #017A61;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 10px;
+    width: calc(100% - 20px);
+    cursor: pointer;
+}
+
+.node-create_cv-form #field-price-add-more-wrapper .form-item-field-price-und-0-value {
+    justify-content: flex-start;
+}
+
+.node-create_cv-form .form-type-textfield #edit-field-price-und-0-value {
+    margin-top: 10px;
+    display: inline-block;
+    border: 0.5px solid #017a61;
+    border-radius: 12px;
+    color: #017A61;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 10px;
+    width: calc(100% - 20px);
+    cursor: pointer;
+}
+
+.node-create_cv-form #edit-field-description-und-0-format {
+    margin-top: 10px;
+    padding: 0;
+}
+
+.node-create_cv-form #edit-body {
+    padding: 0 10px;
+}
+
+@media only screen and (min-width: 850px) {
+    .node-create_cv-form {
+        max-width: 785px;
+    }
+}
+
+
+/* Добавление файла, фото */
+
+.node-create_cv-form .form-field-name-field-photo label {
+    display: flex;
+    width: 120px;
+    height: 96px;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #017A61;
+    box-sizing: border-box;
+    border-radius: 9px;
+    font-size: 50px;
+    text-align: center;
+    font-family: 'Mulish', sans-serif;
+    font-weight: 600;
+    float: left;
+    color: #017A61;
+    background-color: #BBDFD8;
+}
+
+.node-create_cv-form #field-price-add-more-wrapper label {
+    padding: 10px 0;
+    color: #017A61;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.node-create_cv-form #field-price-add-more-wrapper label .form-required {
+    color: red;
+}
+
+.node-create_cv-form #edit-field-description-und-0-format .fieldset-wrapper {
+    display: none;
+}
+
+.node-create_cv-form div .vertical-tabs {
+    padding: 0 10px;
+}
+
+.node-create_cv-form #edit-field-photo-und-0-upload {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.node-create_cv-form #edit-field-photo-und-0-upload {
+    width: 50px;
+}
+
+.node-create_cv-form #edit-field-photo-und-0-upload-button {
+    display: none;
+}
+
+.node-create_cv-form .form-field-name-field-photo {
+    box-shadow: none;
+}
+
+.node-create_cv-form #edit-field-photo {
+    padding: 0 10px;
+}
+
+.node-create_cv-form #edit-field-photo .form-item-field-photo-und-0 {
+    display: flex;
+    gap: 20px;
+}
+
+.node-create_cv-form #edit-field-photo .form-item-field-photo-und-0 .image-widget {
+    display: flex;
+    flex-direction: column;
+}
+
+.node-create_cv-form #edit-field-photo .form-item-field-photo-und-0 .image-widget .image-preview img {
+    width: 120px;
+    height: 96px;
+    object-fit: contain;
+}
+
+.node-create_cv-form .form-field-name-field-photos {
+    box-shadow: none;
+}
+
+.node-create_cv-form #edit-field-photos-und-0-upload {
+    width: 120px;
+}
+
+.node-create_cv-form .form-field-name-field-photos label {
+    display: flex;
+    width: 120px;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #017A61;
+    box-sizing: border-box;
+    border-radius: 9px;
+    font-size: 96px !important;
+    font-family: "Montserrat-Regular";
+    font-weight: 600;
+    float: left;
+    color: #017A61;
+    background-color: #BBDFD8;
+}
+
+.node-create_cv-form .form-field-name-field-photos input {
+    display: none;
+}
+
+.node-create_cv-form #edit-description-photo {
+    padding: 0 10px;
+}
+
+.node-create_cv-form #edit-field-produits-similaires,
+.node-create_cv-form #edit-field-views-gallery,
+.node-create_cv-form #edit-field-security-block,
+.node-create_cv-form #edit-field-flypage {
+    padding: 0 10px 10px;
+}
+
+.node-create_cv-form .vertical-tabs-pane .fieldset-wrapper {
+    width: auto;
+}
+
+
+/* кнопки формы  */
+
+.node-create_cv-form .form-actions {
+    display: block;
+    margin-top: 30px;
+    padding: 0 10px;
+}
+
+.node-create_cv-form .form-actions #edit-preview {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #F5B4B4;
+    color: #777777;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0;
+}
+
+.node-create_cv-form #edit-field-location-2-und-0-value {
+    width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    .node-create_cv-form .form-actions {
+        display: flex;
+        justify-content: space-around;
+    }
+    .node-create_cv-form .form-actions #edit-submit,
+    .node-create_cv-form .form-actions #edit-preview {
+        width: 47%;
+    }
+}

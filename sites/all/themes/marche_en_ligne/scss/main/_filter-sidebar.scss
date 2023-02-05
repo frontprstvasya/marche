@@ -1,0 +1,246 @@
+/* Filter sidebar */
+@import "../variables";
+@import "../breakpoints";
+
+.form-item-field-sub-categories-tid, .form-item-field-location-tid-1 {
+  position: relative;
+}
+
+#edit-field-categories-tid-select-2, #edit-field-location-tid-select-2{
+  display: none !important;
+}
+
+#edit-field-sub-categories-tid-select-1, #edit-field-location-tid-1-select-1{
+  pointer-events: none;
+  color: transparent;
+}
+
+#edit-field-sub-categories-tid-select-2,  #edit-field-location-tid-1-select-2{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: 0;
+  bottom: 0;
+}
+
+.filters-container{
+  display: none;
+}
+
+.frontpage-content{
+  flex-direction: column !important;/*ВРЕМЕННО*/
+}
+.filters-container{
+  position: relative;
+  box-sizing: border-box;
+  margin: -2px auto 0 auto;
+  padding: 20px 20px 40px 20px;
+  border-radius: 12px;
+  width: 100%;
+  background: #017A61;
+  transition: all .5s ease;
+}
+
+.filters-container *{
+  box-sizing: border-box;
+}
+
+.views-filter-heading{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.views-filter-heading h2{
+  margin-right: 10px;
+  color: #017A61;
+  font-size: 18px;
+  line-height: 23px;
+  font-weight: 700;
+}
+
+.views-filter-heading .filter-toggle-btn{
+  padding: 7px 5.5px;
+  border: 2px solid #017A61;
+  border-radius: 100%;
+  color: #017A61;
+  font-size: 21px;
+  line-height: 18px;
+}
+
+.filters-container .title{
+  margin-bottom: 30px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+}
+
+.filters-container .exit-btn{
+  content: '';
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  width: 15px;
+  height: 15px;
+  color: #fff;
+  font-size: 15px;
+}
+
+.filters-container .views-exposed-widgets{
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+.filters-container .views-exposed-widget{
+  padding: 0;
+  width: 100%;
+}
+
+.filters-container .exposed-widget--form-action{
+  width: 100%;
+}
+
+.filters-container .exposed-widget--form-action input{
+  padding: 10px 0;
+  border-radius: 10px;
+  width: 100%;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.field-name-field-views-new-ad .field-label{
+  display: none !important;
+}
+
+.filters-container .exposed-widget--form-action #edit-submit-new-views-front-new-ad{
+  color: #017A61;
+  background-color: #FCD216;
+}
+
+.filters-container .exposed-widget--form-action #edit-reset{
+  color: #777777;
+  background-color: #F5B4B4;
+}
+
+.filters-container select{
+  position: relative;
+  padding: 10px 16px 10px 22px;
+  border-radius: 12px;
+  width: 100%;
+  color: #777777;
+  font-size: 14px;
+  line-height: 18px;
+  background: #fff;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.filters-container select:focus{
+  //border: none;
+  outline: none!important;
+  outline-width: 0;
+}
+
+.filters-container .form-type-select{
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.filters-container .form-type-select::after{
+  content: '\e919';
+  font-family: 'new-marche';
+  position: absolute;
+  right: 15px;
+  top: 18px;
+  width: 14px;
+  height: 7px;
+  color: #017A61;
+}
+
+.scroll-container{
+  position: fixed;
+  top: 100px;
+  left: 0;
+  padding-left: 15px;
+  z-index: 100;
+}
+
+.filters-container .views-exposed-form .views-exposed-widget{
+  float: none;
+}
+
+.filters-container .views-widget-filter-field_price_value, .filters-container .views-widget-filter-field_price_value_1{
+  padding:  0;
+  width: calc(50% - 7px);
+
+}
+
+.filters-container .views-widget-filter-field_price_value{
+  margin-right: 13px;
+}
+
+.filters-container .views-widget-filter-field_price_value input, .filters-container .views-widget-filter-field_price_value_1 input{
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: 100%;
+  color: #777;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+}
+
+.filters-container #edit-field-price-value placeholder{
+  color: transparent;
+}
+
+.filters-container .views-exposed-widget  .label-filter{
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.filters-container  .views-widget-filter-field_price_value_1 .label-filter{
+  color: transparent;
+}
+
+.showSub {
+  display: block !important;
+  transform: scale(1) !important;
+
+  .views-exposed-form{
+    display: block!important;
+  }
+}
+
+.sticky {
+  position: fixed;
+  top: 65px;
+  left: 30px;
+  z-index: 100;
+  background-color: #fff;
+}
+
+.greenBtn{
+  color: #fff !important;
+  background-color: #017A61;
+  border-radius: 100% 100% 0 0  !important;
+}
+
+@media only screen and (min-width: 1024px) {
+  .filters-container{
+    display: block;
+  }
+
+  .views-filter-heading{
+    display: none;
+  }
+}
+

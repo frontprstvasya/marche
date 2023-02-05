@@ -1,0 +1,16 @@
+<?php
+
+function dm_reviews_menu(): array {
+    $path_to_form = theme_get_setting('url_page_review', 'marche_en_ligne');
+    $items = [];
+    $items[$path_to_form] = [
+        'title' => 'Create feedback',
+        'description' => 'Process for working chat',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => ['dm_reviews_form'],
+        'access callback' => true,
+        'file' => 'include/dm_reviews_form.inc',
+    ];
+
+    return $items;
+}

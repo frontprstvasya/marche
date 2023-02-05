@@ -1,0 +1,207 @@
+
+.taxonomy-header-mark{
+  padding: 0 20px;
+}
+
+.taxonomy-header-mark p{
+  text-align: center;
+}
+
+.wrapper-categories--content{
+  padding: 0 20px;
+}
+
+
+.subtitle-categories .menu li {
+  display: none;
+}
+.subtitle-categories .menu .is-active-trail {
+  display: block;
+}
+.subtitle-categories .menu .is-active-trail a {
+  display: none;
+}
+.subtitle-categories .menu .is-active-trail .menu li {
+  display: flex;
+}
+.subtitle-categories .menu .is-active-trail .menu li a {
+  display: flex;
+}
+.subtitle-categories .active-count {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.subtitle-categories .active-count li {
+  display: flex;
+  width: 100%;
+  margin-bottom: 5px;
+}
+.subtitle-categories .active-count li a {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px solid #8BCDBF;
+  width: 100%;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  color: #364340;
+  transition: 0.3s;
+  background: #8BCDBF;
+}
+.subtitle-categories .active-count li a:hover {
+
+  background-color: transparent;
+  transition: all .3s ease;
+}
+
+.wrapper-categories--depth .subtitle-categories {
+  margin-bottom: 25px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: 1s ease;
+}
+
+.wrapper-categories--depth .subtitle-categories.show{
+  max-height: 1500px;
+  overflow: visible;
+  opacity: 1;
+}
+
+
+.wrapper-categories--depth .frontpage-content {
+  padding-top: 0;
+}
+
+.wrapper-categories--depth .frontpage-content .view-content {
+  margin-right: 0;
+}
+.wrapper-categories--depth .view-commercial-sidebar-views .view-content {
+  display: flex;
+  margin: 0 0 25px 0;
+}
+
+.wrapper-categories--depth-2 .wrapper-categories--content, .section-views {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper-categories--depth-2 {
+  position: relative;
+}
+.wrapper-categories--depth-2 .views-filter-heading .filter-toggle-btn {
+  border-radius: 100% !important;
+}
+.wrapper-categories--depth-2 .sidebar-container {
+  position: static;
+  flex-direction: column;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+
+.wrapper-categories--depth-2 .filters-container .label-filter {
+  display: block;
+}
+
+.wrapper-categories--depth-2 .views-widget-filter-field_price_value_1 {
+  margin-top: auto;
+}
+
+
+
+/****************MEDIA********************/
+@media only screen and (max-width: 768px) {
+  .wrapper-categories--depth .commercial-link img {
+    max-height: 132px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+
+  .page-taxonomy-term .frontpage-content .view-content {
+    width: 100%;
+  }
+
+  .page-taxonomy-term .section-content{
+    width: calc(100% - 320px);
+  }
+
+  .page-taxonomy-term .view-commercial-sidebar-views{
+    width: 300px;
+  }
+
+  .subtitle-categories .active-count {
+    justify-content: flex-start;
+  }
+  .subtitle-categories .active-count li {
+    display: flex;
+    width: calc(33.33% - 16px);
+    margin-bottom: 10px;
+    margin-right: 24px;
+  }
+
+  .subtitle-categories .active-count li:nth-child(3n+3) {
+    margin-right: 0;
+  }
+
+  .wrapper-categories--depth .subtitle-categories {
+    margin-bottom: 80px;
+  }
+
+
+  .wrapper-categories--depth .view-commercial-sidebar-views .view-content .views-row {
+    margin: 0 0 25px 0;
+    width: 100%;
+  }
+  .wrapper-categories--depth .view-commercial-sidebar-views .view-content .views-row:hover {
+    background-color: transparent;
+  }
+
+  .wrapper-categories--depth .view-commercial-sidebar-views .view-content {
+    flex-direction: column;
+    margin-bottom: 0;
+  }
+
+  .wrapper-categories--depth-2 .wrapper-categories--content, .section-views {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .wrapper-categories--depth-2 .sidebar-container {
+    width: 300px;
+  }
+  .wrapper-categories--depth-2 .sidebar-container .filter-toggle-btn {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .wrapper-categories--depth .commercial-link img {
+    object-fit: cover;
+    object-position: center;
+  }
+  .wrapper-categories--depth-2 .filters-container {
+    margin-top: 20px;
+  }
+  .wrapper-categories--depth-2 .view-commercial-sidebar-views {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .subtitle-categories {
+    padding: 5px 0 10px 0;
+  }
+
+  .subtitle-categories .active-count li a {
+    padding: 10px 13px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+}

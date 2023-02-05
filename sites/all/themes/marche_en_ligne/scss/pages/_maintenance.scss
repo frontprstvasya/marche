@@ -1,0 +1,78 @@
+/* Maintenance */
+@import "../variables";
+@import "../breakpoints";
+
+.maintenance-page * {
+  box-sizing: border-box;
+}
+
+.maintenance-page .page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #FCD216;
+  padding: 30px;
+  width: 100vw;
+  height: 100vh;
+}
+
+.maintenance-page .header {
+  width: 100%;
+  height: auto;
+}
+
+.maintenance-page .header__logo {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  max-width: 300px;
+  height: auto;
+}
+
+.maintenance-page .header__logo-image {
+  width: 100%;
+  object-fit: contain;
+}
+
+.maintenance-page .header__name-and-slogan {
+  display: none;
+}
+
+.maintenance-page .main-content {
+  color: #171718;
+  font-family: $text-700;
+  font-weight: 400;
+  font-size: 20px;
+  text-align: center;
+}
+
+.maintenance-page .main-content h1 {
+  color: #171718;
+  font-family: $text-700;
+  font-weight: 600;
+  font-size: 24px;
+  margin: 25px 0;
+  text-align: center;
+}
+
+@media only screen and (min-width: 1024px) {
+  .maintenance-page .header {
+    width: 500px;
+    padding: 15px;
+    border-radius: 18px;
+    background-color: #FCD216;
+  }
+  .maintenance-page .header__logo {
+    max-width: 400px;
+    width: 85%;
+  }
+  .maintenance-page .main-content {
+    max-width: 1200px;
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .maintenance-page .main-content h1 {
+    font-size: 36px;
+  }
+}

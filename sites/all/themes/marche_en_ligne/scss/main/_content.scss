@@ -1,0 +1,96 @@
+/* Content */
+@import "../variables";
+@import "../breakpoints";
+
+.node-type-main-page{
+
+  #block-menu-menu-menu-categories{
+    padding: 20px 35px 10px 35px;
+  }
+
+  .section-content{
+    display: block;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 0;
+  }
+
+  .node-main-page{
+    padding: 0;
+  }
+
+  .link-rules{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+
+    .icon-marche_22-book{
+      color: #017A61;
+      position: relative;
+
+      span{
+        display: block;
+        font-family: $text-400;
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 10px;
+        color: #017A61;
+        padding-left: 45px;
+      }
+
+      &:before{
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 37px;
+      }
+    }
+  }
+}
+
+// Media
+@media only screen and ($ipad-pro) {
+  .node-type-main-page{
+    #block-menu-menu-menu-categories{
+      padding: 40px 35px 50px 35px;
+    }
+
+    .link-rules{
+      margin-top: 10px;
+      margin-bottom: 40px;
+
+      .icon-marche_22-book{
+        span{
+          font-size: 20px;
+          line-height: 20px;
+          padding-left: 80px;
+        }
+
+        &:before{
+          font-size: 70px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and ($desktop) {
+  .node-type-main-page{
+    #block-menu-menu-menu-categories{
+      padding: 40px 0 50px 0;
+    }
+
+    .view-id-views_front_new_ad{
+      padding: 15px 0 30px 35px;
+    }
+
+    .field-name-field-views-new-ad .field-label{
+      margin: 0;
+      width: calc(100% - 70px);
+    }
+  }
+}
+
+

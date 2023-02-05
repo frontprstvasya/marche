@@ -1,0 +1,175 @@
+<?php
+/**
+ * Implements hook_cron().
+ *
+ *  Create new entry in table.
+ *
+ * @throws \Exception
+ */
+
+function  dm_export_cron()  {
+
+    // require 'include/profile.php';
+    // require 'include/phone.php';
+
+    //    require 'include/metadata_height.php';
+    //    require 'include/metadata_width.php';
+    //    require 'include/communication.php';
+    //    require 'include/file_usage.php';
+    //    require 'include/file_usage2.php';
+    //    require 'include/image.php';
+    //    require 'include/node.php';
+    //    require 'include/fields.php';
+    //
+        // require 'include/category.php';
+    //    require 'include/sub-category.php';
+
+//      require 'include/test/test-communication.php';
+//      require 'include/test/test-image.php';
+//      require 'include/test/test-file_usage.php';
+//      require 'include/test/test-metadata-height.php';
+//      require 'include/test/test-metadata-width.php';
+//      require 'include/test/test-node.php';
+//      require 'include/test/test-fields.php';
+
+  /**
+   * CREATE NEW ENTRY.
+   *
+   * @param $import_array  // Array for import table.
+   * @param $name_table    // Name table for db_insert fields.
+   * @param $array         // Array fields.
+   */
+  function insert_table($import_array, $name_table, $array) {
+    $query = db_insert($name_table)->fields($array);
+
+    foreach ($import_array as $record) {
+      $query->values($record);
+    }
+    $query->execute();
+
+    drupal_set_message('Import table ' . $name_table . ' DONE!');
+  }
+
+
+    /**
+     * Vars for updates BD.
+     */
+
+    $table_category         = 'field_data_field_categories';
+    $table_sub_category     = 'field_data_field_sub_categories';
+
+    $table_rev_category     = 'field_data_field_sub_categories';
+    $table_rev_sub_category = 'field_revision_field_sub_categories';
+
+
+
+//  function update_table($fieldTable, $value, $nid) {
+//      return db_update($fieldTable)
+//        ->fields(array(
+//          'field_get_chart_value' => $value,
+//        ))
+//        ->condition('entity_id', $nid)
+//        ->execute();
+//    }
+//
+//
+//    foreach ($array_nid AS $nid) {
+//      update_table($table_category, $value, $nid);
+//      update_table($table_sub_category, $value, $nid);
+//    }
+
+
+  /************************************************************ CALL FUNCTION */
+
+
+      /* Profile */
+      // insert_table($profile, $name_table_users, $users_fields);
+      // insert_table($phone, $name_table_uphone, $uphone_fields);
+      // insert_table($phone, $name_table_revision_uphone, $revision_uphone_fields);
+
+
+    /* Image */
+//           insert_table($image, $name_table_file_managed, $file_managed_fields);
+//           insert_table($communication, $name_table_communication, $communication_fields);
+//           insert_table($communication, $name_table_revision_communication, $communication_fields);
+
+//           insert_table($file_usage , $name_table_file_usage, $file_usage_fields);
+                     //     insert_table($file_usage2 , $name_table_file_usage, $file_usage_fields);
+////
+//           insert_table($metadata_height, $name_table_file_metadata, $file_metadata_fields);
+//           insert_table($metadata_width, $name_table_file_metadata, $file_metadata_fields);
+//           insert_table($image, $name_table_field_data_field_photos, $field_data_field_photos_fields);
+//           insert_table($image, $name_table_field_revision_field_photos, $field_data_field_photos_fields);
+
+      //    /**
+      //     * Node
+//      //     */
+//           insert_table($node, $name_table_node, $node_fields);
+//           insert_table($node, $name_table_node_revision, $node_revision_fields);
+//           insert_table($node, $name_table_pathauto_state, $pathauto_state_fields);
+//           insert_table($node, $name_table_node_comment_statistics, $node_comment_statistics_fields);
+
+      /**
+       * FIELDS Node
+       */
+            /* Price */
+//             insert_table($fields, $name_table_price, $price_fields);
+//              insert_table($fields, $name_table_price_revision, $price_fields);
+//                /* Categories */
+//             insert_table($fields, $name_table_categories, $categories_fields);
+//             insert_table($fields, $name_table_categories_revision, $categories_fields);
+
+  /* Sub categories */
+//             insert_table($fields, $name_table_sub_categories, $sub_categories_fields);
+//            insert_table($fields, $name_table_sub_categories_revision, $sub_categories_fields);
+
+
+
+            /* Categories separately */
+//                 insert_table($category, $name_table_categories, $categories_fields);
+//                 insert_table($category, $name_table_categories_revision, $categories_fields);
+
+            /* Sub categories separately */
+//                insert_table($category, $name_table_sub_categories, $sub_categories_fields);
+//                insert_table($category, $name_table_sub_categories_revision, $sub_categories_fields);
+
+
+
+              /* Type ad */
+//            insert_table($fields, $name_table_type_ad, $type_ad_fields);
+//            insert_table($fields, $name_table_type_ad_revision, $type_ad_fields);
+//
+//            /* Views gallery */
+//            insert_table($fields, $name_table_views_gallery, $views_gallery_fields);
+//            insert_table($fields, $name_table_views_gallery_revision, $views_gallery_fields);
+//
+//             /* Author info */
+//            insert_table($fields, $name_table_author_info, $author_info_fields);
+//            insert_table($fields, $name_table_author_info_revision, $author_info_fields);
+
+//              /* btn CALL */
+//              insert_table($fields, $name_table_btn_call, $btn_call_fields);
+//              insert_table($fields, $name_table_btn_call_revision, $btn_call_fields);
+//
+//              /* btn CHAT */
+//              insert_table($fields, $name_table_btn_chat, $btn_chat_fields);
+//              insert_table($fields, $name_table_btn_chat_revision, $btn_chat_fields);
+//
+//              /* btn WHATSAPP */
+//              insert_table($fields, $name_table_btn_whatsapp, $btn_whatsapp_fields);
+//              insert_table($fields, $name_table_btn_whatsapp_revision, $btn_whatsapp_fields);
+//
+              /* Location */
+//              insert_table($fields, $name_table_location, $location_fields);
+//              insert_table($fields, $name_table_location_revision, $location_fields);
+//              insert_table($fields, $name_table_location_2, $location_2_fields);
+//              insert_table($fields, $name_table_location_2_revision, $location_2_fields);
+
+              /* Description */
+//             insert_table($fields, $name_table_description, $description_fields);
+//             insert_table($fields, $name_table_description_revision, $description_fields);
+
+
+
+}
+

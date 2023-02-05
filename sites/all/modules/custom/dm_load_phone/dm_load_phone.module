@@ -1,0 +1,46 @@
+<?php
+/**
+ * Implements hook preprocess_node().
+ */
+
+function dm_load_phone_menu()
+{
+    $items = [];
+    $items['getuphone'] = [
+        'page callback' => 'dm_load_phone_ajaxcode',
+        'type' => MENU_CALLBACK,
+        'access callback' => TRUE,
+    ];
+    return $items;
+}
+
+function dm_load_phone_ajaxcode(){
+    if ($_GET['ajx'] && $_GET['method']) {
+        header('Content-Type: text/html; charset=UTF-8');
+        switch ($_GET['method']) {
+            case 'loadphone':
+                $nid = 0;
+                $node=[];
+                $phone = null;
+                if(isset($_GET['nid'])){
+                    $nid=$_GET['nid'];
+                    $node = node_load($nid);
+                    $uid = $node->uid;
+                    $phone = dm_load_phone_get_uphone( $uid,'field_uphone');
+                }
+                $result = ['data' =>[
+                    'phone'=>$phone,
+                ]];
+               die(drupal_json_encode($result));
+        }
+    }
+}
+
+
+function  dm_load_phone_get_uphone($uid, $field){
+    return db_select('field_data_' . $field, 'n')
+        ->fields('n', [$field . '_value'])
+        ->condition('n.entity_id',$uid)
+        ->execute()
+        ->fetchField();
+}

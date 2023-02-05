@@ -1,0 +1,3416 @@
+<?php
+
+$_SESSION['id']=session_id();
+
+function messente_form_alter(&$form, &$form_state, $form_id){
+
+  if(isset($form['phone_and_mail'])){
+      $form['phone_and_mail']['#attributes'] = array('id' => 'edit-phone-and-mail');//, 'placeholder'=> 'phone and email'
+      if(variable_get('messente_phone_mask_enabled')){
+          $form['phone_and_mail']['#prefix'] = '<div id="country_mask_select"></div>';
+      }
+
+  }
+  if(isset($form['code'])){
+        $form['code']['#attributes'] = array('id' => 'edit-code');
+        $form['code']['#prefix'] = '<div id="block_inputs_pincodes"></div>';
+        $form['code']['#suffix'] = '<div id="block_pincode_msg_time"></div>';
+    }
+  switch ($form_id) {
+    case 'user_login':
+        $form['messente_error_block'] = array(
+            '#markup' => '<div id="messente_error_block"></div>',
+        );
+        if(isset($form['name'])) {
+        $form['name']['#attributes'] = array('id' => 'edit-name');
+        if(variable_get('messente_phone_mask_enabled')){
+          $form['name']['#prefix'] = '<div id="country_mask_select"></div>';
+          $form['name']['#attributes'] = array('id' => 'edit-phone-and-mail');
+        }
+        if(variable_get('messente_input_type_selection_enabled')){
+          $MessenteSetting = getSettings();
+
+          $form['#attached']['js'] = array(
+            drupal_get_path('module', 'messente') . '/js/jquery_maskedinput.js' => array(
+              'type' => 'file',
+            ),
+            drupal_get_path('module', 'messente') . '/js/userlogin_mask.js' => array(
+              'type' => 'file',
+            ),
+          );
+          $form['#attached']['js'][] = array(
+            'data' => array('Messente' =>$MessenteSetting),
+            'type' => 'setting',
+          );
+        }
+      }
+      if(isset($form_state['input']['name'])) {
+        if (!empty($form_state['input']['name'])) {
+          if(isset($form_state['input']['pass'])){
+            $name = UserIsEnterLogin($form_state['input']['name']);
+            if($name){
+              $uid = user_authenticate($name, $form_state['input']['pass']);
+              if($uid){
+                get_UserLoginFinalize($uid);
+              }
+            }
+          }
+        }
+      }
+      if (variable_get('messente_request_mail') || !variable_get('messente_phone_mask_enabled')){
+        $form['name']['#title'] = t("phone number or username or email");
+        $form['name']['#description'] = t("");
+      }
+      else{
+        $form['name']['#title'] = t("phone number or username");
+        $form['name']['#description'] = t("");
+      }
+      if (isset($_GET["user_get"])) {
+        $form['name']['#default_value'] = $_GET["user_get"];
+      }
+      if (isset($_GET['code']) ) {
+        $code =$_GET['code'];
+        $RequestGoogle =get_RequestGoogleLogin($code);
+        if(isset($RequestGoogle['access_token'])){
+          $access_google_user = get_AuthGoogleTokenId($RequestGoogle['access_token']);
+          if(isset($access_google_user['id'])){
+            if(FALSE==($user_uid = get_UserUidGoogleIsCode($access_google_user['id']))){
+              form_set_error('name', t("This user is not yet registered"));
+            }else{
+              get_UserLoginFinalize($user_uid);
+            }
+          }
+        }
+        $RequestFacebook =get_RequestFacebookLogin($code);
+        if(isset($RequestFacebook['access_token'])){
+          $access_facebook_user = get_AuthFacebookTokenId($RequestFacebook['access_token']);
+          if(isset($access_facebook_user['id'])){
+            if(FALSE==($uid = get_UserUidFacebookIsCode($access_facebook_user['id']))){
+              form_set_error('name', t("This user is not yet registered"));
+            }else{
+              get_UserLoginFinalize($uid);
+            }
+          }
+        }
+      }
+    case 'messente_main_settings':
+      break;
+    case 'user_profile_form':
+        if(variable_get('messente_phone_change')){
+            global $user;
+            $phone_user_old = getPhoneisUid($user->uid);
+            $form[variable_get('messente_field_phone')]['und'][0]['#prefix'] = '<div id="change_user_phone_block">';
+            $form[variable_get('messente_field_phone')]['und'][0]['#suffix'] ='<input type="submit" id="btn_change_phone_form" name="btn_change_phone_form" style="cursor: pointer;"  value="'.t("Change phone number").'" class="submit form-submit"></div><hr>';
+            drupal_add_js( drupal_get_path('module', 'messente') . '/js/changephone.js', array('type' => 'file', 'scope' => 'footer'));
+            if($phone_user_old){
+                variable_set('messente_user_phone_old_'.$user->uid, $phone_user_old);
+            }else{
+                $form[variable_get('messente_field_phone')]['und'][0]['#suffix'] ='<input type="submit" id="btn_change_phone_form" name="btn_change_phone_form" style="cursor: pointer;" value="'.t("Add phone number").'" class="submit form-submit"></div><hr>';
+            }
+        }
+        break;
+    }
+}
+
+function messente_block_info() {
+  $blocks['messente_soc_block_register'] = array( // имя блока - индекс массива
+    'info' => t('Register block Fb and Google'),// title block in list
+  );
+  $blocks['messente_soc_block_login'] = array(
+    'info' => t('Login block Fb and Google'),
+  );
+  return $blocks;
+}
+
+/**
+ * Реализация hook_block_view()
+ */
+function messente_block_view($delta = '') {
+  if (variable_get('messente_register_google') || variable_get('messente_register_facebook')) {
+    switch ($delta) {
+      case 'messente_soc_block_register': // имя блока
+        $block['subject'] = '';//заголовок блока
+        $block['content']['messente-soc-block-register'] = [ //название файла шаблона
+          '#theme' => 'messente_soc_block_register', //название темы из hook_theme
+        ];
+        return $block;
+      case 'messente_soc_block_login': // имя блока
+        $block['subject'] = '';//заголовок блока
+        $block['content']['messente-soc-block-login'] = [ //название файла шаблона
+          '#theme' => 'messente_soc_block_login', //название темы из hook_theme
+        ];
+
+        return $block;
+    }
+  }
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function messente_theme($existing, $type, $theme, $path){
+  return [
+    'messente_admin_form' => [
+      'template' => 'messente-admin-form',
+      'render element' => 'form',
+    ],
+    'messente_register_form' => [
+      'template' => 'messente-register-form',
+      'render element' => 'form',
+    ],
+    'messente_request_form' => [
+      'template' => 'messente-request-form',
+      'render element' => 'form',
+    ],
+    'messente_email_request_form' => [
+      'template' =>  'messente-email-request-form',
+      'render element' => 'form',
+    ],
+    'messente_register_email_form' => [
+      'template' => 'messente-register-email-form',
+      'render element' => 'form',
+    ],
+    'messente_google_register_form' => [
+      'template' => 'messente-google-register-form',
+      'render element' => 'form',
+    ],
+    'messente_facebook_register_form' => [
+      'template' => 'messente-facebook-register-form',
+      'render element' => 'form',
+    ],
+    'messente_phone_change_form' => [
+      'template' => 'messente-phone-change-form',
+      'render element' => 'form',
+    ],
+    'messente_soc_block_register' => array(
+      'template' => 'messente-soc-block-register',
+      'variables'=> array('url_fb' =>getParamsUrlforSocial('fb'), 'url_google' =>getParamsUrlforSocial('google')),
+    ),
+    'messente_soc_block_login' => array(
+      'template' => 'messente-soc-block-login',
+      'variables'=> array('url_fb' =>getParamsUrlforSocial('fb',true), 'url_google' =>getParamsUrlforSocial('google',true)),
+    ),
+  ];
+}
+
+function messente_menu()
+{
+  $items = [];
+  $items['ajax-messente-changephonemask'] = [
+    'page callback' => 'messente_ajaxcode',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  ];
+  $items['ajax-messente_upload'] = [
+    'page callback' => 'messente_ajaxcode',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  ];
+
+  $items['admin/config/people/messente'] = [
+    'title' => 'Messente',
+    'description' => 'Messente Configuration.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['messente_main_settings'],
+    'access callback' => 'user_access',
+    'access arguments' => ['administer site configuration'],
+    'file' => 'admin/messente.admin.inc',
+  ];
+  $items['admin/config/people/messente/import_provider'] = array(
+    'title'            => 'Providers list',
+    'description'      => 'Configure providers',
+    'page callback'    => 'messente_import_provider_list',
+    'access arguments' => array('administer site configuration'),
+  );
+  $items['admin/config/people/messente/import_provider/list'] = array(
+    'title'  => 'Import Providers',
+    'type'   => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 1,
+  );
+  $items['admin/config/people/messente/import_provider/add'] = array(
+    'title'            => 'add new provider',
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('messente_provider_form'),
+    'access arguments' => array('administer site configuration'),
+    'type'             => MENU_LOCAL_TASK,
+    'weight'           => 2,
+  );
+  $items['admin/config/people/messente/import_provider/provider/%/edit'] = array(
+    'title'            => 'Edit provider',
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('messente_provider_form', 6),
+    'access arguments' => array('administer site configuration'),
+    'type'             => MENU_CALLBACK,
+  );
+  $items['admin/config/people/messente/import_provider/provider/%/delete'] = array(
+    'title'            => 'Delete mask',
+    'page callback'    => 'messente_provider_form_delete',
+    'page arguments'   => array(6),
+    'access arguments' => array('administer site configuration'),
+    'type'             => MENU_CALLBACK,
+  );
+  $items['admin/config/people/messente/import_mask'] = array(
+    'title'            => 'Mask for phone number list',
+    'description'      => 'Configure Mask phone number',
+    'page callback'    => 'messente_import_mask_list',
+    'access arguments' => array('administer site configuration'),
+  );
+  $items['admin/config/people/messente/import_mask/list'] = array(
+    'title'  => 'Import Mask list',
+    'type'   => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 1,
+  );
+  $items['admin/config/people/messente/import_mask/add'] = array(
+    'title'            => 'add new mask',
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('messente_mask_form'),
+    'access arguments' => array('administer site configuration'),
+    'type'             => MENU_LOCAL_TASK,
+    'weight'           => 2,
+  );
+  $items['admin/config/people/messente/import_mask/mask/%/edit'] = array(
+    'title'            => 'Edit mask',
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('messente_mask_form', 6),
+    'access arguments' => array('administer site configuration'),
+    'type'             => MENU_CALLBACK,
+  );
+  $items['admin/config/people/messente/import_mask/mask/%/delete'] = array(
+    'title'            => 'Delete mask',
+    'page callback'    => 'messente_mask_form_delete',
+    'page arguments'   => array(6),
+    'access arguments' => array('administer site configuration'),
+    'type'             => MENU_CALLBACK,
+  );
+
+  if(variable_get('messente_phone_change')) {
+    $items[variable_get('messente_url_phone_change_form')] = [
+      'page callback' => 'drupal_get_form',
+      'page arguments' => ['messente_phone_change_form'],
+      'access callback' => TRUE,
+    ];
+  }
+  if(variable_get('messente_form_email_register_enabled')) {
+    $items[variable_get('messente_url_form_email_register')] = [
+      'page callback' => 'drupal_get_form',
+      'page arguments' => ['messente_register_email_form'],
+      'access callback' => TRUE,
+    ];
+    $items[variable_get('messente_url_form_email_request')] = [
+      'page callback' => 'drupal_get_form',
+      'page arguments' => ['messente_email_request_form'],
+      'access callback' => TRUE,
+    ];
+  }
+  $items[variable_get('messente_url_form_register')] = [
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['messente_register_form'],
+    'access callback' => TRUE,
+  ];
+  $items[variable_get('messente_url_form_request')] = [
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['messente_request_form'],
+    'access callback' => TRUE,
+  ];
+  if( variable_get('messente_register_google')){
+    $items[variable_get('messente_url_google_register_form')] = [
+      'page callback' => 'drupal_get_form',
+      'page arguments' => ['messente_google_register_form'],
+      'access callback' => TRUE,
+    ];
+  }
+  if( variable_get('messente_register_facebook')){
+    $items[variable_get('messente_url_facebook_register_form')] = [
+      'page callback' => 'drupal_get_form',
+      'page arguments' => ['messente_facebook_register_form'],
+      'access callback' => TRUE,
+    ];
+  }
+  return $items;
+}
+
+function messente_ajaxcode(){
+  if ($_GET['ajx'] && $_GET['method']) {
+    header('Content-Type: text/html; charset=UTF-8');
+    switch ($_GET['method']) {
+      case 'loadimage':
+        $photo = drupal_http_request(variable_get('messente_file_url_'.session_id()));
+
+        $file_get_var = file_save_data($photo->data);
+        $result = [
+          'file_get_var'=>$file_get_var,
+          'file_link'=>file_create_url( $file_get_var->uri)
+        ];
+        die(drupal_json_encode($result));
+      case 'cleanconfig':
+        $configs =[
+          'messente_facebook_register_user_array_',
+          'messente_google_register_user_array_',
+          'messente_request_time_user_',
+          'validate_messente_mail_',
+          'messente_user_id_',
+          'messente_file_url_',
+          'messente_mail_pin_code_',
+          'select_mask_phone_number_id_',
+          'valid_mask_phone_number_count_',
+          'messente_user_phone_old_',
+          'messente_user_phone_new_',
+          'messente_file_url_',
+          'messente_file_fid',
+          'messente_file_fid_',
+        ];
+        foreach ($configs as $config){
+          Tools::delete_config($config);
+        }
+        die(drupal_json_encode($configs));
+      case 'change_phone':
+          global $user;
+
+        $result =array(
+          'uid'=>$user->uid,
+          'user_phone'=>getPhoneisUid($user->uid),
+          'text'=>t("You need to add and verify a phone number"),
+          'url'=>$GLOBALS['base_root'] . '/'.variable_get('messente_url_phone_change_form'),
+          'field_name'=>str_replace('_','-',variable_get('messente_field_phone')),
+          'field_type'=> variable_get('field_phone_number_type')
+        );
+        die(json_encode($result));
+      case 'changephonemask':
+        if(isset($_GET['phonemask'])){
+          if($_GET['phonemask']){
+            variable_set('select_mask_phone_number_id_'.session_id(),(int)$_GET['phonemask']);
+          }
+        }
+        if(isset($_GET['phonecount'])){
+          if($_GET['phonecount']){
+            variable_set('valid_mask_phone_number_count_'.session_id(),(int)$_GET['phonecount']);
+          }
+        }
+        die(json_encode(array(
+          'result_mask'=> variable_get('select_mask_phone_number_id_'.session_id()),
+          'result_count'=>  variable_get('valid_mask_phone_number_count_'.session_id()),
+        )));
+      case 'getsetting':
+        die(json_encode(getSettings()));
+      case 'twilio_send':
+        $PinCode =Tools::get_rand_pincode();
+        variable_set('twilio_pincode_'.session_id(), $PinCode);
+        $phone = '+237651316253';
+        $cc= Twilio::sendTwilio( $phone ,$PinCode);
+        $params=array(
+          'table'=>'messente_providers',
+          'fields'=>array('sid'),
+          'condition'=>array(
+            array(
+              'name'=>'default',
+              'value'=>1
+            ),
+            array(
+              'name'=>'status',
+              'value'=>1
+            ),
+          ),
+        );
+        $providers = ProviderSMS::getProviderDefault();
+        $twilio = ProviderSMS::getProviderFieldsIsName('twilio');
+        $twilio_sender = new TwilioSend( $twilio->sid,$twilio->tiken);
+        $result=array(
+          'pin'=>$PinCode,
+          'provider'=>$twilio,
+          'twilio_sender'=> $cc
+        );
+        die(json_encode($result));
+    }
+  }
+}
+
+/////// USER CHANGE PHONE NUMBER /////////////////////////////////////////////////////////////////////////////
+function messente_phone_change_form($form, &$form_state){
+
+  if (!isset($form_state['step'])) {
+    $form_state['step'] = 1;
+    $form_state['steps_values'] = [];
+  }
+  $step = $form_state['step'];
+  $form['#attached']['js'] = addJsForStep($step);
+  $form['phone_and_mail'] = [
+    '#type' => 'hidden',
+    '#title' => t("Phone number*"),
+    '#default_value' => isset($form_state['input']['phone_and_mail']) ? $form_state['input']['phone_and_mail'] : '',
+
+  ];
+
+  if(variable_get('messente_user_phone_new_'. session_id())){
+      $form['phone_and_mail']['#default_value']=variable_get('messente_user_phone_new_'. session_id());
+  }
+
+  $form['code'] = [
+    '#attributes'=>array('id' => 'edit-code'),
+    '#type' => 'hidden',
+    '#title' => t('Pin Code'),
+    '#default_value' => '',
+  ];
+  $form['messente_error_block'] = array(
+        '#markup' => '<div id="messente_error_block"></div>',
+    );
+
+  $form['step_number'] = [
+    '#type' => 'hidden',
+    '#title' => t('step-form'),
+    '#default_value' => $step,
+  ];
+  $form['actions'] = [
+    '#type' => 'actions',
+  ];
+  if($step==1){
+    $form['phone_and_mail']['#type'] = 'textfield';
+    $form['step_number']['#value'] = 1;
+    $form['step_number']['#default_value'] = 1;
+    $form['actions']['next'] = [
+      '#attributes'=>array('id' => 'edit-next'),
+      '#type' => 'submit',
+      '#value' => t("Next"),
+      '#submit' => ['messente_register_form_next'],
+    ];
+  }
+  if ($step == 2) {
+    $form['code']['#type'] = 'textfield';
+    $form['step_number']['#value'] = 2;
+    $form['step_number']['#default_value'] = 2;
+
+    $form['actions']['prev'] = [
+      '#attributes'=>array('id' => 'edit-back'),
+      '#type' => 'submit',
+      '#value' => t('Back'),
+      '#submit' => ['messente_register_form_prev'],
+      '#limit_validation_errors' => [],
+    ];
+    $form['actions']['request_code'] = [
+      '#type' => 'submit',
+      '#value' => t("Send PIN CODE again"),
+      '#submit' => ['messente_register_code_submit'],
+      '#limit_validation_errors' => [],
+    ];
+    $form['actions']['submit'] = [
+      '#attributes'=>array('id' => 'edit-next'),
+      '#type' => 'submit',
+      '#value' => t("Set phone numbers"),
+      '#submit' => ['messente_phone_change_form_submit'],
+    ];
+  // $form['actions']['prev']['#type'] = 'hidden';
+  }
+  return $form;
+}
+
+function messente_phone_change_form_validate(&$form, &$form_state){
+  $current_step = empty($form_state['step']) ? 1 : $form_state['step'];
+  if(!variable_get('messente_test_mode')){
+    switch ($current_step) {
+      case 1:
+        if (empty($form_state['values']['phone_and_mail'])) {
+          form_set_error('phone_and_mail', t("The Phone field cannot be empty"));
+        }
+        else{
+          variable_del('messente_user_phone_new_'. session_id());
+          $phone = Tools::replace_str($form_state['values']['phone_and_mail'],'phone');
+          variable_del('messente_user_id_'. $phone);
+          if (FALSE !== (Tools::validation_phone($phone))) {
+            if (isHaveUserFieldPhone($phone) == false) {
+              variable_del('messente_user_id_'. $phone);
+              RegisterUserIsPhoneNew($phone);
+            }else{
+              global $user;
+              if($user){
+                $uid = $user->uid;
+                if((int)getUIDisHaveFon($phone)==(int)$uid){
+                  form_set_error('phone_and_mail', t("You have already verified this phone number before, please try another one"));
+                }else{
+                  form_set_error('phone_and_mail', t("A user with this phone number is already registered"));
+                }
+              }else{
+                form_set_error('phone_and_mail', t("A user with this phone number is already registered"));
+              }
+            }
+
+          }else {
+            form_set_error('phone_and_mail', t("Please enter a valid phone number"));
+          }
+        }
+        break;
+      case 2:
+        if (empty($form_state['values']['code'])) {
+          form_set_error('code', t("Wrong CODE entered"));
+        }
+        else {
+          if (Tools::validation_pincode($form_state['values']['code'])) {
+              $phone = Tools::replace_str($form_state['values']['phone_and_mail'],'phone');
+            if (FALSE !== ($messente_id = variable_get('messente_user_id_'.$phone))) {
+               if(Messente::SendSMSVerifyPin($messente_id, $form_state['values']['code'])!=false) {
+                  variable_del('messente_user_id_'. $phone);
+               } else {
+                  form_set_error('code', t("Enter the correct Pin Code"));
+              }
+            }else {
+              form_set_error('code', t("Something went wrong, try again later"));
+            }
+          }else {
+            form_set_error('code', t("Please enter a valid Pin Code"));
+          }
+        }
+        break;
+    }
+  }
+}
+
+function messente_phone_change_form_submit($form, &$form_state) {
+  global $user;
+  $phone = Tools::replace_str($form_state['values']['phone_and_mail'],'phone');
+  if (isHaveUserFieldPhone($phone) == false) {
+    if ($user) {
+      $uid = $user->uid;
+      $user =Tools::user_field_set($uid,  variable_get('messente_field_phone')  ,variable_get('field_phone_number_type'), $phone);
+      if ((int)getUIDIsPhone($phone) == (int)$uid) {
+        drupal_goto($GLOBALS['base_root'] . '/user', []);
+        drupal_set_message(t("Your new phone number has been verified, thank you!"));
+      }
+      else {
+        form_set_error('phone_and_mail', t("Something went wrong, please try again later"));
+      }
+    }
+    deleteUserSessionConfig($phone);
+  }
+  else{
+    form_set_error('phone_and_mail', t("Something went wrong, please try again later"));
+    drupal_goto($GLOBALS['base_root'] . '/user', []);
+  }
+
+
+}
+
+/////// END USER CHANGE PHONE NUMBER /////////////////////////////////////////////////////////////////////////////
+///
+
+function messente_google_register_form($form, &$form_state){
+  if(isset($form_state["build_info"]) || isset($form_state["build_info"]["form_id"])){
+        $access_google_user=[];
+        $user_google_auth = variable_get('messente_google_register_user_array_'.session_id());
+      if(empty($user_google_auth)){
+            if (isset($_GET['code'])) {
+                $code =    $_GET['code'];
+                $RequestGoogle =get_RequestGoogleRegister($code);
+
+                if(isset($RequestGoogle['access_token'])){
+                  $access_google_user = get_AuthGoogleTokenId($RequestGoogle['access_token']);
+                }
+                else{
+                  form_set_error('phone_and_mail', t("Service unavailable, please try again later"));
+                  drupal_goto($GLOBALS['base_root'] . '/'.variable_get('messente_redirect_url_google_and_facebook'), []);
+                }
+
+                if(isset($access_google_user['id'])){
+                  variable_del('messente_google_register_user_array_'.session_id());
+                  variable_set('messente_google_register_user_array_'.session_id(), $access_google_user);
+                  $user_google_auth = variable_get('messente_google_register_user_array_'.session_id());
+                }
+                else{
+                  form_set_error('phone_and_mail', t("Service unavailable, please try again later"));
+                  drupal_goto($GLOBALS['base_root'] . '/'.variable_get('messente_redirect_url_google_and_facebook'), []);
+                }
+
+            }else{
+                drupal_goto($GLOBALS['base_root'] . '/'.variable_get('messente_redirect_url_google_and_facebook'), []);
+             }
+        }
+      if($user_google_auth){
+        if(isset($user_google_auth['id'])){
+          if(get_UserUidGoogleIsCode($user_google_auth['id'])){
+            variable_del('messente_google_register_user_array_'.session_id());
+            form_set_error('phone_and_mail', t("This user is already registered"));
+            drupal_goto($GLOBALS['base_root'] . '/'.variable_get('messente_redirect_url_google_and_facebook'), []);
+          }
+          else{
+            if (!isset($form_state['step'])) {
+              $form_state['step'] = 1;
+              $form_state['steps_values'] = [];
+            }
+            $step = $form_state['step'];
+            $form['#attached']['js'] = addJsForStep($step);
+            $form['step_number'] = [
+              '#type' => 'hidden',
+              '#title' => t('step form'),
+              '#default_value' => $step,
+            ];
+            $form['phone_and_mail'] = [
+              '#type' => 'hidden',
+              '#title' => t("Phone number"),
+            ];
+            if (isset($form_state['input']['phone_and_mail'])) {
+              $form_state['phone_and_mail']['#default_value'] = $form_state['input']['phone_and_mail'];
+            }
+            // Step 1
+            if ($step == 1) {
+              $form['phone_and_mail']['#type'] = 'textfield';
+              $form['step_number']['#value'] = 1;
+              $form['step_number']['#default_value'] = 1;
+            } // Step 2
+            elseif ($step == 2) {
+              $form['code'] = [
+                '#attributes'=>array('id' => 'edit-code'),
+                '#type' => 'textfield',
+                '#title' => t('Pin Code'),
+                '#default_value' => '',
+              ];
+              $form['step_number']['#value'] = 2;
+              $form['step_number']['#default_value'] = 2;
+            } // Step 3
+            // Buttons
+
+            $form['actions'] = [
+              '#type' => 'actions',
+            ];
+              $form['actions']['request_code'] = [
+                  '#type' => 'hidden',
+                  '#value' => t("Send PIN code again"),
+                  '#submit' => ['messente_register_code_submit'],
+              ];
+
+
+
+            if($step == 1){
+              $form['actions']['next'] = [
+                '#attributes'=>array('id' => 'edit-next'),
+                '#type' => 'submit',
+                '#value' => t("Next"),
+                '#submit' => ['messente_register_form_next'],
+              ];
+            }
+            if ($step == 2) {
+              $form['actions']['prev'] = [
+                '#attributes'=>array('id' => 'edit-back'),
+                '#type' => 'submit',
+                '#value' => t('Back'),
+                '#submit' => ['messente_register_form_prev'],
+                '#limit_validation_errors' => [],
+              ];
+              $form['actions']['request_code'][ '#type']='submit';
+
+              $form['actions']['submit'] = [
+                '#attributes'=>array('id' => 'edit-next'),
+                '#type' => 'submit',
+                '#value' => t("Complete registration"),
+                '#submit' => ['messente_google_register_form_submit'],
+              ];
+            }
+            $form['messente_error_block'] = array(
+                '#markup' => '<div id="messente_error_block"></div>',
+            );
+            return $form;
+          }
+        }
+      }
+      else{
+       drupal_goto($GLOBALS['base_root'] . '/'.variable_get('messente_redirect_url_google_and_facebook'), []);
+      }
+  }
+}
+
+function messente_google_register_form_validate(&$form, &$form_state){
+    $current_step = empty($form_state['step']) ? 1 : $form_state['step'];
+    if(!variable_get('messente_test_mode')) {
+        switch ($current_step) {
+            case 1:
+                if (empty($form_state['values']['phone_and_mail'])) {
+                    form_set_error('phone_and_mail', t("The Phone field cannot be empty"));
+                } else {
+                    if (FALSE !== (Tools::validation_phone($form_state['values']['phone_and_mail']))) {
+                        $phone = Tools::replace_str($form_state['values']['phone_and_mail'], 'phone');
+                        if (isHaveUserFieldPhone($phone) == FALSE) {
+                            variable_del('messente_user_id_' . $phone);
+                            RegisterUserIsPhoneNew($phone);
+                        } else {
+                            form_set_error('phone_and_mail', t("A user with this phone number is already registered"));
+                        }
+
+                    } else {
+                        form_set_error('phone_and_mail', t("Please enter a valid phone number"));
+                    }
+                }
+                break;
+            case 2:
+                $phone = Tools::replace_str($form_state['values']['phone_and_mail'], 'phone');
+                if (!variable_get('messente_test_mode')) {
+                    if (empty($form_state['values']['code'])) {
+                        form_set_error('code', t("Wrong CODE entered"));
+                    } else {
+                        if (Tools::validation_pincode($form_state['values']['code'])) {
+                            if (FALSE !== ($messente_id = variable_get('messente_user_id_' . $phone))) {
+                                if (FALSE !== ($messente_code = Messente::SendSMSVerifyPin($messente_id, $form_state['values']['code']))) {
+                                    variable_del('messente_user_id_' . $phone);
+                                } else {
+                                    form_set_error('code', t("Enter the correct Pin Code"));
+                                }
+                            } else {
+                                form_set_error('code', t("Something went wrong, try again later"));
+                            }
+                        } else {
+                            form_set_error('code', t("Please enter a valid Pin Code"));
+                        }
+                    }
+                }
+                break;
+        }
+    }
+}
+
+function messente_google_register_form_submit($form, &$form_state) {
+  global $user;
+  $google_user = variable_get('messente_google_register_user_array_'.session_id());
+  variable_del('messente_google_register_user_array_'.session_id());
+  $user_params= [
+    'name' => $google_user['id'],
+    'pass' => $google_user['id'],
+    'mail' => $google_user['email'],
+    'init' => $google_user['email'],
+    'status' => 1,
+    'roles' => [DRUPAL_AUTHENTICATED_RID => TRUE],
+  ];
+  $phone = Tools::replace_str($form_state['values']['phone_and_mail'],'phone');
+
+  if (isHaveUserFieldPhone($phone) == false) {
+    user_save(NULL,  $user_params);
+    $uid = user_authenticate( $user_params['name'], $user_params['pass']);
+    if($uid){
+
+      if (variable_get('messente_field_phone')) {
+       $user = user_load($uid);
+        user_save($user, [
+          variable_get('messente_field_phone') => [
+            'und' => [
+              0 => [
+                'value' => $phone,
+                variable_get('field_phone_number_type') => $phone,
+              ],
+            ],
+          ],
+
+        ]);
+      }
+      if (variable_get('messente_field_username_enabled')) {
+        $user = user_load($uid);
+        user_save($user, [
+          variable_get('messente_field_username') => [
+            'und' => [
+              0 => [
+                'value' =>  $google_user['name'],
+              ],
+            ],
+          ],
+
+        ]);
+      }
+      if (isset($google_user['picture']) && $google_user['picture']) {
+          $photo = drupal_http_request($google_user['picture']);
+          $file =file_save_data($photo->data,"public://avatar-img", FILE_EXISTS_REPLACE);
+          $file->status = FILE_STATUS_PERMANENT;
+          $file->type= 'image';
+          file_save($file);
+          $user = user_load($uid);
+            if($file){
+                $user_field=[];
+                if(variable_get('messente_field_user_avatar')){
+                    $user_field[variable_get('messente_field_user_avatar')] = array(
+                        'und' => [0 => Tools::array_is_object($file)]
+                    );
+                }
+                $user_field['picture'] = $file;
+                $save_user = user_save($user,$user_field);
+            }
+      }
+      $google_user['uid']=$uid;
+      set_UserGoogleIsCode($google_user);
+      deleteUserSessionConfig($phone);
+      variable_del('messente_google_register_user_array_'.session_id());
+      variable_del('messente_user_id_' .$phone);
+      unset($_SESSION['id']);
+      get_UserLoginFinalize($uid);
+      session_unset();
+    }
+  }
+  else{
+    watchdog('messente', '(messente_google_register_form_submit >isHaveUserFieldPhone($phone)) ', array('@logfile' =>$phone ), WATCHDOG_ERROR);
+    form_set_error('name', t("You have already verified this phone number before, please try another one"));
+
+  }
+
+}
+
+///////END USER GOOGLE /////////////////////////////////////////////////////////////////////////////
+
+/////// USER FACEBOOK /////////////////////////////////////////////////////////////////////////////
+function messente_facebook_register_form($form, &$form_state){
+  if(isset($form_state["build_info"]) || isset($form_state["build_info"]["form_id"])){
+    if($form_state["build_info"]["form_id"]=='messente_facebook_register_form'){
+      $access_google_user=[];
+      $user_google_auth = variable_get('messente_facebook_register_user_array_'.session_id());
+      if (empty($user_google_auth )) {
+        if(isset($_GET['code'])){
+          $code = $_GET['code'];
+          $RequestGoogle =get_RequestFacebookRegister($code);
+          if(isset($RequestGoogle['access_token'])){
+            $access_google_user = get_AuthFacebookTokenId($RequestGoogle['access_token']);
+          }else{
+            form_set_error('phone_and_mail', t("Service unavailable, please try again later"));
+            drupal_goto($GLOBALS['base_root'] . '/'.variable_get('messente_redirect_url_google_and_facebook'), []);
+          }
+          if(isset($access_google_user['id'])){
+            variable_del('messente_facebook_register_user_array_'.session_id());
+            variable_set('messente_facebook_register_user_array_'.session_id(),$access_google_user);
+            $user_google_auth = variable_get('messente_facebook_register_user_array_'.session_id());
+          }else{
+            form_set_error('phone_and_mail', t("Service unavailable, please try again later"));
+            drupal_goto($GLOBALS['base_root'] . '/'.variable_get('messente_redirect_url_google_and_facebook'), []);
+          }
+        } else{
+          drupal_goto($GLOBALS['base_root'] . '/'.variable_get('messente_redirect_url_google_and_facebook'), []);
+        }
+
+      }
+      if($user_google_auth){
+        if(isset($user_google_auth['id'])){
+          if( get_UserUidFacebookIsCode($user_google_auth['id'])){
+            form_set_error('phone_and_mail', t("This user is already registered"));
+            variable_del('messente_facebook_register_user_array_'.session_id());
+            drupal_goto($GLOBALS['base_root'] . '/'.variable_get('messente_redirect_url_google_and_facebook'), []);
+          }
+          else{
+            if (!isset($form_state['step'])) {
+              $form_state['step'] = 1;
+              $form_state['steps_values'] = [];
+            }
+            $step = $form_state['step'];
+            $form['#attached']['js'] = addJsForStep($step);
+            $form['step_number'] = [
+              '#type' => 'hidden',
+              '#title' => t('step form'),
+              '#default_value' => $step,
+            ];
+            $form['phone_and_mail'] = [
+              '#type' => 'hidden',
+              '#title' => t("Phone number"),
+            ];
+            if (isset($form_state['input']['phone_and_mail'])) {
+              if (isset($form_state['input']['phone_and_mail']))
+                $form_state['phone_and_mail']['#default_value'] = $form_state['input']['phone_and_mail'];
+            }
+            $form['messente_error_block'] = array(
+                  '#markup' => '<div id="messente_error_block"></div>',
+              );
+            // Buttons
+            $form['actions'] = [
+              '#type' => 'actions',
+            ];
+            if($step == 1){
+              $form['phone_and_mail']['#type'] = 'textfield';
+              $form['step_number']['#value'] = 1;
+              $form['step_number']['#default_value'] = 1;
+
+              $form['actions']['next'] = [
+                '#attributes'=>array('id' => 'edit-next'),
+                '#type' => 'submit',
+                '#value' => t("Next"),
+                '#submit' => ['messente_register_form_next'],
+              ];
+            }
+            if ($step == 2) {
+              $form['code'] = [
+                '#attributes'=>array('id' => 'edit-code'),
+                '#type' => 'textfield',
+                '#title' => t('Pin Code'),
+                '#default_value' => '',
+              ];
+              $form['step_number']['#value'] = 2;
+              $form['step_number']['#default_value'] = 2;
+              $form['actions']['prev'] = [
+                 '#attributes'=>array('id' => 'edit-back'),
+                '#type' => 'submit',
+                '#value' => t('Back'),
+                '#submit' => ['messente_register_form_prev'],
+                '#limit_validation_errors' => [],
+              ];
+              $form['actions']['request_code'] = [
+                '#type' => 'submit',
+                '#value' => t("Send PIN code again"),
+                '#submit' => ['messente_register_code_submit'],
+                '#limit_validation_errors' => [],
+              ];
+              $form['actions']['submit'] = [
+                '#type' => 'submit',
+                '#value' => t("Complete registration"),
+                '#submit' => ['messente_google_register_form_submit'],
+              ];
+            }
+            return $form;
+          }
+        }
+      }
+      else{
+        drupal_goto($GLOBALS['base_root'] . '/'.variable_get('messente_redirect_url_google_and_facebook'), []);
+      }
+    }
+  }
+}
+
+function messente_facebook_register_form_validate(&$form, &$form_state){
+  $current_step = empty($form_state['step']) ? 1 : $form_state['step'];
+  if(!variable_get('messente_test_mode')) {
+    switch ($current_step) {
+      case 1:
+        if (empty($form_state['values']['phone_and_mail'])) {
+          form_set_error('phone_and_mail', t("The Phone field cannot be empty"));
+        }
+        else {
+          $phone = Tools::replace_str($form_state['values']['phone_and_mail'], 'phone');
+          if (Tools::validation_phone($phone)) {
+            if (isHaveUserFieldPhone($phone) == FALSE) {
+              variable_del('messente_user_id_'.  $phone);
+              RegisterUserIsPhoneNew($phone);
+            }
+            else {
+              form_set_error('phone_and_mail', t("A user with this phone number is already registered"));
+            }
+          }
+          else {
+            form_set_error('phone_and_mail', t("Please enter a valid phone number"));
+          }
+        }
+        break;
+      case 2:
+            $phone = Tools::replace_str($form_state['values']['phone_and_mail'],'phone');
+            if(!variable_get('messente_test_mode')) {
+                if (empty($form_state['values']['code'])) {
+                    form_set_error('code', t("Wrong CODE entered"));
+                }else {
+                    if (Tools::validation_pincode($form_state['values']['code'])) {
+                        if (FALSE !== ($messente_id = variable_get('messente_user_id_'.$phone))) {
+                            if (FALSE !== ($messente_code =Messente::SendSMSVerifyPin($messente_id, $form_state['values']['code']))) {
+                                variable_del('messente_user_id_'. $phone);
+                            }else {
+                                form_set_error('code', t("Enter the correct Pin Code"));
+                            }
+                        } else {
+                            form_set_error('code', t("Something went wrong, try again later"));
+                        }
+                    } else {
+                        form_set_error('code', t("Please enter a valid Pin Code"));
+                    }
+                }
+            }
+            break;
+    }
+  }
+}
+
+function messente_facebook_register_form_submit($form, &$form_state){
+  global $user;
+  $facebook_user = variable_get('messente_facebook_register_user_array_'.session_id());
+  variable_del('messente_facebook_register_user_array_'.session_id());
+  $facebook_user['name'] =  $facebook_user['first_name'].' '. $facebook_user['last_name'];
+  $user_params= [
+    'name' => $facebook_user['id'],
+    'pass' => $facebook_user['id'],
+    'mail' => $facebook_user['email'],
+    'init' => $facebook_user['email'],
+    'status' => 1,
+    'roles' => [DRUPAL_AUTHENTICATED_RID => TRUE],
+  ];
+  user_save(NULL,  $user_params);
+  $phone =Tools::replace_str($form_state['values']['phone_and_mail'],'phone');
+  $uid = user_authenticate( $user_params['name'], $user_params['pass']);
+  if($uid){
+    if (variable_get('messente_field_phone')) {
+        $user = user_load($uid);
+      user_save($user, [
+        variable_get('messente_field_phone') => [
+          'und' => [
+            0 => [
+              'value' => $phone,
+              variable_get('field_phone_number_type') => $phone,
+            ],
+          ],
+        ],
+
+      ]);
+    }
+    if (variable_get('messente_field_username_enabled')) {
+        $user = user_load($uid);
+      user_save($user, [
+        variable_get('messente_field_username') => [
+          'und' => [
+            0 => [
+              'value' =>  $facebook_user['name'],
+            ],
+          ],
+        ],
+
+      ]);
+    }
+    if (isset( $facebook_user['picture']) && isset( $facebook_user['picture']['data']) && count($facebook_user['picture']['data']) && isset( $facebook_user['picture']['data']['url'])) {
+       if($facebook_user['picture']['data']['url']){
+                  $user = user_load($uid);
+                  $photo = drupal_http_request($facebook_user['picture']['data']['url']);
+                  $file =file_save_data($photo->data,"public://avatar-img", FILE_EXISTS_REPLACE);
+                  $file->status = FILE_STATUS_PERMANENT;
+                  $file->type= 'image';
+                  file_save($file);
+                  $user = user_load($uid);
+                  if($file){
+                      $user_field=[];
+                      if(variable_get('messente_field_user_avatar')){
+                          $user_field[variable_get('messente_field_user_avatar')] = array(
+                              'und' => [0 => Tools::array_is_object($file)]
+                          );
+                      }
+                      $user_field['picture'] = $file;
+                      $save_user = user_save($user,$user_field);
+                  }
+       }
+    }
+    $facebook_user['uid']=$uid;
+    set_UserFacebookIsCode($facebook_user);
+    variable_del('messente_facebook_register_user_array_'.session_id());
+    variable_del('messente_user_id_' .$phone);
+    deleteUserSessionConfig($phone);
+    get_UserLoginFinalize($uid);
+    unset($_SESSION['id']);
+  }else{
+    watchdog('messente', 'messente_facebook_register_form_submit >$uid) ', array('@logfile' =>$uid), WATCHDOG_ERROR);
+    form_set_error('name', t("This user is already registered"));
+  }
+}
+
+////// END USER FACEBOOK ///////////////////////////////////////////////////////////////////
+
+/// REGISTER AND RECOVERY BY PHONE
+/* Форма смены пароля пользователя пользователя */
+function messente_request_form($form, &$form_state)
+{
+  if (!isset($form_state['step'])) {
+    $form_state['step'] = 1;
+    $form_state['steps_values'] = [];
+  }
+  $step = $form_state['step'];
+  $form['#attached']['js'] = addJsForStep($step);
+  $max_step = 3;
+  $form['phone_and_mail'] = [
+    '#type' => 'hidden',
+    '#title' => t("Phone number*"),
+    '#default_value' => isset($form_state['input']['phone_and_mail']) ? $form_state['input']['phone_and_mail'] : '',
+  ];
+  if (variable_get('messente_request_mail')) {
+    $form['phone_and_mail']['#title'] = t("Phone number/email*");
+  }
+  $form['code'] = [
+    '#attributes'=>array('id' => 'edit-code'),
+    '#type' => 'hidden',
+    '#title' => t('Pin Code'),
+    '#default_value' => '',
+  ];
+  $form['step_number'] = [
+    '#type' => 'hidden',
+    '#title' => t('step-form'),
+    '#default_value' => $step,
+  ];
+  $form['messente_error_block'] = array(
+        '#markup' => '<div id="messente_error_block"></div>',
+    );
+  // Buttons
+  $form['actions'] = [
+    '#type' => 'actions',
+  ];
+  if($step==1){
+    $form['phone_and_mail']['#type'] = 'textfield';
+    $form['step_number']['#value'] = 1;
+    $form['step_number']['#default_value'] = 1;
+  }
+  if ($step > 1) {
+
+    $form['actions']['prev'] = [
+       '#attributes'=>array('id' => 'edit-back'),
+      '#type' => 'submit',
+      '#value' => t('Back'),
+      '#submit' => ['messente_register_form_prev'],
+      '#limit_validation_errors' => [],
+    ];
+  }
+  if ($step == 2) {
+    $form['code']['#type'] = 'textfield';
+    $form['step_number']['#value'] = 2;
+    $form['step_number']['#default_value'] = 2;
+    $form['actions']['request_code'] = [
+      '#type' => 'submit',
+      '#value' => t("Send PIN CODE again"),
+      '#submit' => ['messente_request_code_submit'],
+      '#limit_validation_errors' => [],
+    ];
+  }
+  if ($step == 3) {
+    $form['pass'] = [
+      '#type' => 'password_confirm',
+      '#title' => t('Confirm password'),
+      '#size' => 25,
+
+    ];
+    $form['step_number']['#value'] = 3;
+    $form['step_number']['#default_value'] = 3;
+  }
+
+  if ($step < $max_step) {
+    $form['actions']['next'] = [
+      '#attributes'=>array('id' => 'edit-next'),
+      '#type' => 'submit',
+      '#value' => t("Next"),
+      '#submit' => ['messente_register_form_next'],
+    ];
+
+  } else {
+    $form['actions']['submit'] = [
+      '#type' => 'submit',
+      '#value' => t("Complete Password recovery"),
+      '#submit' => ['messente_request_form_submit'],
+    ];
+    $form['actions']['prev']['#type'] = 'hidden';
+
+  }
+  return $form;
+}
+
+function messente_request_form_validate(&$form, &$form_state){
+  $current_step = empty($form_state['step']) ? 1 : $form_state['step'];
+  if(!variable_get('messente_test_mode')) {
+    switch ($current_step) {
+      case 1:
+        if (empty($form_state['values']['phone_and_mail'])) {
+          form_set_error('phone_and_mail', t("This field can not be empty"));
+        }
+        else {
+          $phone = Tools::replace_str($form_state['values']['phone_and_mail'], 'phone');
+          variable_del('messente_user_id_'.$phone);
+          if (Tools::validation_phone($phone)) {
+            if (isHaveUserFieldPhone($phone)) {
+              RequestUserPasswordIsPhoneNew($phone);
+            }
+            else {
+              form_set_error('phone_and_mail', t("No user found with this phone number"));
+            }
+
+          }
+          else {
+            form_set_error('phone_and_mail', t("Please enter the correct phone number"));
+          }
+        }
+        break;
+      case 2:
+            $phone = Tools::replace_str($form_state['values']['phone_and_mail'],'phone');
+            if(!variable_get('messente_test_mode')) {
+                if (empty($form_state['values']['code'])) {
+                    form_set_error('code', t("Wrong CODE entered"));
+                }
+                else {
+                    if (Tools::validation_pincode($form_state['values']['code'])) {
+                        if (FALSE !== ($messente_id = variable_get('messente_user_id_'.$phone))) {
+
+                            if (FALSE !== ($messente_code =Messente::SendSMSVerifyPin($messente_id, $form_state['values']['code']))) {
+                                variable_del('messente_user_id_'. $phone);
+                            } else {
+                                form_set_error('code', t("Enter the correct Pin Code"));
+                            }
+                        } else {
+                            form_set_error('code', t("Something went wrong, try again later"));
+                        }
+                    } else {
+                        form_set_error('code', t("Please enter a valid Pin Code"));
+                    }
+                }
+            }
+            break;
+      case 3:
+        if (empty($form_state['values']['pass'])) {
+          form_set_error('pass', t("Password field cannot be empty"));
+        }
+        else {
+          $min_pass = 6;
+          if (count(str_split($form_state['values']['pass'])) < $min_pass) {
+            form_set_error('pass', t("The password is too short, at least " . $min_pass . " characters"));
+          }
+        }
+        break;
+    }
+  }
+}
+
+function messente_request_form_submit($form, &$form_state)
+{
+  // global $user;
+  $uid=false;
+  if(valid_email_address($form_state['input']['phone_and_mail'])){
+    $uid = getUidUserIsMail($form_state['input']['phone_and_mail']);
+  }
+  $phone =Tools::replace_str($form_state['input']['phone_and_mail'],'phone');
+  if (!$uid) {
+    $uid = getUIDisHaveFon($phone);
+  }
+  if ($uid) {
+    $user = user_load($uid);
+    user_save($user, [
+      'pass' => $form_state['input']['pass']['pass1'],
+    ]);
+    variable_del('messente_request_time_user_' . $uid);
+    variable_del('messente_request_time_user_'.$phone);
+    deleteUserSessionConfig($phone);
+    drupal_flush_all_caches();
+    drupal_set_message(t("Log in to your account with a new password"));
+    drupal_goto($GLOBALS['base_root'] . '/user', []);
+  } else {
+    form_set_error('pass', t("User not found"));
+  }
+
+
+}
+
+function messente_request_code_submit(&$form, &$form_state)
+{
+  $step = &$form_state['step'];
+  $form_state['rebuild'] = TRUE;
+  $step = 2;
+  if (isset($form_state['input']['phone_and_mail'])) {
+      $phone =Tools::replace_str($form_state['input']['phone_and_mail'],'phone');
+      if (Tools::validation_phone($phone)) {
+            if (isHaveUserFieldPhone($phone)) {
+              RequestUserPasswordIsPhoneNew($phone);
+            }
+            else{
+              form_set_error('phone_and_mail', t("No user found with this phone number"));
+            }
+      }
+      else {
+      form_set_error('code', t("The phone number is incorrect"));
+      }
+  }
+  else {
+    form_set_error('code', t("Phone number not found"));
+  }
+}
+
+
+function messente_register_form($form, &$form_state){
+
+  if (!isset($form_state['step'])) {
+    $form_state['step'] = 1;
+    $form_state['steps_values'] = [];
+  }
+  $step = $form_state['step'];
+  $max_step = 3;
+  $form['step_number'] = [
+    '#type' => 'hidden',
+    '#title' => t('step form'),
+    '#default_value' => $step,
+  ];
+
+  $form['#attached']['js'] = addJsForStep($step);
+
+  $form['phone_and_mail'] = [
+    '#type' => 'hidden',
+    '#title' => t("Phone number"),
+  ];
+
+  if (isset($form_state['input']['phone_and_mail'])) {
+    $form_state['phone_and_mail']['#default_value'] = $form_state['input']['phone_and_mail'];
+  }
+
+  $form['code'] = [
+    '#attributes'=>array('id' => 'edit-code'),
+    '#type' => 'hidden',
+    '#title' => t('Pin Code'),
+    '#default_value' => '',
+  ];
+  $form['messente_error_block'] = array(
+        '#markup' => '<div id="messente_error_block"></div>',
+    );
+  $form['actions'] = [
+    '#type' => 'actions',
+  ];
+  $form['actions']['request_code'] = [
+    '#type' => 'hidden',
+    '#value' => t("Send PIN code again"),
+    '#submit' => ['messente_register_code_submit'],
+    '#limit_validation_errors' => [],
+  ];
+
+  if($step === 1){
+    $form['phone_and_mail']['#type'] = 'textfield';
+    if (variable_get('messente_request_mail') && !variable_get('messente_form_email_register_enabled')) {
+      $form['phone_and_mail']['#title'] = t("Phone number / email*");
+    }
+    $form['step_number']['#value'] = 1;
+    $form['step_number']['#default_value'] = 1;
+  }
+
+  if($step >  1){
+    $form['actions']['prev'] = [
+      '#attributes'=>array('id' => 'edit-back'),
+      '#type' => 'submit',
+      '#value' => t('Back'),
+      '#submit' => ['messente_register_form_prev'],
+      '#limit_validation_errors' => [],
+    ];
+  }
+
+  if($step === 2){
+    $form['step_number']['#value'] = 2;
+    $form['step_number']['#default_value'] = 2;
+    $form['code']['#type'] = 'textfield';
+    $form['actions']['request_code']['#type'] = 'submit';
+  }
+
+  if($step === 3){
+    $form['#attributes']['enctype'] = 'multipart/form-data';
+    $form['step_number']['#value'] = 3;
+    $form['step_number']['#default_value'] = 3;
+    if (variable_get('messente_field_username_enabled')) {
+       $form['name'] = [
+        '#type' => 'textfield',
+        '#title' => t('Username'),
+        '#default_value' => '',
+        '#maxlength' => 120,
+       ];
+    }
+    if (variable_get('messente_field_surname_enabled')) {
+       $form['surname'] = [
+        '#type' => 'textfield',
+        '#title' => t('Surname'),
+        '#default_value' => '',
+        '#maxlength' => 120,
+      ];
+    }
+    if (variable_get('messente_field_email_enabled')) {
+       $form['email'] = [
+        '#type' => 'textfield',
+        '#title' => t('email'),
+        '#default_value' => '',
+        '#maxlength' => 120,
+       ];
+    }
+    $form['pass'] = [
+      '#type' => 'password_confirm',
+      '#title' => t('Password'),
+      '#size' => 25,
+    ];
+    if( variable_get('messente_register_picture_upload_enabled')){
+
+    if(!isset( $form['container_file_upload'])){
+        $text_data =getTextData();
+        $form['container_file_upload']=array(
+          '#prefix' => '<div id="container_file_upload"><h2 class="upload-photo-title">'.t('Add a photo for your profile').'</h2>'.$text_data,
+          '#suffix' => '</div>',
+        );
+        $form['container_file_upload']['conainer_upload']=array(
+          '#prefix' => '<div id="container_upload_prefix">',//<p class="text-upload">Файл не выбран</p>
+          '#suffix' => '<div class="item-link-block"></div>
+                            <a id="prefix_upload_btn" onclick="GETONCLICK()" class="form-submit">'.t('Select').'</a>
+                            </div>',
+        );
+        $form['container_file_upload']['conainer_upload']['im-container'] = array(
+          '#prefix' => '<div id="im-area">',
+          '#suffix' => '</div>',
+        );
+        if(variable_get('messente_register_picture_upload_url')){
+            $form['container_file_upload']['conainer_upload']['im-container'][ '#markup']='<img src="'.variable_get('messente_register_picture_upload_url').'"  style="width: 55px;height: auto;"  />';
+        }
+        $form['container_file_upload']['conainer_upload']['image_file'] = array(
+          '#type' => 'file',
+          '#attributes' => array('id' => 'edit-image-file-input'),
+          '#prefix' => '<div id="im-inp" style="display: none">',
+          '#markup' => '',
+          '#suffix' => '</div>',
+        );
+        $form['container_file_upload']['upload'] = array(
+            '#type' => 'submit',
+            '#value' => 'upload',
+            '#submit' => array('file_managed_file_submit'),
+            '#validate' => array(),
+            '#prefix' => '<div id="im-btn" style="display: none">',
+            '#markup' => '',
+            '#suffix' => '</div>',
+            '#ajax' => array(
+                'callback' => 'messente_upload_image',
+                'wrapper' => 'container_upload_prefix',
+                'method' => 'replace',
+                'effect' => 'fade',
+            ),
+        );
+      }
+    }
+
+    $form['actions']['submit'] = [
+      '#type' => 'submit',
+      '#value' => t("Complete registration"),
+      '#submit' => ['messente_register_form_submit'],
+    ];
+  }
+
+  if($step < $max_step) {
+    $form['actions']['next'] = [
+      '#attributes'=>array('id' => 'edit-next'),
+      '#type' => 'submit',
+      '#value' => t("Next"),
+      '#submit' => ['messente_register_form_next'],
+    ];
+  }
+  return $form;
+
+}
+
+function messente_register_form_validate(&$form, &$form_state){
+    $current_step = empty($form_state['step']) ? 1 : $form_state['step'];
+    $build_id = getFormstateId($form_state);
+    if(!variable_get('messente_test_mode')) {
+    }else{
+        variable_set('messente_user_id_'.$build_id, $form_state['values']['phone_and_mail']);
+     }
+    switch ($current_step) {
+        case 1:
+            if(!variable_get('messente_test_mode')) {
+                if (empty($form_state['values']['phone_and_mail'])) {
+                    if (variable_get('messente_request_mail')&& !variable_get('messente_form_email_register_enabled')) {
+                        form_set_error('phone_and_mail', t("Email and Phone fields cannot be empty"));
+                    } else {
+                        form_set_error('phone_and_mail', t("The Phone field cannot be empty"));
+                    }
+                }
+                else {
+                    if (valid_email_address($form_state['values']['phone_and_mail'])) {    // Если ввели email
+                        if (variable_get('messente_request_mail')&& !variable_get('messente_form_email_register_enabled')) {
+                            if (Tools::get_count_user_is_mail($form_state['values']['phone_and_mail'])) {
+                                form_set_error('phone_and_mail', t("User with this email is already registered"));
+                            }else{
+                                RegisterUserIsMailgetCode($form_state['values']['phone_and_mail']);
+                            }
+                        }else {
+                            form_set_error('phone_and_mail', t("Please enter a valid phone number"));
+                        }
+                    }
+                    else{
+                        $phone = Tools::replace_str($form_state['values']['phone_and_mail'],'phone');
+                        variable_del('messente_user_id_'.$phone);
+                        if (Tools::validation_phone($phone)) {
+                            if (isHaveUserFieldPhone($phone)==false) {
+                                RegisterUserIsPhoneNew($phone);
+                            }else{
+                                form_set_error('phone_and_mail', t("A user with this phone number is already registered"));
+                            }
+                        } else {
+                            form_set_error('phone_and_mail', t("Please enter a valid phone number"));
+                        }
+                    }
+                }
+            }
+            break;
+        case 2:
+            $phone = Tools::replace_str($form_state['values']['phone_and_mail'],'phone');
+            if(!variable_get('messente_test_mode')) {
+                if (empty($form_state['values']['code'])) {
+                    form_set_error('code', t("Wrong CODE entered"));
+                }
+                else {
+                    if (Tools::validation_pincode($form_state['values']['code'])) {
+                        if (valid_email_address($form_state['values']['phone_and_mail'])) {
+                            if ((int)$form_state['values']['code'] != (int)variable_get('messente_mail_pin_code_' .   $phone)) {
+                                form_set_error('code', t("Please enter correct Pin Code"));
+                            }
+                        } else {
+
+                            if (FALSE !== ($messente_id = variable_get('messente_user_id_'.$phone))) {
+
+                                if (FALSE !== ($messente_code =Messente::SendSMSVerifyPin($messente_id, $form_state['values']['code']))) {
+                                    variable_del('messente_user_id_'. $phone);
+                                } else {
+                                    form_set_error('code', t("Enter the correct Pin Code"));
+                                }
+                            } else {
+                                form_set_error('code', t("Something went wrong, try again later"));
+                            }
+                        }
+                    } else {
+                        form_set_error('code', t("Please enter a valid Pin Code"));
+                    }
+                }
+            }
+            break;
+        case 3:
+            if(!variable_get('messente_test_mode')) {
+                if (variable_get('messente_field_username_enabled')) {
+                    if (empty($form_state['values']['name'])) {
+                        form_set_error('name', t('Username field cannot be empty'));
+                    } else {
+                        if (!preg_match('/^[а-яёА-ЯЁa-zA-Z\s]+$/u', $form_state['values']['name'])) {
+                            form_set_error('name', t("Invalid characters in username field"));
+                        }
+                    }
+                }
+                if (variable_get('messente_field_surname_enabled')) {
+                    if (empty($form_state['values']['surname'])) {
+                        form_set_error('surname', t('Surname field cannot be empty'));
+                    } else {
+                        if (!preg_match('/^[а-яёА-ЯЁa-zA-Z\s]+$/u', $form_state['values']['surname'])) {
+                            form_set_error('surname', t("Invalid characters in surname field"));
+                        }
+                    }
+                }
+                if (variable_get('messente_field_email_enabled')) {
+                    if (empty($form_state['values']['email'])) {
+                        form_set_error('email', t('Email field cannot be empty'));
+                    }else {
+                        if(!valid_email_address($form_state['values']['email'])) {
+                            form_set_error('email', t("Invalid characters in email field"));
+                        }else {
+                            if (getUidUserIsMail($form_state['values']['email'])) {
+                                form_set_error('email', t("This address is already registered"));
+                            }
+                        }
+                    }
+                }
+                if (empty($form_state['values']['pass'])) {
+                    form_set_error('pass', t("The password field cannot be empty"));
+                }
+                if (variable_get('messente_register_picture_upload_enabled')) {
+                    if(!variable_get('messente_file_fid_'.session_id())) {
+                        form_set_error('upload', 'No file uploaded');
+                    }
+                }
+            }
+            else{
+                if (variable_get('messente_register_picture_upload_enabled')) {
+                    if(!isset($form_state['values']['form_build_id']) || !variable_get('messente_file_fid_'.$build_id )){
+                        form_set_error('upload', 'No file uploaded');
+                    }
+                }
+            }
+            break;
+    }
+
+}
+
+function messente_upload_image(&$form, &$form_state) {
+    $validators = array(
+        'file_validate_is_image' => array(),
+        'file_validate_extensions' => array('png gif jpg jpeg'),
+        'file_validate_image_resolution' => array(variable_get('user_picture_dimensions','1024x1024')),
+        'file_validate_size' => array(variable_get('user_picture_file_size','1024') * 1024),
+    );
+    $file = file_save_upload('image_file', $validators, "public://avatar-img", FILE_EXISTS_REPLACE);
+    if ($file) {
+        $file->status = FILE_STATUS_PERMANENT;
+        file_save($file);
+        variable_del('messente_file_fid_'.session_id());
+        variable_set('messente_file_fid_'.session_id(),$file->fid);
+
+        $form['container_file_upload']['conainer_upload']['im-container']['#markup'] ='<img src="'.file_create_url($file->uri).'" style="width: 55px;height: auto;"  />';
+
+    }
+    return  $form['container_file_upload']['conainer_upload'];
+
+}
+
+function messente_register_form_next($form, &$form_state){
+  $step = &$form_state['step'];
+  $form_state['rebuild'] = TRUE;
+  // Save current step values
+  $form_state['steps_values'][$step] = $form_state['values'];
+  // Change step
+  $step++;
+  // Restore next step values
+  $form_state['values'] = isset($form_state['steps_values'][$step]) ? $form_state['steps_values'][$step] : [];
+}
+
+function messente_register_form_prev($form, &$form_state)
+{
+  $step = &$form_state['step'];
+  $form_state['rebuild'] = TRUE;
+  // Change step
+  $step--;
+  // Restore prev step values
+  $form_state['values'] = $form_state['steps_values'][$step];
+}
+
+function messente_register_code_submit(&$form, &$form_state)
+{
+    $step = &$form_state['step'];
+    $form_state['rebuild'] = TRUE;
+    // Save current step values
+    $form_state['steps_values'][$step] = $form_state['values'];
+    $form_state['values'] = isset($form_state['steps_values'][$step]) ? $form_state['steps_values'][$step] : [];
+     if(!variable_get('messente_test_mode')) {
+     if (isset($form_state['input']['phone_and_mail'])) {
+      $phone = Tools::replace_str($form_state['input']['phone_and_mail'], 'phone');
+      if (Tools::validation_phone($phone)) {
+          setLog([$phone]);
+        if (isHaveUserFieldPhone($phone) == FALSE) {
+             RegisterUserIsPhoneNew($phone);
+             setLog([$phone]);
+        }
+        else {
+          form_set_error('phone_and_mail', t("A user with this phone number is already registered"));
+        }
+
+      }
+      else {
+        form_set_error('name', t("Enter a valid phone number"));
+      }
+    }
+    else {
+      form_set_error('name', t("Enter a valid phone number"));
+    }
+  }
+}
+
+function messente_register_form_submit($form, &$form_state){
+
+    if(isset($form_state['values']['phone_and_mail'])){
+        global $user;
+        $arguments = [
+            'name' => Tools::login_generate(),
+            'pass' => $form_state['values']['pass'],
+            'mail' => '',
+            'init' => '',
+            'status' => 1,
+            'roles' => [DRUPAL_AUTHENTICATED_RID => TRUE],
+        ];
+        if(valid_email_address($form_state['values']['phone_and_mail'])){
+            $arguments['mail']=$form_state['values']['phone_and_mail'];
+            $arguments['init']=$form_state['values']['phone_and_mail'];
+        }
+
+        if(isset($form_state['values']['email'])){
+            if (variable_get('messente_field_email_enabled')) {
+                if(valid_email_address($form_state['values']['email'])){
+                    $arguments['mail']=$form_state['values']['email'];
+                    $arguments['init']=$form_state['values']['email'];
+                }
+             }
+        }
+
+        user_save(NULL, $arguments);
+
+        $uid = user_authenticate($arguments['name'], $arguments['pass']);
+        $user = user_load($uid);
+
+        if (variable_get('messente_field_username_enabled')) {
+            if(isset( $form_state['values']['name'])) {
+                $user = Tools::user_field_set($uid, variable_get('messente_field_username') ,'value',$form_state['values']['name']);
+            }
+        }
+
+        if (variable_get('messente_field_surname_enabled')) {
+            if(isset( $form_state['values']['surname'])){
+                $user = Tools::user_field_set($uid, variable_get('messente_field_surname') ,'value', $form_state['values']['surname']);
+            }
+         }
+
+        $phone = Tools::replace_str($form_state['values']['phone_and_mail'], 'phone');
+
+        if(!valid_email_address($form_state['values']['phone_and_mail'])){
+            if(variable_get('messente_field_phone')){
+                $user =Tools::user_field_set($uid,  variable_get('messente_field_phone')  ,variable_get('field_phone_number_type'), $phone);
+            }
+        }
+
+        if( variable_get('messente_register_picture_upload_enabled')){
+            setLog(array(
+                'config'=>variable_get('messente_file_fid_'.session_id())
+            ));
+            if(variable_get('messente_file_fid_'.session_id())){
+                    $file = file_load(variable_get('messente_file_fid_' .session_id()));
+                    variable_del('messente_file_fid_' . session_id());
+                    if($file){
+                        $user = user_load($uid);
+                        setLog(array(
+                            'file'=>$file,
+                            'user'=>$user
+                        ));
+                        $user_field=[];
+                        if(variable_get('messente_field_user_avatar')){
+                            $user_field[variable_get('messente_field_user_avatar')] = array(
+                                'und' => [0 => Tools::array_is_object($file)]
+                            );
+                        }
+                        $user_field['picture'] = $file;
+                        user_save($user,$user_field);
+                    }
+            }
+         }
+        user_login_finalize();
+        if(valid_email_address($arguments['mail'])){
+                _user_mail_notify('register_no_approval_required', $user);
+        }
+        if($user->uid) {
+          clearAllConfigs();
+          drupal_set_message(t("You have successfully registered"));
+          drupal_goto($GLOBALS['base_root'] . '/user', []);
+         }
+  }
+    else{
+    watchdog('messente', 'messente_register_form_submit->phone_and_mail', array('@logfile' =>null), WATCHDOG_ERROR);
+    form_set_error('name', t("Something went wrong, try again later"));
+  }
+
+}
+
+/// END REGISTER AND RECOVERY BY PHONE
+
+///MESSENTE REGISTER USER EMAIL
+/* Форма смены пароля пользователя EMAIL */
+
+
+function messente_email_request_form($form, &$form_state){
+  if (!isset($form_state['step'])) {
+      $form_state['step'] = 1;
+      $form_state['steps_values'] = [];
+  }
+  $step = $form_state['step'];
+  $max_step = 3;
+  $form['phone_and_mail'] = [
+    '#type' => 'hidden',
+    '#title' => t("Email*"),
+    '#default_value' => isset($form_state['input']['phone_and_mail']) ? $form_state['input']['phone_and_mail'] : '',
+  ];
+  $form['code'] = [
+     '#attributes'=>array('id' => 'edit-code'),
+    '#type' => 'hidden',
+    '#title' => t('Pin Code'),
+    '#default_value' => '',
+  ];
+  $form['messente_error_block'] = array(
+        '#markup' => '<div id="messente_error_block"></div>',
+    );
+  $form['step_number'] = [
+    '#type' => 'hidden',
+    '#title' => t('step-form'),
+    '#default_value' => $step,
+  ];
+  // Buttons
+  $form['actions'] = [
+    '#type' => 'actions',
+  ];
+  if($step==1){
+    $form['phone_and_mail']['#type'] = 'textfield';
+    $form['step_number']['#value'] = 1;
+    $form['step_number']['#default_value'] = 1;
+  }
+  if ($step > 1) {
+    $form['#attached']['js'] = addJsForStep($step);
+    $form['actions']['prev'] = [
+      '#attributes'=>array('id' => 'edit-back'),
+      '#type' => 'submit',
+      '#value' => t('Back'),
+      '#submit' => ['messente_register_form_prev'],
+      '#limit_validation_errors' => [],
+    ];
+  }
+  if ($step == 2) {
+    $form['code']['#type'] = 'textfield';
+    $form['step_number']['#value'] = 2;
+    $form['step_number']['#default_value'] = 2;
+    $form['actions']['request_code'] = [
+      '#type' => 'submit',
+      '#value' => t("Send PIN CODE again"),
+      '#submit' => ['messente_email_request_code_submit'],
+      '#limit_validation_errors' => [],
+    ];
+  }
+  if ($step == 3) {
+    $form['pass'] = [
+      '#type' => 'password_confirm',
+      '#title' => t('Confirm password'),
+      '#size' => 25,
+
+    ];
+    $form['step_number']['#value'] = 3;
+    $form['step_number']['#default_value'] = 3;
+  }
+  if ($step < $max_step) {
+    $form['actions']['next'] = [
+      '#attributes'=>array('id' => 'edit-next'),
+      '#type' => 'submit',
+      '#value' => t("Next"),
+      '#submit' => ['messente_register_form_next'],
+    ];
+
+  }else {
+     $form['actions']['submit'] = [
+      '#type' => 'submit',
+      '#value' => t("Complete Password recovery"),
+      '#submit' => ['messente_email_request_form_submit'],
+     ];
+     $form['actions']['prev']['#type'] = 'hidden';
+  }
+  return $form;
+}
+
+function messente_email_request_form_validate(&$form, &$form_state)
+{
+  $current_step = empty($form_state['step']) ? 1 : $form_state['step'];
+  if(!variable_get('messente_test_mode')) {
+    switch ($current_step) {
+      case 1:
+        if (empty($form_state['values']['phone_and_mail'])) {
+            form_set_error('phone_and_mail', t("This field can not be empty"));
+        }
+        else {
+          if (valid_email_address($form_state['values']['phone_and_mail'])) {
+              if (Tools::get_count_user_is_mail($form_state['values']['phone_and_mail'])) {
+                         RegisterUserIsMailgetCode($form_state['values']['phone_and_mail']);
+              }
+            else {
+                        form_set_error('phone_and_mail', t("User with this email address not found"));
+            }
+          }
+          else {
+            form_set_error('phone_and_mail', t("Please enter the correct email address"));
+          }
+        }
+        break;
+      case 2:
+        if (empty($form_state['values']['code'])) {
+          form_set_error('code', t("Please enter pin code"));
+        }
+        else {
+          if (Tools::validation_pincode($form_state['values']['code'])) {
+              $mail_config = Tools::replace_str($form_state['values']['phone_and_mail'],'mail');
+            if ((int) $form_state['values']['code'] != (int) variable_get('messente_mail_pin_code_' . $mail_config)) {
+              form_set_error('phone_and_mail', t("Please enter correct Pin Code"));
+            }
+          }
+          else {
+            form_set_error('phone_and_mail', t("Please enter a valid Pin Code"));
+          }
+        }
+        break;
+      case 3:
+        if (empty($form_state['values']['pass'])) {
+          form_set_error('pass', t("Password field cannot be empty"));
+        }
+        else {
+          if (count(str_split($form_state['values']['pass'])) < 6) {
+            form_set_error('pass', t("The password is too short, at least 6 characters"));
+          }
+        }
+        break;
+    }
+  }
+}
+
+function messente_email_request_code_submit(&$form, &$form_state)
+{
+  $step = &$form_state['step'];
+  $form_state['rebuild'] = TRUE;
+  $step = 2;
+  if (isset($form_state['input']['phone_and_mail'])) {
+    if (valid_email_address($form_state['input']['phone_and_mail'])) {
+      if (!Tools::get_count_user_is_mail($form_state['input']['phone_and_mail'])) {
+        form_set_error('phone_and_mail', t("User with this email is already registered"));
+      }
+      else{
+        RegisterUserIsMailgetCode($form_state['input']['phone_and_mail']);
+      }
+    }
+    else{
+      form_set_error('phone_and_mail', t("Please enter a valid Email"));
+    }
+  }
+  else {
+    form_set_error('code', t("Enter a valid phone number"));
+  }
+
+}
+
+function messente_email_request_form_submit($form, &$form_state)
+{
+  if(isset($form_state['input']['phone_and_mail'])){
+    $uid=getUidUserIsMail($form_state['input']['phone_and_mail']);
+    if ($uid) {
+      $user = user_load($uid);
+      user_save($user, [
+        'pass' => $form_state['input']['pass']['pass1'],
+      ]);
+      $mail_str=Tools::replace_str($form_state['input']['phone_and_mail'],'mail');
+      RemoveRequestTimeUser(session_id());
+      variable_del('messente_mail_pin_code_'. $mail_str);
+      drupal_set_message(t("Log in to your account with a new password"));
+      deleteUserSessionConfig();
+      drupal_flush_all_caches();
+      drupal_goto($GLOBALS['base_root'] . '/user', []);
+    } else {
+      watchdog('messente', 'messente_email_request_form_submit->user uid not found', array('@logfile' =>null), WATCHDOG_ERROR);
+      form_set_error('name', t("User not found"));
+    }
+  }else{
+    watchdog('messente', 'messente_email_request_form_submit->phone_and_mail', array('@logfile' =>null), WATCHDOG_ERROR);
+    form_set_error('name', t("Email not found"));
+  }
+
+
+
+}
+
+/* Форма регистрации пользователя EMAIL */
+function messente_register_email_form($form, &$form_state){
+  if (!isset($form_state['step'])) {
+    $form_state['step'] = 1;
+    $form_state['steps_values'] = [];
+  }
+  $step = $form_state['step'];
+  $max_step = 3;
+  $form['step_number'] = [
+    '#type' => 'hidden',
+    '#title' => t('step form'),
+    '#default_value' => $step,
+  ];
+  $form['phone_and_mail'] = [
+    '#type' => 'hidden',
+    '#title' => t("Email"),
+  ];
+
+  if (isset($form_state['input']['phone_and_mail'])) {
+    $form_state['phone_and_mail']['#default_value'] = $form_state['input']['phone_and_mail'];
+  }
+
+  $form['messente_error_block'] = array(
+        '#markup' => '<div id="messente_error_block"></div>',
+    );
+  $form['actions'] = [
+    '#type' => 'actions',
+  ];
+
+  if($step == 1){
+    $form['phone_and_mail']['#type'] = 'textfield';
+    $form['step_number']['#value'] = 1;
+    $form['step_number']['#default_value'] = 1;
+  }
+  if($step > 1){
+    $form['#attached']['js'] = addJsForStep($step);
+    $form['actions']['prev'] = [
+      '#attributes'=>array('id' => 'edit-back'),
+      '#type' => 'submit',
+      '#value' => t('Back'),
+      '#submit' => ['messente_register_form_prev'],
+      '#limit_validation_errors' => [],
+    ];
+  }
+  if($step == 2){
+    $form['code'] = [
+      '#type' => 'textfield',
+      '#attributes'=>array('id' => 'edit-code'),
+      '#title' => t('Pin Code'),
+      '#default_value' => '',
+    ];
+    $form['step_number']['#value'] = 2;
+    $form['step_number']['#default_value'] = 2;
+    $form['actions']['request_code'] = [
+      '#type' => 'submit',
+      '#value' => t("Send PIN code again"),
+      '#submit' => ['messente_register_email_code_submit'],
+      '#limit_validation_errors' => [],
+    ];
+  }
+  if($step == 3){
+    if (variable_get('messente_field_username_enabled')) {
+      $form['name'] = [
+        '#type' => 'textfield',
+        '#title' => t('Username'),
+        '#default_value' => '',
+        '#maxlength' => 120,
+      ];
+    }
+    if (variable_get('messente_field_surname_enabled')) {
+      $form['surname'] = [
+        '#type' => 'textfield',
+        '#title' => t('Surname'),
+        '#default_value' => '',
+        '#maxlength' => 120,
+      ];
+    }
+    $form['pass'] = [
+      '#type' => 'password_confirm',
+      '#title' => t(''),
+      '#size' => 25,
+    ];
+    $form['#attributes']['enctype'] = 'multipart/form-data';
+    $form['step_number']['#value'] = 3;
+    $form['step_number']['#default_value'] = 3;
+
+    if( variable_get('messente_register_picture_upload_enabled')) {
+          if(!isset( $form['container_file_upload'])){
+              $text_data =getTextData();
+              $form['container_file_upload']=array(
+                  '#prefix' => '<div id="container_file_upload"><h2 class="upload-photo-title">'.t('Add a photo for your profile').'</h2>'.$text_data,
+                  '#suffix' => '</div>',
+              );
+              $form['container_file_upload']['conainer_upload']=array(
+                  '#prefix' => '<div id="container_upload_prefix">',//<p class="text-upload">Файл не выбран</p>
+                  '#suffix' => '<div class="item-link-block"></div>
+                            <a id="prefix_upload_btn" onclick="GETONCLICK()" class="form-submit">'.t('Select').'</a>
+                            </div>',
+              );
+              $form['container_file_upload']['conainer_upload']['im-container'] = array(
+                  '#prefix' => '<div id="im-area">',
+                  '#suffix' => '</div>',
+              );
+              if(variable_get('messente_register_picture_upload_url')){
+                  $form['container_file_upload']['conainer_upload']['im-container'][ '#markup']='<img src="'.variable_get('messente_register_picture_upload_url').'"  style="width: 55px;height: auto;"  />';
+              }
+              $form['container_file_upload']['conainer_upload']['image_file'] = array(
+                  '#type' => 'file',
+                  '#attributes' => array('id' => 'edit-image-file-input'),
+                  '#prefix' => '<div id="im-inp" style="display: none">',
+                  '#markup' => '',
+                  '#suffix' => '</div>',
+              );
+
+              $form['container_file_upload']['upload'] = array(
+                  '#type' => 'submit',
+                  '#value' => 'upload',
+                  '#submit' => array('file_managed_file_submit'),
+                  '#validate' => array(),
+                  '#prefix' => '<div id="im-btn" style="display: none">',
+                  '#markup' => '',
+                  '#suffix' => '</div>',
+                  '#ajax' => array(
+                      'callback' => 'messente_upload_image',
+                      'wrapper' => 'container_upload_prefix',
+                      'method' => 'replace',
+                      'effect' => 'fade',
+                  ),
+              );
+          }
+      }
+    $form['actions']['submit'] = [
+      '#type' => 'submit',
+      '#value' => t("Complete registration"),
+      '#submit' => ['messente_register_form_submit'],
+    ];
+    $form['actions']['prev']['#type'] = 'hidden';
+  }
+  if($step < $max_step) {
+    $form['actions']['next'] = [
+      '#attributes'=>array('id' => 'edit-next'),
+      '#type' => 'submit',
+      '#value' => t("Next"),
+      '#submit' => ['messente_register_form_next'],
+    ];
+  }
+  return $form;
+}
+
+function messente_register_email_form_validate(&$form, &$form_state){
+  $current_step = empty($form_state['step']) ? 1 : $form_state['step'];
+    $build_id = getFormstateId($form_state);
+  if(!variable_get('messente_test_mode')) {
+    switch ($current_step) {
+      case 1:
+        if (empty($form_state['values']['phone_and_mail'])) {
+          form_set_error('phone_and_mail', t("Email field cannot be empty"));
+        }
+        else {
+          if (valid_email_address($form_state['values']['phone_and_mail'])) {
+            if (Tools::get_count_user_is_mail($form_state['values']['phone_and_mail'])) {
+              form_set_error('phone_and_mail', t("User with this email is already registered"));
+            }
+
+            else {
+              RegisterUserIsMailgetCode($form_state['values']['phone_and_mail']);
+            }
+          }
+          else {
+            form_set_error('phone_and_mail', t("Please enter a valid Email"));
+          }
+        }
+        break;
+      case 2:
+        if (empty($form_state['values']['code'])) {
+          form_set_error('code', t("Please enter pin code"));
+        }
+        else {
+          if (Tools::validation_pincode($form_state['values']['code'])) {
+              $mail_config = Tools::replace_str($form_state['values']['phone_and_mail'],'mail');
+            if ((int) $form_state['values']['code'] != (int) variable_get('messente_mail_pin_code_' .  $mail_config)) {
+              form_set_error('code', t("Please enter correct Pin Code"));
+            }
+          }
+          else {
+            form_set_error('code', t("Please enter a valid Pin Code"));
+          }
+        }
+        break;
+      case 3:
+        if (variable_get('messente_field_username_enabled')) {
+          if (empty($form_state['values']['name'])) {
+            form_set_error('name', t('Username field cannot be empty'));
+          }
+          else {
+            if (!preg_match('/^[а-яёА-ЯЁa-zA-Z\s]+$/u', $form_state['values']['name'])) {
+              form_set_error('name', t("Invalid characters in username field"));
+            }
+          }
+        }
+        if (variable_get('messente_field_surname_enabled')) {
+          if (empty($form_state['values']['surname'])) {
+            form_set_error('surname', t('Surname field cannot be empty'));
+          }
+          else {
+            if (!preg_match('/^[а-яёА-ЯЁa-zA-Z\s]+$/u', $form_state['values']['surname'])) {
+              form_set_error('surname', t("Invalid characters in surname field"));
+            }
+          }
+        }
+        if (empty($form_state['values']['pass'])) {
+          form_set_error('pass', t("The password field cannot be empty"));
+        }
+        if (variable_get('messente_register_picture_upload_enabled')) {
+          if (! variable_get('messente_file_fid_' .$build_id)) {
+            form_set_error('upload', 'No file uploaded');
+          }
+        }
+        break;
+    }
+  }
+
+}
+
+function messente_register_email_code_submit(&$form, &$form_state){
+  $step = &$form_state['step'];
+  $form_state['rebuild'] = TRUE;
+  $step = 2;
+  if (isset($form_state['input']['phone_and_mail'])) {
+    if (valid_email_address($form_state['input']['phone_and_mail'])) {
+      if (Tools::get_count_user_is_mail($form_state['input']['phone_and_mail'])) {
+        form_set_error('phone_and_mail', t("User with this email is already registered"));
+      }else{
+        RegisterUserIsMailgetCode($form_state['input']['phone_and_mail']);
+      }
+    }else{
+      form_set_error('phone_and_mail', t("Please enter a valid Email"));
+    }
+  } else {
+    form_set_error('code', t("Enter a valid phone number"));
+  }
+
+}
+
+function RegisterUserIsMailgetCode($mail){
+  $PinCode =Tools::get_rand_pincode();
+  $mail_config = Tools::replace_str($mail,'mail');
+  if (!variable_get('messente_mail_pin_code_' . $mail_config)) {
+      if (isRequestGood(session_id())) {
+         if (messente_mail_send('default_from', $mail, 'Valid PIN CODE', $PinCode)) {
+             variable_set('messente_mail_pin_code_'.$mail_config, $PinCode);
+             RemoveRequestTimeUser(session_id());
+             AddRequestTimeUser(session_id());
+             drupal_set_message(t("Resend via " . variable_get('messente_request_timer') . "sec."));
+         }
+         else{
+              form_set_error('phone_and_mail', t("Service temporarily unavailable, please try again later"));
+              watchdog('messente', 'RegisterUserIsPhoneNew >SendSMSVerifyStart Ошибка', array('@logfile' =>''), WATCHDOG_ERROR);
+         }
+      }
+    else {
+          form_set_error('phone_and_mail', t("Pin Code has been sent, please wait, it remains: " . GetRequestISGoodTimer(session_id()) . " sec."));
+    }
+  }
+  else {
+        variable_del('messente_mail_pin_code_'.$mail_config);
+        RegisterUserIsMailgetCode($mail);
+  }
+}
+
+function messente_mail_send($from, $to, $subject, $message) {
+  $my_module = 'messente';
+  $my_mail_token = microtime();
+  if($from == 'default_from') {
+    $from =  variable_get('site_mail', ini_get('sendmail_from'));
+  }
+  $message = array(
+    'id' => $my_module . '_' . $my_mail_token,
+    'to' => $to,
+    'subject' => $subject,
+    'body' => array($message),
+    'headers' => array(
+      'From' => $from,
+      'Sender' => $from,
+      'Return-Path' => $from,
+    ),
+  );
+  $system = drupal_mail_system($my_module, $my_mail_token);
+  $message = $system->format($message);
+  if ($system->mail($message)) {
+    return TRUE;
+  }
+  else {
+    return FALSE;
+  }
+}
+
+
+///  END MESSENTE REGISTER USER EMAIL
+
+
+function messente_import_mask_list()
+{
+  $header = array(
+    array('data' => t('id')),
+    array('data' => t('Code')),
+    array('data' => t('Count number')),
+    array('data' => t('Country')),
+    array('data' => t('Mask')),
+    array('data' => t('Action'))
+  );
+  $connections  = db_select('messente_mask_phone', 'n')
+    ->fields('n')
+    ->execute()->fetchAll();
+
+  $row = array();
+  if ($connections) {
+    foreach ($connections as $connection) {
+      $actions = array(
+        l(t('edit'), 'admin/config/people/messente/import_mask/mask/' . $connection->id . '/edit'),
+        l(t('delete'), 'admin/config/people/messente/import_mask/mask/' . $connection->id . '/delete'),
+      );
+      // setLog($connection);
+
+      $row [] = array(
+        array('data' => $connection->id),
+        array('data' => $connection->code),
+        array('data' => $connection->count),
+        array('data' => $connection->country),
+        array('data' => $connection->mask),
+        array('data' => implode(' | ', $actions)),
+      );
+    }
+  }
+
+  return theme('table', array(
+    'header' => $header,
+    'rows'   => $row,
+  ));
+}
+
+function messente_mask_form($form, &$form_state, $connection = null)
+{
+  if(!isset( $form_state['values']['img'])){
+      $form_state['values']['img']='';
+  }
+  $connection =  messente_mask_load($connection);
+  $form['#attached']['js'] = addJsForStep(3);
+  $form['code'] = array(
+    '#title'         => t('code phone.'),
+    '#description'   => t(''),
+    '#type'          => 'textfield',
+    '#default_value' => $connection ? $connection['code'] : '',
+    '#required'      => true,
+  );
+  $form['count'] = array(
+    '#title'         => t('count number.'),
+    '#description'   => t('Max count phone number for this Mask (code+number)'),
+    '#type'          => 'textfield',
+    '#default_value' => $connection ? $connection['count'] : '',
+    '#required'      => true,
+  );
+  $form['country'] = array(
+    '#title'         => t('country name.'),
+    '#description'   => t(''),
+    '#type'          => 'textfield',
+    '#default_value' => $connection ? $connection['country'] : '',
+    '#required'      => true,
+  );
+  $form['mask'] = array(
+    '#title'         => t('Mask phone.'),
+    '#description'   => t('Instead of numbers, put "x". Exemple : xxx xxx xx xx'),
+    '#type'          => 'textfield',
+    '#default_value' => $connection ? $connection['mask'] : '',
+    '#required'      => true,
+  );
+      $form['img'] = array(
+          '#title'         => t('Img flag'),
+          '#description'   => t(''),
+          '#type'          => 'hidden',
+          '#default_value' => $connection ? $connection['img'] : '',
+          '#required'      => false,
+      );
+      if(isset($connection['img'])){
+          if($connection['img']){
+              $form['img']['#prefix'] = '<img src="'.$connection['img'].'" style="width: 55px;height: auto;"  />';
+              $form['img']['#type']= 'textfield';
+          }
+      }
+
+      $form['container_file_upload']=array(
+          '#prefix' => '<div id="container_file_upload">',
+          '#suffix' => '</div>',
+      );
+      $form['container_file_upload']['conainer_upload']=array(
+          '#prefix' => '<div id="container_upload_prefix" style="display: flex;align-items: center;background: #f1f1f1;padding: 10px;">',//<p class="text-upload">Файл не выбран</p>
+          '#suffix' => '<div class="item-link-block" style="width: 50%;text-align: center;"><span>'.t("File not selected").'</span></div>
+                            <a id="prefix_upload_btn" style="width: 30%;text-align: center;padding: 5px; background: #ccc;color: #000;cursor: pointer;
+" onclick="GETONCLICK()" class="form-submit">'.t('Select').'</a>
+                            </div>',
+      );
+      $form['container_file_upload']['conainer_upload']['im-container'] = array(
+          '#prefix' => '<div id="im-area"  style="width: 25px;height: 25px; display: block;background: #ccc;">',
+          '#markup' => '',
+          '#suffix' => '</div>',
+      );
+      $form['container_file_upload']['conainer_upload']['image_file'] = array(
+          '#type' => 'file',
+          '#attributes' => array('id' => 'edit-image-file-input'),
+          '#prefix' => '<div id="im-inp" style="display: none">',
+          '#markup' => '',
+          '#suffix' => '</div>',
+      );
+      $form['container_file_upload']['upload'] = array(
+        '#type' => 'submit',
+        '#value' => 'upload',
+        '#submit' => array('file_managed_file_submit'),
+        '#validate' => array(),
+        '#prefix' => '<div id="im-btn" style="display: none">',
+        '#markup' => '',
+        '#suffix' => '</div>',
+        '#ajax' => array(
+            'callback' => 'messente_mask_upload_image',
+            'wrapper' => 'container_upload_prefix',
+            'method' => 'replace',
+            'effect' => 'fade',
+        ),
+    );
+      $form['img_validation']=[
+          '#prefix' => '<div>',
+          '#markup' => '<small>max 125 * 125 px (png gif jpg jpeg )</small>',
+          '#suffix' => '</div>',
+      ];
+
+  $form['submit'] = array(
+    '#type'  => 'submit',
+    '#value' => $connection ? t('Save') : t('Add'),
+  );
+  if ($connection) {
+    $form['id'] = array(
+      '#type'  => 'value',
+      '#value' => $connection['id'],
+    );
+  }
+  return $form;
+}
+
+function messente_mask_upload_image(&$form, &$form_state) {
+   $patch =$_SERVER['DOCUMENT_ROOT'] . base_path().'sites/default/files/flag-img/';
+   if (!file_exists($patch)) {
+       mkdir($patch , 0777, true);
+   }
+    $validators = array(
+        'file_validate_is_image' => array(),
+        'file_validate_extensions' => array('png gif jpg jpeg'),
+        'file_validate_size' => array(1 * 125 * 125),
+    );
+    $file = file_save_upload('image_file', $validators, "public://flag-img", FILE_EXISTS_REPLACE);
+
+    if ($file) {
+        $file->status = FILE_STATUS_PERMANENT;
+        file_save($file);
+        variable_set('messente_mask_url_flag_'.session_id(),file_create_url($file->uri));
+        $form['container_file_upload']['conainer_upload']['#suffix']='<div class="item-link-block" style="width: 50%;text-align: center;">
+            <span>'.$file->filename.'</span></div>
+            <a id="prefix_upload_btn" style="width: 30%;text-align: center;padding: 5px; background: #ccc;color: #000;cursor: pointer;" 
+            onclick="GETONCLICK()" class="form-submit">'.t('Select').'</a></div>';
+        $form['container_file_upload']['conainer_upload']['im-container']['#markup'] ='<img src="'.file_create_url($file->uri).'" style="width: 55px;height: auto;"  />';
+        $form['container_file_upload']['conainer_upload']['im-container']['#prefix'] = '<div id="im-area"  style="width: 20%;text-align: center;">';
+        return $form['container_file_upload']['conainer_upload'];
+    }else{
+        watchdog('messente', 'messente_mask_upload_image->file Ошибка создания файла', array('@logfile' =>$file), WATCHDOG_ERROR);
+        form_set_error('container_file_upload', t("File creation error"));
+        return false;
+    }
+
+}
+
+function messente_mask_form_validate($form, &$form_state){
+  if(isset($form_state['values'])){
+    foreach ($form_state['values'] as $name=>$value){
+        if($name!=='img' && $name!=='container_file_upload' && $name!=='img_validation'){
+            if(empty($value)){
+                form_set_error($name, $name.' the field cannot be empty');
+            }
+        }else{
+            break;
+        }
+    }
+  }
+  }
+
+function messente_mask_form_submit($form, &$form_state){
+
+  $connection = array(
+    'code'       =>  $form_state['values']['code'],
+    'count'        => $form_state['values']['count'],
+    'country'       =>  $form_state['values']['country'],
+    'mask'       =>  $form_state['values']['mask'],
+    'img'=>$form_state['values']['img'],
+  );
+
+  if(variable_get('messente_mask_url_flag_'.session_id())){
+      $connection['img']= variable_get('messente_mask_url_flag_'.session_id());
+      variable_del('messente_mask_url_flag_'.session_id());
+  }
+  if (isset($form_state['values']['id']) && $form_state['values']['id']) {
+      $params=[
+          'table'=>'messente_mask_phone',
+          'fields'=> $connection,
+          'condition'=>['name'=>'id','value'=>$form_state['values']['id']],
+      ];
+      Tools::update_field_table($params);
+        drupal_set_message(t('Phone mask saved!'));
+  }else {
+      $params=[
+          'table'=>'messente_mask_phone',
+          'fields'=> $connection,
+      ];
+      Tools::insert_field_table($params);
+    drupal_set_message(t('Phone mask added!'));
+  }
+  drupal_goto('admin/config/people/messente/import_mask');
+}
+
+function messente_mask_form_delete($connection){
+  $connection =  messente_mask_load($connection);
+  if(isset($connection['id'])){
+    $id =  $connection['id'];
+    $code = $connection['code'];
+
+    db_delete('messente_mask_phone')
+      ->condition('id', (int) $id)
+      ->execute();
+    //setLog($id );
+    drupal_set_message(t("Mask Phone number [ id:".$id." , code:".$code." ]  delete"));
+  }
+
+  drupal_goto('admin/config/people/messente/import_mask');
+}
+
+function messente_mask_load($id)
+{
+  $connection = db_select('messente_mask_phone', 'n')
+    ->fields('n')
+    ->condition('n.id', $id)
+    ->execute()->fetchAssoc();
+
+  return $connection;
+}
+
+function messente_mask_contents($display)
+{
+  $query = db_select('messente_mask_phone', 'n')
+    ->fields('n', array('id', 'code'))
+    ->orderBy('name', 'DESC');
+
+  if ($display == 'block') {
+    $query->range(0, 5);
+  }
+
+  return $query->execute();
+}
+
+function messente_import_provider_list(){
+  $header = array(
+    array('data' => t('id')),
+    array('data' => t('name')),
+    array('data' => t('sid')),
+    array('data' => t('token')),
+    array('data' => t('status')),
+    array('data' => t('default')),
+    array('data' => t('Action'))
+  );
+  $connections  = db_select('messente_providers', 'n')
+    ->fields('n')
+    ->execute()->fetchAll();
+  $row = array();
+  if ($connections) {
+    foreach ($connections as $connection) {
+      $actions = array(
+        l(t('edit'), 'admin/config/people/messente/import_provider/provider/' . $connection->id . '/edit'),
+        l(t('delete'), 'admin/config/people/messente/import_provider/provider/' . $connection->id . '/delete'),
+      );
+      $row [] = array(
+        array('data' => $connection->id),
+        array('data' => $connection->name),
+        array('data' => $connection->sid),
+        array('data' => $connection->token),
+        array('data' => $connection->status ? 'true' : 'false'),
+        array('data' => $connection->default ? 'true' : 'false'),
+        array('data' => implode(' | ', $actions)),
+      );
+    }
+  }
+  return theme('table', array(
+    'header' => $header,
+    'rows'   => $row,
+  ));
+}
+
+function messente_provider_form($form, &$form_state, $connection = null)
+{
+
+  $connection =  messente_provider_load($connection);
+  $form['name'] = array(
+    '#title'         => t('name'),
+    '#description'   => t(''),
+    '#type'          => 'textfield',
+    '#default_value' => $connection ? $connection['name'] : '',
+    '#required'      => true,
+  );
+  $form['sid'] = array(
+    '#title'         => t('sid'),
+    '#description'   => t(''),
+    '#type'          => 'textfield',
+    '#default_value' => $connection ? $connection['sid'] : '',
+    '#required'      => true,
+  );
+  $form['token'] = array(
+    '#title'         => t('token'),
+    '#description'   => t(''),
+    '#type'          => 'textfield',
+    '#default_value' => $connection ? $connection['token'] : '',
+    '#required'      => true,
+  );
+  $form['default'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('default'),
+    '#default_value' =>  $connection ? $connection['default'] : '',
+  );
+  $form['status'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('status'),
+    '#default_value' =>  $connection ? $connection['status'] : '',
+  );
+  $form['submit'] = array(
+    '#type'  => 'submit',
+    '#value' => $connection ? t('Save') : t('Add'),
+  );
+
+  if ($connection) {
+    $form['id'] = array(
+      '#type'  => 'value',
+      '#value' => $connection['id'],
+    );
+  }
+  return $form;
+}
+
+function messente_provider_form_validate($form, &$form_state)
+{
+  if(isset($form_state['values'])){
+    foreach ($form_state['values'] as $key=>$value){
+      if($key!=='status' && $key!=='default'){
+        if(empty( $value)){
+          form_set_error($key, t("field ".$key." empty"));
+          break;
+        }
+      }
+
+    }
+
+  }
+
+
+
+}
+
+function messente_provider_form_submit($form, &$form_state){
+
+  $connection = array(
+    'name'       =>  $form_state['values']['name'],
+    'sid'        =>  $form_state['values']['sid'],
+    'token'        => $form_state['values']['token'],
+    'status'        => $form_state['values']['status'],
+    'default'        => $form_state['values']['default'],
+  );
+
+  $defouls = messente_provider_get_default();
+  if(isset($form_state['values']['id'])){
+    if($form_state['values']['default']){
+      if($defouls){
+        messente_provider_set($defouls['id'],'default',0);
+      }
+    }
+    $connection['id'] = $form_state['values']['id'];
+    drupal_write_record('messente_providers', $connection, 'id');
+    drupal_set_message(t('Providers saved!'));
+  } // add new data
+  else {
+    if($form_state['values']['default']){
+      if($defouls){
+        messente_provider_set($defouls['id'],'default',0);
+      }
+    }
+    drupal_write_record('messente_providers', $connection);
+    drupal_set_message(t('Providers added!'));
+  }
+
+  drupal_goto('admin/config/people/messente/import_provider');
+}
+
+function messente_provider_form_delete($id){
+  $connection =  messente_provider_load($id);
+  if(isset($connection['id'])){
+    $ID =  $connection['id'];
+    $name = $connection['name'];
+
+    db_delete('messente_providers')
+      ->condition('id', (int)  $ID)
+      ->execute();
+    drupal_set_message(t("Mask Phone number [ id:". $ID." , name:".$name." ]  delete"));
+  }
+
+  drupal_goto('admin/config/people/messente/import_provider');
+}
+
+function messente_provider_load($id)
+{
+  $connection = db_select('messente_providers', 'n')
+    ->fields('n')
+    ->condition('n.id', $id)
+    ->execute()->fetchAssoc();
+
+  return $connection;
+}
+
+function messente_provider_get_default()
+{
+  $connection = db_select('messente_providers', 'n')
+    ->fields('n')
+    ->condition('n.default', 1)
+    ->execute()->fetchAssoc();
+
+  return $connection;
+}
+
+function messente_provider_set($id,$field,$value){
+  db_update('messente_providers')
+    ->fields(array($field => $value))
+    ->condition('id', $id)
+    ->execute();
+
+}
+
+function messente_provider_contents($display)
+{
+  $query = db_select('messente_provider', 'n')
+    ->fields('n', array('id', 'status'))
+    ->orderBy('name', 'DESC');
+
+  if ($display == 'block') {
+    $query->range(0, 5);
+  }
+
+  return $query->execute();
+}
+
+///REQUEST TIME
+function isRequestGood($phone)
+{
+  $time = REQUEST_TIME;
+  $request_time = GetRequestTimeUser($phone);
+  if ($request_time) {
+    $vlid_user_time = isValidRequestTimeUser($phone, $time);
+    if ($vlid_user_time) {
+      RemoveRequestTimeUser($phone);
+      return TRUE;
+    }
+    return FALSE;
+  } else {
+    return TRUE;
+  }
+
+}
+
+function AddRequestTimeUser($phone)
+{
+  $time = (int)$_SERVER['REQUEST_TIME'];
+  variable_set('messente_request_time_user_' . $phone, $time);
+}
+
+function RemoveRequestTimeUser($phone)
+{
+  variable_del('messente_request_time_user_' . $phone);
+}
+
+function GetRequestTimeUser($phone)
+{
+  return variable_get('messente_request_time_user_' . $phone);
+}
+
+function isValidRequestTimeUser($phone, $time)
+{
+  $st_time = GetRequestTimeUser($phone) + (int)variable_get('messente_request_timer');
+  if ($st_time < $time) {
+    return TRUE;
+  } else {
+    return FALSE;
+  }
+
+}
+
+function GetRequestISGoodTimer($phone)
+{
+  if (empty($phone)) {
+    return FALSE;
+  } else {
+    if (FALSE !== ($user_timer = GetRequestTimeUser($phone))) {
+      $server_time = (int)$_SERVER['REQUEST_TIME'];
+      if (isRequestGood($phone)) {
+        return 0;
+      } else {
+        return (int)variable_get('messente_request_timer') - ($server_time - $user_timer);
+      }
+    } else {
+      return FALSE;
+    }
+  }
+}
+
+////END REQUEST TIME
+
+function getNameUserIdIsPhone($phone)
+{
+  $result = getUIDIsPhone($phone);
+  if ($result) {
+    return getNameIUID($result);
+  }
+  $result = getUIDIsPhone('+' . $phone);
+  if ($result) {
+    return getNameIUID($result);
+  }
+  $result = getUIDIsPhone(Tools::replace_str($phone,'phone'));
+  if ($result) {
+    return getNameIUID($result);
+  }
+  return FALSE;
+}
+
+function getUIDisHaveFon($phone)
+{
+  if (FALSE !== ($result = getUIDIsPhone($phone))) {
+    return $result;
+  }
+  if (FALSE !== ($result = getUIDIsPhone(Tools::replace_str($phone,'phone')))) {
+    return $result;
+  }
+
+  if (FALSE !== ($result = getUIDIsPhone('+' . $phone))) {
+    return $result;
+  }
+  return FALSE;
+}
+
+function getUIDIsPhone($phone)
+{
+  $count = db_select('field_data_' . variable_get('messente_field_phone'), 'n')
+    ->fields('n', ['entity_id'])
+    ->condition('n.' . variable_get('messente_field_phone') . '_' . variable_get('field_phone_number_type'), $phone)
+    ->execute()
+    ->fetchField();
+  return $count;
+}
+
+function getPhoneisUid($uid){
+  $count = db_select('field_data_' . variable_get('messente_field_phone'), 'n')
+    ->fields('n', [variable_get('messente_field_phone') . '_' . variable_get('field_phone_number_type')])
+    ->condition('n.entity_id',$uid)
+    ->execute()
+    ->fetchField();
+  return $count;
+}
+
+function getNameIUID($uid)
+{
+  if ($uid) {
+    $params = [
+      'table' => 'users',
+      'fields' => ['name'],
+      'condition' => ['name' => 'uid', 'value' =>$uid],
+    ];
+    $name =  Tools::get_field_table($params);
+    if ($name) {
+      return $name;
+    } else {
+      return FALSE;
+    }
+  } else {
+    return FALSE;
+  }
+}
+
+function getUidUserIsMail($mail)
+{
+  if (Tools::get_count_user_is_mail($mail)) {
+    $params = [
+      'table' => 'users',
+      'fields' => ['uid'],
+      'condition' => ['name' => 'mail', 'value' =>$mail],
+    ];
+    $name =  Tools::get_field_table($params);
+    if ($name) {
+      return $name;
+    } else {
+      return FALSE;
+    }
+  } else {
+    return FALSE;
+  }
+
+}
+
+function getNameUserIsMail($mail){
+  if (Tools::get_count_user_is_mail($mail)) {
+    $params = [
+      'table' => 'users',
+      'fields' => ['name'],
+      'condition' => ['name' => 'mail', 'value' =>$mail],
+    ];
+    $name =  Tools::get_field_table($params);
+    if ($name) {
+      return $name;
+    } else {
+      return FALSE;
+    }
+  } else {
+    return FALSE;
+  }
+}
+
+function SendMailRequestPassword($uid){
+  if (empty($uid)) {
+    return FALSE;
+  }else {
+    if (user_load($uid)) {
+      return _user_mail_notify('password_reset', user_load($uid));
+    }else {
+      return FALSE;
+    }
+  }
+}
+
+function RequestUserPasswordIsConfigMail($mail)
+{
+  if (FALSE !== ($user_uid = getUidUserIsMail($mail))) { // получаем uid пользователя
+    if (SendMailRequestPassword($user_uid)) {
+        drupal_set_message(t("Pour changer votre mot de passe, suivez le lien envoyé sur votre email"));
+        drupal_goto($GLOBALS['base_root'] . '/user', []);
+    }else {
+        form_set_error('phone_and_mail', t("Something went wrong, please try again later"));
+    }
+  }
+  else {
+    form_set_error('phone_and_mail', t("This email address has not yet been registered on the site"));
+  }
+}
+
+function RequestUserPasswordIsPhoneNew($phone){
+  if (isHaveUserFieldPhone($phone)) {
+    if (isRequestGood(session_id())) {
+      if (FALSE == ($resultsend = Messente::SendSMSVerifyStart($phone))) {
+        form_set_error('phone_and_mail', t("Service temporarily unavailable, please try again later"));
+        watchdog('messente', 'RequestUserPasswordIsPhoneNew->SendSMSVerifyStart Ошибка получения ID у провайдера ', array('@logfile' =>$resultsend ), WATCHDOG_ERROR);
+      } else {
+        variable_set('messente_user_id_'.$phone, $resultsend);
+        RemoveRequestTimeUser(session_id());
+        AddRequestTimeUser(session_id());
+        drupal_set_message(t("SMS with a code has been sent to the phone number. You can resend the code via " . variable_get('messente_request_timer') . " sec."));
+
+      }
+    } else {
+      // AddRequestTimeUser($phone);
+      $if_request_timer = isRequestGood(session_id());
+      form_set_error('phone_and_mail', t("The PIN code has been sent, please wait, there is still: " . GetRequestISGoodTimer(session_id()) . " sec."));
+    }
+
+  } else {
+    form_set_error('phone_and_mail', t("The user with this phone number has not been registered"));
+  }
+}
+
+function RegisterUserIsPhoneNew($phone){
+  if (isHaveUserFieldPhone($phone) === false) {
+    if (!variable_get('messente_user_id_'. $phone)) {
+      if (isRequestGood(session_id())) {
+        if (FALSE !== ($create_user = Messente::SendSMSVerifyStart($phone))) {
+          variable_set('messente_user_id_'.$phone,$create_user);
+          RemoveRequestTimeUser(session_id());
+          AddRequestTimeUser(session_id());
+          drupal_set_message(t("SMS with a code has been sent to the phone number. You can resend the code via " . variable_get('messente_request_timer') . "sec."));
+        } else {
+          form_set_error('phone_and_mail', t("Service temporarily unavailable, please try again later"));
+          watchdog('messente', '(RegisterUserIsPhoneNew >SendSMSVerifyStart) Не получилось создать пользователя на староне провайдера', array('@logfile' =>$create_user ), WATCHDOG_ERROR);
+        }
+      } else {
+        form_set_error('phone_and_mail', t("Pin Code has been sent, please wait, it remains: " . GetRequestISGoodTimer(session_id()) . " sec."));
+      }
+    }
+    else{
+      variable_del('messente_user_id_' .$phone);
+      RegisterUserIsPhoneNew($phone);
+    }
+  }
+  else {
+    form_set_error('phone_and_mail', t("A user with this phone number is already registered"));
+  }
+}
+
+
+
+function isHaveUserFieldPhone($phone)
+{
+  $phone= Tools::replace_str($phone,'phone');
+  if (Tools::get_count_field_is_phone($phone)) {
+    return TRUE;
+  }
+  if (Tools::get_count_field_is_phone('+' . $phone)) {
+    return TRUE;
+  }
+  return FALSE;
+
+}
+
+/////// USER FACEBOOK ///////////////////////////////////////////////////////////////////////////
+function get_RequestFacebookRegister($code){
+  $params = array(
+    'client_id'     => variable_get('messente_facebook_client_id'),
+    'client_secret' => variable_get('messente_facebook_client_secret'),
+    'redirect_uri'  => variable_get('messente_facebook_redirect_uri'),
+    'code'          =>$code
+  );
+  $url = 'https://graph.facebook.com/oauth/access_token';
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_POST, 1);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, urldecode(http_build_query($params)));
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+  $result = curl_exec($curl);
+  curl_close($curl);
+  if(FALSE!==( $tokenInfo = json_decode($result, true))){
+    if(isset($tokenInfo['error'])){
+      return  false;
+    }else{
+      return $tokenInfo;
+    }
+
+  }else{
+    return  false;
+  }
+}
+
+function get_RequestFacebookLogin($code){
+  $params = array(
+    'client_id'     => variable_get('messente_facebook_client_id'),
+    'client_secret' => variable_get('messente_facebook_client_secret'),
+    'redirect_uri'  => variable_get('messente_facebook_enter_redirect_uri'),
+    'code'          =>$code
+  );
+  $url = 'https://graph.facebook.com/oauth/access_token';
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_POST, 1);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, urldecode(http_build_query($params)));
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+  $result = curl_exec($curl);
+  curl_close($curl);
+  if(FALSE!==( $tokenInfo = json_decode($result, true))){
+    if(isset($tokenInfo['error'])){
+      return  false;
+    }else{
+      return $tokenInfo;
+    }
+
+  }else{
+    return  false;
+  }
+
+}
+
+function get_AuthFacebookTokenId($access_token){
+  $params = array(
+    'access_token' => $access_token,
+    'fields'       => 'id,email,first_name,last_name,picture'
+  );
+  $url = 'https://graph.facebook.com/me';
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_POST, 1);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, urldecode(http_build_query($params)));
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+  $result = curl_exec($curl);
+  curl_close($curl);
+  if(FALSE!==( $tokenInfo = json_decode($result, true))){
+    if(isset($tokenInfo['error'])){
+      return  false;
+    }else{
+      return $tokenInfo;
+    }
+
+  }else{
+    return  false;
+  }
+}
+
+function set_UserFacebookIsCode($facebook_user){
+  $params=[
+    'table'=>'users',
+    'fields'=>['facebook'=>$facebook_user['id']],
+    'condition'=>['name'=>'uid','value'=>$facebook_user['uid']],
+  ];
+  Tools::update_field_table($params);
+}
+
+function get_UserUidFacebookIsCode($code){
+  if(empty($code)){
+    return false;
+  }else {
+    $params = [
+      'table' => 'users',
+      'fields' => ['uid'],
+      'condition' => ['name' => 'facebook', 'value' => $code],
+    ];
+    return Tools::get_field_table($params);
+  }
+}
+
+/////// END USER FACEBOOK ///////////////////////////////////////////////////////////////////////////
+
+/////// USER GOOGLE /////////////////////////////////////////////////////////////////////////////
+
+function get_RequestGoogleRegister($code){
+  $paramsZapros = array(
+    'client_id' => variable_get('messente_google_client_id'),
+    'client_secret' => variable_get('messente_google_client_secret'),
+    'redirect_uri' => variable_get('messente_google_redirect_uri'),
+    'grant_type' => 'authorization_code',
+    'code' => $code,
+  );
+  $url = 'https://accounts.google.com/o/oauth2/token';
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_POST, 1);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, urldecode(http_build_query($paramsZapros)));
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+  $result = curl_exec($curl);
+  curl_close($curl);
+  if(FALSE!==( $tokenInfo = json_decode($result, true))){
+    if(isset($tokenInfo['error'])){
+      return  false;
+    }else{
+      return $tokenInfo;
+    }
+
+  }else{
+    return  false;
+  }
+}
+
+function get_RequestGoogleLogin($code){
+  $paramsZapros = array(
+    'client_id' => variable_get('messente_google_client_id'),
+    'client_secret' => variable_get('messente_google_client_secret'),
+    'redirect_uri' => variable_get('messente_google_enter_redirect_uri'),
+    'grant_type' => 'authorization_code',
+    'code' => $code,
+  );
+  $url = 'https://accounts.google.com/o/oauth2/token';
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_POST, 1);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, urldecode(http_build_query($paramsZapros)));
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+  $result = curl_exec($curl);
+  curl_close($curl);
+  if(FALSE!==( $tokenInfo = json_decode($result, true))){
+    if(isset($tokenInfo['error'])){
+      return  false;
+    }else{
+      return $tokenInfo;
+    }
+
+  }else{
+    return  false;
+  }
+}
+
+function get_AuthGoogleTokenId($access_token){
+  $params['access_token'] = $access_token;
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, 'https://www.googleapis.com/oauth2/v1/userinfo' . '?' . urldecode(http_build_query($params)));
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  $out = curl_exec($curl);
+  if(FALSE!==( $result = json_decode($out, true))){
+    if(isset($result['error'])){
+      return  false;
+    }else{
+      return $result;
+    }
+
+  }else{
+    return  false;
+  }
+}
+
+function set_UserGoogleIsCode($google_user){
+  $params=[
+    'table'=>'users',
+    'fields'=>['google'=>$google_user['id']],
+    'condition'=>['name'=>'uid','value'=>$google_user['uid']],
+  ];
+  Tools::update_field_table($params);
+}
+
+function get_UserUidGoogleIsCode($code){
+  if(empty($code)){
+    return false;
+  }else{
+    $params=[
+      'table'=>'users',
+      'fields'=>['uid'],
+      'condition'=>['name'=>'google','value'=>$code],
+    ];
+    return  Tools::get_field_table($params);
+  }
+
+}
+
+function get_UserLoginFinalize($idUser){
+  global $user;
+  $user = user_load($idUser);
+  user_login_finalize();
+  drupal_goto($GLOBALS['base_root'] . '/user', []);
+}
+
+function getParamsUrlforSocial($prov,$login=false){
+  if($prov=='fb'){
+    $params = array(
+      'client_id'     =>  variable_get('messente_facebook_client_id'),
+      'redirect_uri'  =>  variable_get('messente_facebook_redirect_uri'),
+      'scope'         => 'email',
+      'response_type' => 'code',
+      'state'         => '123'
+
+    );
+    if($login){
+      $params['redirect_uri']=variable_get('messente_facebook_enter_redirect_uri');
+    }
+    return 'https://www.facebook.com/dialog/oauth?' . urldecode(http_build_query($params));
+  }
+  if($prov=='google'){
+    $url = 'https://accounts.google.com/o/oauth2/auth';
+    $params = array(
+      'redirect_uri' => variable_get('messente_google_redirect_uri'),
+      'response_type' => 'code',
+      'client_id' => variable_get('messente_google_client_id'),
+      'scope' => 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
+    );
+    if($login){
+      $params['redirect_uri']=variable_get('messente_google_enter_redirect_uri');
+    }
+    return  $url . '?' . urldecode(http_build_query($params));
+  }
+
+}
+////// END USER GOOGLE ///////////////////////////////////////////////////////////////////
+
+
+function getTextData(){
+    $extens = 'png, gif, jpg, jpeg';
+    $max_size = round((variable_get('user_picture_file_size') / 1024),1);
+    $mb = t('Mb');
+    $varibl_text_img_size ='<span>'. t('The file must weigh less than').' <strong>'.$max_size.' '.$mb.'.</strong></span>';
+    $Extensions='<span>'. t('Extensions allowed:').' <strong>'.$extens.'.</strong></span>';
+    $resolution = '<span>'.  t('The image that is wider than') .' <strong>'.variable_get('user_picture_dimensions','1024x1024').'</strong> '.t('pixels will be resized.').'</span>';
+    $text_data ='<div class="file_uplod_text_valid">'.$varibl_text_img_size.' '.$Extensions.' '. $resolution.'</div>';
+    return $text_data;
+}
+
+function deleteUserSessionConfig($phone=false){
+  if($phone!=false){
+    RemoveRequestTimeUser($phone);
+    variable_del('messente_user_id_'.  $phone);
+  }
+  RemoveRequestTimeUser(session_id());
+  variable_del('messente_mask_url_flag_'. session_id());
+  variable_del('messente_user_phone_new_'.session_id());
+  variable_del('messente_user_id_'. session_id());
+  variable_del('messente_file_url_'.session_id());
+  variable_del('messente_mail_pin_code_'.session_id());
+  variable_del('select_mask_phone_number_id_'.session_id());
+  variable_del('valid_mask_phone_number_count_'.session_id());
+}
+
+function clearAllConfigs(){
+    $configs =[
+        'messente_facebook_register_user_array_',
+        'messente_google_register_user_array_',
+        'messente_request_time_user_',
+        'validate_messente_mail_',
+        'messente_user_id_',
+        'messente_file_url_',
+        'messente_mail_pin_code_',
+        'select_mask_phone_number_id_',
+        'valid_mask_phone_number_count_',
+        'messente_user_phone_old_',
+        'messente_user_phone_new_',
+        'messente_file_url_',
+        'messente_file_fid',
+        'messente_file_fid_',
+    ];
+    foreach ($configs as $config){
+        Tools::delete_config($config);
+    }
+}
+
+function getSettings(){
+
+    $text_we_have = t('We have sent an SMS with a verification code to the phone number');
+    $text_you_can_repeat = t('You can repeat the code request after');
+    $sec=t('sec');
+    $text_pincode_re = t("Pin Code has been sent, please wait, it remains:");
+
+  return array(
+    'url'=>$GLOBALS['base_root'] . '/'.variable_get('messente_url_phone_change_form'),
+    'field_name'=>str_replace('_','-',variable_get('messente_field_phone')),
+    'field_type'=> variable_get('field_phone_number_type'),
+    'mask'=>Tools::get_fields_table(['table'=>'messente_mask_phone'],false),
+    'label'=>t("Please select a country"),
+    'step'=>1,
+    'user_phone_and_mail'=>variable_get('messente_user_id_'. session_id()),
+    'result_mask'=> variable_get('select_mask_phone_number_id_'.session_id()),
+    'result_count'=>  variable_get('valid_mask_phone_number_count_'.session_id()),
+    'id_select'=>variable_get('select_mask_phone_number_id_'.session_id()),
+    'pin_length'=>(int)variable_get('messente_pin_length'),
+    'request_timer'=>(int)variable_get('messente_request_timer'),
+    'rest_request_timer'=>GetRequestTimeUser(variable_get('messente_user_id_'. session_id())),
+    'request_timer_msg'=> $text_we_have." ".variable_get('messente_user_id_'. session_id())." ".$text_you_can_repeat." ". variable_get('messente_request_timer')." ".$sec,
+    'request_timer_error'=> $text_pincode_re." ". GetRequestISGoodTimer(session_id()) ." ".$sec,
+    'request_msg'=> $text_we_have,
+    'text_for_change_number'=>t("Send PIN code again"),
+     'text_for_enter'=>['mail'=>t("Login to the site using your email"),'phone'=>t("Login to the site using your phone number")],
+  );
+
+
+}
+
+function addJsForStep($step){
+  $MessenteSetting = getSettings();
+  $MessenteSetting['step']= $step;
+  $result = [];
+  if($step) {
+    if($step===1) {
+      if (variable_get('messente_phone_mask_enabled')) {
+        $result = [
+          drupal_get_path('module', 'messente') . '/js/jquery_maskedinput.js' => [
+            'type' => 'file',
+          ],
+          drupal_get_path('module', 'messente') . '/js/MessenteMask.js' => [
+            'type' => 'file',
+          ],
+          [
+            'data' => ['Messente' => $MessenteSetting],
+            'type' => 'setting',
+          ]
+        ];
+      }
+    }
+    if($step===2) {
+      if(variable_get('messente_pincode_inputs_add_enabled')){
+        $result = array(
+          drupal_get_path('module', 'messente') . '/js/pincode.js' => array(
+            'type' => 'file',
+          ),
+          array(
+            'data' => array('Messente' =>$MessenteSetting),
+            'type' => 'setting',
+          )
+        );
+      }
+    }
+    if($step===3) {
+      if( variable_get('messente_register_picture_upload_enabled')) {
+        $result=array(
+          drupal_get_path('module', 'messente'). '/js/upload.js' => array(
+            'type' => 'file',
+          ),
+          array(
+            'data' => array('Messente' =>$MessenteSetting),
+            'type' => 'setting',
+          )
+        );
+      }
+    }
+  }
+  return $result;
+}
+
+function UserIsEnterLogin($name){
+  if($name=='admin'){
+    return 'admin';
+  }
+  if (variable_get('messente_request_mail') != false) {
+    if (valid_email_address($name)) {
+      $login = getNameUserIsMail($name);
+      return $login;
+    }else{
+      if (isHaveUserFieldPhone($name)) {
+        if (FALSE !== ($isphone_user = getNameUserIdIsPhone($name))) {
+          return $isphone_user;
+        }
+      }
+    }
+  }
+  else{
+    if (isHaveUserFieldPhone($name)) {
+      if (FALSE !== ($isphone_user = getNameUserIdIsPhone($name))) {
+        return $isphone_user;
+      }
+    }
+  }
+  return $name;
+}
+
+function setLog($array){
+  $log = date('Y-m-d H:i:s') . ' ' . print_r($array, TRUE);
+  file_put_contents(__DIR__ . '/Atrixrlog.txt', $log . PHP_EOL, FILE_APPEND);
+}
+
+function setErrorLog($array){
+  $log = date('Y-m-d H:i:s') . ' ' . print_r($array, TRUE);
+  file_put_contents(__DIR__ . '/Errorlog.txt', $log . PHP_EOL, FILE_APPEND);
+
+}
+
+function getFormstateId($formstate){
+    if(isset($formstate['values']) && isset($formstate['values']['form_build_id'])){
+            return $formstate['values']['form_build_id'];
+    }else{
+        return false;
+    }
+}
+
+
+
+

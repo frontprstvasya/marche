@@ -1,0 +1,72 @@
+2022-08-15 14:30:30 Array
+(
+    [form_value] => 1
+    [variable] => 1
+)
+
+2022-08-15 14:30:38 Array
+(
+    [form_value] => 1
+    [variable] => 
+)
+
+2022-08-15 14:31:55 Array
+(
+    [form_value] => 1
+    [variable] => 
+    [mask_phone] => Array
+        (
+            [form] => 0
+            [variable] => 0
+        )
+
+)
+
+2022-08-15 14:33:09 Array
+(
+    [form_value] => 1
+    [variable] => 0
+    [mask_phone] => Array
+        (
+            [form] => 0
+            [variable] => 0
+        )
+
+)
+
+2022-08-15 14:34:24 Array
+(
+    [form_value] => 
+    [variable] => 
+    [mask_phone] => Array
+        (
+            [form] => 0
+            [variable] => 0
+        )
+
+)
+
+2022-08-15 14:34:32 Array
+(
+    [form_value] => 
+    [variable] => 
+    [mask_phone] => Array
+        (
+            [form] => 1
+            [variable] => 0
+        )
+
+)
+
+2022-08-15 14:34:37 Array
+(
+    [form_value] => 1
+    [variable] => 
+    [mask_phone] => Array
+        (
+            [form] => 1
+            [variable] => 1
+        )
+
+)
+

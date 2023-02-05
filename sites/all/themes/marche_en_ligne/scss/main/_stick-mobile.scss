@@ -1,0 +1,155 @@
+/* Stick mobile */
+@import "../variables";
+@import "../breakpoints";
+
+#stick-mobile {
+  background-color: #364340;
+}
+
+.region-stick-mobile {
+  position: fixed;
+  bottom: 0;
+  transform: translateY(130%);
+  display: block;
+  width: 100%;
+  background: #C4C4C4;
+  box-shadow: 0px -1.5px 6px rgb(0 0 0 / 25%);
+  min-height: 54px;
+  transition: 0.3s;
+  z-index: 11;
+}
+
+.region-stick-mobile .menu {
+  display: flex;
+  min-height: 44px;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 5px 0 0;
+}
+
+.region-stick-mobile .menu li {
+  display: block;
+}
+
+.region-stick-mobile .menu li a {
+  font-family: 'Mulish', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: -0.03em;
+  text-align: center;
+  text-decoration: none;
+  color: #ffff;
+}
+
+.region-stick-mobile .menu .menu-link-808 {
+  color: #BBDFD8;
+  position: relative;
+}
+
+.region-stick-mobile .menu .menu-link-808::before {
+  content: "\e904";
+  position: absolute;
+  display: block;
+  font-family: 'new-marche';
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-size: 35px;
+  color: #BBDFD8;
+}
+
+.region-stick-mobile .menu .menu-link-12185 {
+  color: #FFF;
+  position: relative;
+}
+
+.region-stick-mobile .menu .menu-link-12185::before {
+  content: "\e903";
+  position: absolute;
+  display: block;
+  font-family: 'new-marche';
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-size: 35px;
+  color: #fff;
+}
+
+.region-stick-mobile .menu .menu-link-810 {
+  position: relative;
+  color: #364340;
+}
+
+.region-stick-mobile .menu .menu-link-810::before {
+  content: "\e902";
+  position: absolute;
+  display: block;
+  font-family: 'new-marche';
+  top: -26px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-size: 55px;
+  color: #fcd216;
+}
+
+.region-stick-mobile .menu .menu-link-809 {
+  color: #FFF;
+  position: relative;
+}
+
+.region-stick-mobile .menu .menu-link-809::before {
+  content: "\e906";
+  position: absolute;
+  display: block;
+  font-family: 'new-marche';
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-size: 35px;
+  color: #fff;
+}
+
+.menu-stick-mobile {
+  padding: 0 10px;
+}
+
+.active-stick {
+  transform: translateY(0) !important;
+  transition: 0.3s;
+}
+/* MEDIA */
+
+@media only screen and (min-width: 340px) {
+  .menu-stick-mobile {
+    padding: 0 20px;
+  }
+}
+
+@media only screen and (min-width: 400px) {
+  .menu-stick-mobile {
+    padding: 0 35px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .menu-stick-mobile {
+    padding: 0 50px;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .menu-stick-mobile {
+    padding: 0 90px;
+  }
+}
+
+@media only screen and (min-width: 1023px) {
+  .region-stick-mobile {
+    display: none;
+  }
+}

@@ -1,0 +1,224 @@
+/* Views new ad */
+@import "../variables";
+@import "../breakpoints";
+
+.field-name-field-views-new-ad{
+  .field-label{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    width: 100%;
+    font-family: $text-400;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #017A61;
+    background: #FCD216;
+    height: 44px;
+    padding: 0 35px;
+  }
+}
+
+.node-type-main-page{
+  .view-views-front-new-ad{
+    padding: 15px 15px 30px 15px;
+
+    .view-content{
+      .views-row{
+        border-radius: 9px;
+        padding: 15px 20px 10px 20px;
+        width: calc(100% - 40px);
+        margin-bottom: 15px;
+        transition: 0.3s;
+
+        &:hover{
+          transition: 0.3s;
+          box-shadow: 4px 4px 8px #00000040;
+        }
+
+        &:before{
+          bottom: 10px;
+          z-index: 11;
+          max-width: 150%;
+          transition: 0.3s;
+        }
+
+        &:hover:before{
+          transition: 0.3s;
+          max-width: 0;
+        }
+
+        .field--description,
+        .field--location{
+          font-size: 10px;
+          line-height: 12px;
+        }
+
+        .views-field-info,
+        .views-field-php-btn{
+          display: none;
+        }
+      }
+    }
+
+    .views-field--foto-info{
+      width: calc(50% - 5px);
+      padding-right: 5px;
+    }
+
+    .views-field--description{
+      width: calc(50% - 15px);
+      padding-left: 15px;
+      position: relative;
+
+      .field-field_price{
+        display: block;
+        position: absolute;
+        left: 15px;
+        bottom: 0;
+        width: 100%;
+
+        span{
+          padding: 11px 0;
+          width: calc(100% - 15px);
+        }
+      }
+    }
+
+    .description--field-title{
+      margin-top: 0;
+    }
+
+    .pager--infinite-scroll{
+      margin: 0;
+      display: block;
+      text-align: center;
+
+      .ajax-progress-throbber{
+        display: none;
+      }
+
+      li{
+        width: auto;
+        display: inline-block;
+        transition: 0.3s;
+
+        a{
+          margin-top: 20px;
+          display: inline-block;
+          font-family: $text-400;
+          font-weight: 700;
+          font-size: 15px;
+          line-height: 18px;
+          text-align: center;
+          color: #FCD216;
+          border: none;
+          background: #CD1426;
+          border-radius: 9px;
+          padding: 14px 27px;
+
+          &:hover{
+            border: none;
+            background: #017A61;
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Media
+@media only screen and ($ipad) {
+  .node-type-main-page{
+    .view-views-front-new-ad{
+      padding: 15px 35px 30px 35px;
+      .view-content{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .views-row{
+          width: calc(50% - 50px);
+
+          &:before{
+            width: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and ($ipad-pro) {
+  .node-type-main-page{
+    .view-views-front-new-ad{
+      padding-top: 35px;
+
+      .view-content{
+        justify-content: flex-start;
+        width: 100%;
+
+        .views-row{
+          width: calc(33.33% - 65px);
+          margin: 0 18.5px 30px 18.5px;
+
+          .views-field--description{
+            width: calc(50% - 15px);
+            padding-left: 15px;
+          }
+
+          &:after{
+            display: none;
+          }
+        }
+
+        .views-row:nth-child(3n+1){
+          margin-left: 0;
+        }
+
+        .views-row:nth-child(3n+3){
+          margin-right: 0;
+        }
+      }
+
+      .item-list{
+        .pager--infinite-scroll{
+          li{
+            height: 60px ;
+            a{
+              font-size: 25px;
+              line-height: 30px;
+              padding: 15px 60px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .field-name-field-views-new-ad{
+    .field-label{
+      border-radius: 9px;
+      font-weight: 600;
+      font-family: $text-700;
+      margin: 0 35px;
+      width: calc(100% - 140px);
+      font-size: 30px;
+      line-height: 37px;
+      height: 60px;
+      justify-content: center;
+    }
+  }
+}
+
+@media only screen and ($desktop) {
+  .node-type-main-page{
+    .view-id-views_front_new_ad{
+      padding: 30px 0 30px 0;
+    }
+  }
+}
+

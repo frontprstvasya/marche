@@ -1,0 +1,17 @@
+name = Messente
+description = Messente SMS
+package = AtrixrModules
+core = 7.x
+version = «7.x-1.0»
+configure = admin/config/people/messente
+files[]= messente.module
+files[]= /admin/messente.admin.inc
+files[] =/includes/Messente.inc
+files[] =/includes/Tools.inc
+files[] =/includes/Twilio.inc
+files[] =/includes/ProviderSMS.inc
+files[] =/includes/SenderSMS.inc
+files[] =/includes/MessenteSend.inc
+files[] =/includes/TwilioSend.inc
+scripts[]=js/messente.js
+stylesheets[all][]  = css/messente.css

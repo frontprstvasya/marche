@@ -1,0 +1,248 @@
+/* Search page body */
+@import "../variables";
+@import "../breakpoints";
+
+.page-search{
+  .navbar-title{
+    display: none;
+  }
+}
+
+.page-categories{
+  display: block;
+  overflow: hidden;
+  width: 100%;
+}
+
+.view-views-categories{
+  .view-content{
+    .views-row{
+      display: flex;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .details-link{
+      z-index: 11;
+
+      &:hover{
+        color: red;
+      }
+    }
+
+    .views-field--foto-info{
+      .field-photos{
+        a {
+          &:after{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+          }
+        }
+      }
+    }
+
+    .views-field-info{
+      display: flex;
+      width: calc(50% - 20px);
+      align-items: stretch;
+      position: relative;
+      padding-left: 20px;
+
+      .field-field_price{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+      }
+
+      .field-name,
+      .field-link-afficher{
+        font-family: $text-700;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 15px;
+        margin-top: 14px;
+        text-align: right;
+        color: #171718;
+      }
+    }
+
+    .field-created{
+      margin-top: 0;
+      font-size: 12px;
+      line-height: 15px;
+    }
+  }
+}
+
+// Media
+@media only screen and ($ipad) {
+ .view-views-categories{
+   .wrap-field-info{
+     display: block;
+     width: 100%;
+   }
+  }
+}
+
+@media only screen and ($ipad-pro) {
+  .view-views-categories{
+    .view-content{
+      width: 785px;
+
+      .views-row{
+        padding-left:35px;
+        transition: .3s;
+        position: relative;
+        margin-bottom: 50px;
+        cursor: pointer;
+
+        &:before{
+          left: 0;
+          transform: translateX(0);
+          width: 100vw;
+        }
+
+        &:after{
+          content: '';
+          position: absolute;
+          width: 100vw;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          height: calc(100% + 50px);
+          transition: .3s;
+          z-index: -10;
+        }
+
+        &:hover:after{
+          background: #EBEBEB;
+          transition: .3s;
+          box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.15);
+        }
+      }
+
+      .views-field--foto-info{
+        max-width: 146px;
+        order: -2;
+
+        .views-photo-count:before {
+          font-size: 24px;
+        }
+      }
+
+      .views-field--description{
+        width: calc(55% - 93px);
+        padding-left: 20px;
+        order: -1;
+        position: relative;
+
+        .field-field_price-desktop{
+          position: absolute;
+          bottom: 0;
+          left: 20px;
+          z-index: -2;
+        }
+
+        .description--field-title{
+          margin-top: 0;
+        }
+
+        .field-field_price-desktop{
+          display: block;
+        }
+
+        .field--description{
+          p{
+            max-height: 75px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+
+      .field--location{
+        margin-bottom: 54px;
+      }
+
+      .views-field-info{
+        width: calc(45% - 93px);
+
+        .wrap-field-info{
+          display: block;
+          width: 100%;
+        }
+
+        .field-created{
+          margin-top: 0;
+
+          span{
+            display: inline-block;
+          }
+        }
+
+        .field-title{
+          display: none;
+        }
+
+        .field-field_price{
+          display: none;
+        }
+      }
+
+      .php-btn-mobile{
+        width: 275px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+      }
+
+      .php-btn--wrap{
+        .feedback-btn{
+          min-width: 129px;
+        }
+
+        .icon-marche_29-watsapp{
+          left: calc(25% - 5px);
+          top: -50px;
+        }
+      }
+    }
+  }
+}
+
+
+@media only screen and ($desktop1200) {
+
+  .categories-content-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 65px 35px 35px 35px;
+
+    .section--sidebar-search{
+      width: 250px;
+      margin-right: 100px;
+      padding: 0;
+    }
+
+    .section-content{
+      width: calc(100% - 350px);
+
+      .view-views-categories{
+        padding: 0;
+
+        .view-content{
+          width: calc(100% - 35px);
+        }
+      }
+    }
+  }
+}

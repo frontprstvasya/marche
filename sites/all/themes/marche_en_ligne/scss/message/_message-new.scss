@@ -1,0 +1,42 @@
+/* Message new */
+@import "../variables";
+@import "../breakpoints";
+
+
+// Hide filter wrapper under body.
+#privatemsg-new{
+  .filter-wrapper{
+    display: none!important;
+  }
+
+  .form-item-recipient,
+  .form-item-subject,
+  .field-name-field-messages-nid{
+    label{
+      display: block;
+    }
+
+    input{
+      display: block;
+      border: 1px solid teal;
+    }
+  }
+
+
+  // Hide excess input
+  .form-item-recipient,
+  .field-name-field-messages-nid{
+    display: none;
+  }
+
+  .form-item-subject{
+    pointer-events: none;
+    label{
+      display: none;
+    }
+
+    input{
+      border:none;
+    }
+  }
+}

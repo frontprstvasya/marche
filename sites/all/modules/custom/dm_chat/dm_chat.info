@@ -1,0 +1,14 @@
+name = DM Chat
+description = Chat for feedback on site.
+core = 7.x
+php = 7.3
+
+package = Custom
+
+files[]= include/dm_chat.admin.inc
+files[]= include/dm_chat.inc
+files[]= include/dm_chat_create_room.inc
+files[]= include/dm_chat_adding_arbitrage.inc
+
+; Adding CSS && JS
+stylesheets[all][] = css/dm-chat.css

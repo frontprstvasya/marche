@@ -1,0 +1,659 @@
+/* Edit create node style */
+@import "../variables";
+@import "../breakpoints";
+
+.node-form{
+  // LINK
+  .field-widget-link-field{
+    display: block;
+    width: 100%;
+
+    label{
+      display: block;
+      background: #eee;
+      width: 100%;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 18px;
+      color: #017A61;
+      font-family: $text-700;
+      padding: 12px;
+      box-sizing: border-box;
+    }
+
+    .form-type-textfield{
+      label{
+        background: none;
+        padding: 0;
+      }
+    }
+  }
+
+  // IMAGE
+  .image-widget-data,
+  .image-preview {
+    float: inherit;
+  }
+
+  .image-widget-data{
+    .form-submit{
+      background: #CD1426;
+      color: #FCD216;
+      font-family: $text-400;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 18px;
+      border-radius: 9px;
+      padding:  5px 10px;
+      margin-left: 20px;
+      cursor: pointer;
+    }
+  }
+
+  .link-field-column{
+    float: inherit;
+  }
+
+  .tabledrag-toggle-weight-wrapper{
+    display: none;
+    margin: 10px 0;
+  }
+
+  .sticky-header{
+    z-index: 10;
+    background: #eee;
+  }
+
+  // TABLE
+  table{
+    display: block;
+    width: 100%;
+
+    .field-label{
+      display: block;
+      font-family: $text-700;
+      text-align: left;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 18px;
+      margin-bottom: 5px;
+      color: #017A61;
+      padding: 10px!important;
+    }
+
+    .form-type-textarea{
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    .form-textarea{
+      display: inline-block;
+      width: 100%;
+      padding: 10px;
+      color: #017A61;
+      border-radius: 9px;
+      outline: none;
+      font-family: $text-400;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 15px;
+      border: 2px solid #017A61;
+      box-sizing: border-box;
+    }
+
+    thead{
+      display: flex;
+      background: #eee;
+      width: 100%;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    tbody{
+      .draggable{
+        position: relative;
+        padding-left: 25px;
+        display: block;
+
+        .tips{
+          display: block;
+          margin-bottom: 30px;
+        }
+
+        .form-type-textfield,
+        .form-type-select,
+        .form-type-textarea{
+          margin-bottom: 40px;
+        }
+
+        .multiple-fields-remove-button{
+          position: absolute;
+          left: 25px;
+          bottom: 15px;
+          background: #CD1426;
+          color: #FCD216;
+          font-family: $text-400;
+          font-weight: 400;
+          font-size: 10px;
+          line-height: 12px;
+          border-radius: 9px;
+          padding: 5px;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+
+        .field-multiple-drag{
+          width: 20px;
+          position: absolute;
+          top: 15px;
+          left: 0;
+        }
+      }
+
+      .draggable:first-child{
+        .form-item{
+          padding-top: 0;
+        }
+      }
+    }
+
+    .tabledrag-handle{
+      display: inline-block;
+      position: relative;
+      height: 10px;
+      width: 10px;
+      background: teal;
+      cursor:move;
+      border-radius: 50px;
+    }
+  }
+
+  .field-add-more-submit{
+    display: inline-block;
+    background: #017A61;
+    color:$white;
+    font-family: $text-400;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    border-radius: 9px;
+    padding: 10px;
+    margin: 10px 0 20px 0;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  display: block;
+  max-width: 1200px;
+  margin: 30px auto 0;
+  padding: 10px 35px;
+
+  .form-type-textfield,
+  .form-type-select,
+  .form-type-textarea{
+    margin-bottom: 15px;
+    display: block;
+
+    label{
+      display: block;
+      font-family: $text-700;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 18px;
+      margin-bottom: 5px;
+      color: #017A61;
+    }
+
+    input,
+    select,
+    textarea{
+      display: inline-block;
+      width: 100%;
+      padding: 10px;
+      color: #017A61;
+      border-radius: 9px;
+      outline: none;
+      font-family: $text-400;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 15px;
+      border: 2px solid #017A61;
+      box-sizing: border-box;
+    }
+  }
+
+  .description{
+    color: #949494;
+    margin: 5px 0 0 0;
+    font-size: 10px;
+    line-height: 14px;
+  }
+
+  .form-actions{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+
+    #edit-preview{
+      color:#017A61;
+      background: #FCD216;
+      display: none;
+    }
+
+    #edit-delete{
+      background: #CD1426;
+      color: #FCD216;
+
+      &:hover{
+        transition: .3s;
+        background: #FCD216;
+        color: #017A61;
+      }
+    }
+
+    input{
+      display: inline-block;
+      padding: 10px 27px;
+      background: #017A61;
+      color: #FFFFFF;
+      font-family: $text-400;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 18px;
+      border-radius: 9px;
+      margin: 10px 0;
+      cursor: pointer;
+      transition: .3s;
+
+      &:hover{
+        transition: .3s;
+        background: #FCD216;
+        color: #017A61;
+      }
+    }
+  }
+}
+
+// NODE LIST
+.page-node-add{
+  .section-content{
+    display: block;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 35px;
+  }
+
+  .node-type-list{
+    display: block;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    dt{
+      display: block;
+      width: 100%;
+      font-family: $text-700;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 17px;
+      padding-top: 20px;
+
+      a{
+        color: #017A61;
+        transition: .3s;
+
+        &:hover{
+          color: #95C11F;
+          transition: .3s;
+        }
+      }
+    }
+
+    dd{
+      font-family: $text-400;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 15px;
+      color: #017A61;
+      margin-top: 5px;
+    }
+  }
+}
+
+.vertical-tabs{
+  background: #fff;
+  border: none;
+  box-sizing: border-box;
+  margin: 30px 0 10px 0!important;
+  position: relative;
+  clear: both;
+
+  .vertical-tabs-list{
+    float: left;
+    font-size: 1em;
+    line-height: 1;
+    margin: 0!important;
+    padding-right: 0;
+    padding-bottom: 20px;
+    width: 100% !important;
+    border: none;
+    list-style-type: square;
+    list-style-image: none;
+
+    .vertical-tab-button{
+      margin: 0;
+
+      a{
+        border-top: 0;
+        border: none;
+        margin-left: -1px;
+        display: block;
+        padding: 10px;
+
+        strong{
+          font-size: 0.923em;
+          font-family: $text-700;
+          font-weight: bold;
+          color: #0074BD;
+        }
+
+        .summary{
+          color: #666;
+          display: block;
+          font-size: 0.846em;
+          padding-top: 0.4em;
+        }
+      }
+    }
+
+    .selected{
+      background: #ddd!important;
+    }
+  }
+
+  .vertical-tabs-panes{
+    margin: 0;
+    width: 100%;
+    clear: both;
+    display: block;
+    padding-top: 25px;
+
+    .form-wrapper{
+      &:first-child{
+        padding-top: 25px;
+      }
+    }
+
+    fieldset{
+      border: solid 1px #ddd;
+      border-top: none;
+      box-shadow: 0px -3px 0 $header;
+      padding: 12px;
+      margin: 20px 0 20px 0!important;
+    }
+
+    legend{
+      background: white;
+      padding: 0 6px;
+      margin: 0 0 0 -3px;
+      font-family: $text-400;
+      font-size: 20px;
+      font-weight: 300;
+      display: inherit !important;
+    }
+
+    .fieldset-wrapper{
+      p{
+        font-family: $text-400;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 15px;
+        color: #171718;
+        margin: 10px 0;
+      }
+
+      .form-item{
+        position: relative;
+        input{
+          display: block;
+          width: 100%;
+          padding: 10px;
+          color: #017A61;
+          border-radius: 9px;
+          outline: none;
+          font-family: $text-400;
+          font-weight: bold;
+          font-size: 12px;
+          line-height: 15px;
+          border: 2px solid #017A61;
+          box-sizing: border-box;
+        }
+      }
+
+      .form-type-select{
+        &:after{
+          display: none;
+        }
+      }
+
+      .form-type-checkbox,
+      .form-type-radio{
+        margin-bottom: 1em;
+
+        label{
+          display: block;
+          font-family: $text-400;
+          font-weight: 700;
+          font-size: 15px;
+          line-height: 18px;
+          color: #017A61;
+          margin-top: 0;
+          margin-bottom: 0;
+          padding-left: 30px;
+        }
+
+        input{
+          -webkit-appearance: none;
+          display: inline-block;
+          margin-right: 0.25em;
+          padding: 0;
+          background: #fff;
+          border: 1px solid #B5B5B5;
+          width: 16px !important;
+          height: 16px !important;
+          -webkit-transition: all 0.5s ease;
+          -o-transition: all 0.5s ease;
+          transition: background 0.5s ease;
+          outline: none;
+          border-radius: 0;
+          position: absolute;
+          top: 3px;
+          left: 0;
+
+          &:checked{
+            background: #fcd216;
+          }
+        }
+      }
+
+      .form-type-radio{
+        input{
+          border-radius: 50%;
+          top: 0;
+        }
+      }
+    }
+  }
+
+  .form-type-textarea{
+    textarea{
+      display: block;
+      width: 100%;
+      margin: 0;
+      border: 2px solid #017A61;
+      color: #767676;
+      border-radius: 9px;
+      box-sizing: border-box;
+      resize: vertical;
+      padding: 15px 10px;
+    }
+  }
+
+  .ckeditor_links{
+    border-left: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+    display: block;
+    padding: 10px;
+    width: auto;
+  }
+
+  a{
+    color: #0074BD;
+    text-decoration: none;
+  }
+
+  .description{
+    color: #949494;
+    margin: 5px  0 0 0 ;
+    font-size: 10px;
+    line-height: 14px;
+  }
+}
+
+.element-invisible{
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+// PAGE DELETE
+#node-delete-confirm{
+  display: block;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 35px 30px 35px;
+  font-family: $text-400;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 18px;
+  color: #017A61;
+
+  .form-actions{
+    display: flex;
+    padding-top: 10px;
+
+    input,
+    a{
+      display: inline-block;
+      padding: 10px 27px;
+      background: #CD1426;
+      color: #FCD216;
+      font-family: $text-400;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 18px;
+      border-radius: 9px;
+      margin: 10px 0;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover{
+        transition: 0.3s;
+        color: #CD1426;
+        background: #95C11F;
+      }
+    }
+
+    #edit-cancel{
+      color: #CD1426;
+      background: #FCD216;
+      margin-left: 15px;
+
+      &:hover{
+        transition: 0.3s;
+        color: $white;
+        background: $header;
+      }
+    }
+  }
+}
+
+// Disable BTN delete not admin NOde edit
+.is-not-admin{
+  .section-content{
+    .node-submit_an_ad-form{
+      .form-actions--submit-an-ad-node{
+        #edit-delete{
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+
+// MEDIA
+@media only screen and ($ipad-pro) {
+
+  .vertical-tabs{
+    clear: both;
+    margin-top: 40px!important;
+
+    .vertical-tabs-list {
+      border-bottom: 1px solid #ccc;
+      font-size: 1em;
+      line-height: 1;
+      margin: 0 -100% -1px 0;
+      padding: 0;
+      width: 240px!important;
+    }
+
+    .vertical-tabs-panes{
+      clear: initial;
+    }
+  }
+
+  .section-node-edit{
+    .form-actions {
+      clear: both;
+      padding-top: 20px;
+    }
+  }
+
+  // NODE LIST
+  .page-node-add{
+    .node-type-list{
+      padding-top: 50px;
+      padding-bottom: 50px;
+
+      dt{
+        font-size: 22px;
+        line-height: 26px;
+      }
+
+      dd{
+        font-size: 15px;
+        line-height: 15px;
+      }
+    }
+  }
+
+}
+
+@media only screen and ($desktop) {
+  .node-form{
+    padding: 10px 0;
+  }
+}
+

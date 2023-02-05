@@ -1,0 +1,8 @@
+name = DM Marshe
+description = General hooks.
+core = 7.x
+version = 1.0
+package = Custom
+
+; TEST include class to template.php
+;files[] = dm_marche.inc

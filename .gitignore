@@ -1,0 +1,24 @@
+.idea
+.htaccess
+robots.txt
+sites/all/themes/marche_en_ligne/node_modules
+sites/all/modules/custom/messente/Atrixrlog.txt
+vendor/*
+sites/all/modules/contrib
+
+# modules patch applied
+!sites/all/modules/contrib/views_selective_filters
+!sites/all/modules/contrib/ife
+!sites/all/modules/contrib/paragraphs
+
+
+# temp.. remove after complete--
+-------  PROD ----warning ----------REDME .txt
+
+# Ignore configuration files that may contain sensitive information.
+sites/*/settings*.php
+
+
+# Ignore paths that contain user-generated content.
+sites/*/files
+sites/*/private

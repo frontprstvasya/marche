@@ -1,0 +1,110 @@
+/* About us */
+@import "../variables";
+@import "../breakpoints";
+
+
+.about-us-article {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 35px;
+}
+
+.marche-about .about-left,
+.marche-about .about-right,
+.marche-about .field-name-field-filtered-description2,
+.marche-about .field-label {
+  font-size: 12px;
+  line-height: 14.63px;
+  font-weight: 500;
+}
+
+.marche-about .about-left strong,
+.marche-about .about-right strong {
+  font-weight: 700;
+}
+
+.marche-about .field-label {
+  margin-bottom: 12px;
+}
+
+.marche-about .field-name-field-about-description,
+.marche-about .field-name-field-rules-item .field-items,
+.marche-about .about-right,
+.marche-about .about-right .field-item,
+.marche-about .field-name-field-filtered-description2 {
+  margin-bottom: 12px;
+}
+
+.marche-about .field-name-field-rules-item .field-item:not(:last-child) {
+  margin-bottom: 6px;
+}
+
+.marche-about .about-link {
+  display: block;
+  padding: 4px 35px;
+  border-radius: 9px;
+  color: #017A61;
+  font-size: 15px;
+  line-height: 17px;
+  font-weight: 600;
+  text-align: center;
+  background-color: #FCD216;
+}
+
+.marche-about .about-link:active {
+  background-color: #95C11F;
+  color: #fff;
+  transition: 0.3s;
+}
+
+@media only screen and (min-width: 1024px) {
+  .about-us-article {
+    display: flex;
+    flex-direction: column;
+  }
+  .marche-about .content-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+  .marche-about .about-left,
+  .marche-about .about-right {
+    width: calc(50% - 32px);
+    font-size: 20px;
+    line-height: 24.38px;
+  }
+  .marche-about .field-label {
+    font-size: 20px;
+    line-height: 24.38px;
+  }
+  .marche-about .about-right .field-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+  .marche-about .about-right .field-name-field-filtered-description {
+    height: 100%;
+  }
+  .marche-about .about-right .field-item {
+    margin-bottom: 0;
+  }
+  .marche-about .field-name-field-filtered-description2 {
+    margin-bottom: 40px;
+    font-size: 20px;
+    line-height: 24.38px;
+    text-align: center;
+  }
+  .marche-about .about-link {
+    padding-top: 23px;
+    padding-bottom: 23px;
+    border-radius: 18px;
+    font-size: 30px;
+    line-height: 30px;
+  }
+  .marche-about .about-link:hover {
+    background-color: #95C11F;
+    color: #fff;
+    transition: 0.3s;
+  }
+}

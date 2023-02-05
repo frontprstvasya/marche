@@ -1,0 +1,28 @@
+.page-user-password.is-not-admin .user-login--title {
+    display: flex;
+    align-items: center;
+}
+
+.page-user-password.is-not-admin .user-login--container--padding .user-login--title {
+    justify-content: center;
+}
+
+.page-user-password.is-not-admin .user-login--container {
+    text-align: center;
+}
+
+.page-user-password.is-not-admin .user-login--wrapper {
+    padding: 25px 13px;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 1px 2px 4px 2px rgb(0 0 0 / 15%);
+}
+
+.page-user-password.is-not-admin .menu li,
+.page-user-password.is-not-admin .description--pass {
+    padding: 0 auto 20px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 20px;
+    color: #494949;
+}

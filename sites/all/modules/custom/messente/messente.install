@@ -1,0 +1,169 @@
+<?php
+
+/**
+ * @file
+ * Installation file for messente.module.
+ */
+
+function messente_install() {
+  variable_set('messente_username','7cb94c36896542e388c2b28ffd099fb3');
+  variable_set('messente_password','71f46de358664c528fb358f735a6a856');
+  variable_set('messente_field_phone','field_phone_number');
+  variable_set('field_phone_number_type', 'value');
+  variable_set('messente_request_mail',false);
+  variable_set('messente_request_timer',30);
+  variable_set('messente_field_username_enabled', false);
+  variable_set('messente_field_username','field_user_name');
+  variable_set('messente_field_surname_enabled', false);
+  variable_set('messente_field_surname','field_surname_name');
+  variable_set('messente_to_name','Adverto');
+  variable_set("messente_sms_text","Votre code PIN de vérification est <PIN>");
+  variable_set('messente_url_form_register','messente/register_form');
+  variable_set('messente_url_form_request','messente/request_form');
+  variable_set('messente_pin_length','6');
+  variable_set('messente_register_google',false);
+  variable_set('messente_url_google_register_form','messente/google_register_form');
+  variable_set('messente_google_client_id', '301192161678-me8amvolno5nkkdhsokasmjmefn5kjob.apps.googleusercontent.com');
+  variable_set('messente_google_client_secret', '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');
+  variable_set('messente_google_redirect_uri', 'https://boncoin-test.org/messente/google_register_form');
+  variable_set('messente_google_enter_redirect_uri', 'https://boncoin-test.org/user');
+  variable_set('messente_register_facebook',false);
+  variable_set('messente_url_facebook_register_form','messente/facebook_register_form');
+  variable_set('messente_facebook_client_id', '138543614878285');
+  variable_set('messente_facebook_client_secret', '5821d9b15be51a2a748aeacb65942a1c');
+  variable_set('messente_facebook_redirect_uri', 'https://boncoin-test.org/messente/facebook_register_form');
+  variable_set('messente_facebook_enter_redirect_uri', 'https://boncoin-test.org/user');
+  variable_set('messente_register_picture_upload_enabled',false);
+  variable_set('messente_register_picture_upload_url','/sites/default/files/img.jpg');
+  variable_set('messente_field_user_avatar' , 'field_user_avatar');
+  variable_set('messente_phone_mask_enabled',false);
+  variable_set('messente_form_email_register_enabled',false);
+  variable_set('messente_url_form_email_register','messente/register_email_form');
+  variable_set('messente_url_form_email_request','messente/request_email_form');
+  variable_set('messente_url_phone_change_form','messente/phone_change_form');
+  variable_set('messente_phone_change',true);
+  variable_set('messente_pincode_inputs_add_enabled',false);
+  variable_set('messente_test_mode',false);
+  variable_set('messente_input_type_selection_enabled',false);
+  variable_set('messente_redirect_url_google_and_facebook','messente/register_form');
+  variable_set('messente_mask_for_login_user', false);
+  variable_set('messente_field_email_enabled', false);
+}
+
+function messente_uninstall() {
+    variable_del('messente_mask_for_login_user');
+    variable_del('messente_username');
+    variable_del('messente_password');
+    variable_del('messente_field_phone');
+    variable_del('messente_request_mail');
+    variable_del('messente_request_timer');
+    variable_del('field_phone_number_type');
+    variable_del('messente_field_username_enabled');
+    variable_del('messente_field_username');
+    variable_del('messente_field_surname_enabled');
+    variable_del('messente_field_surname');
+    variable_del('messente_to_name');
+    variable_del("messente_sms_text");
+    variable_del('messente_url_form_register');
+    variable_del('messente_url_form_request');
+    variable_del('messente_pin_length');
+    variable_del('messente_register_google');
+    variable_del('messente_url_google_register_form');
+    variable_del('messente_google_client_id');
+    variable_del('messente_google_client_secret');
+    variable_del('messente_google_redirect_uri');
+    variable_del('messente_google_enter_redirect_uri');
+    variable_del('messente_register_facebook');
+    variable_del('messente_url_facebook_register_form');
+    variable_del('messente_facebook_client_id');
+    variable_del('messente_facebook_client_secret');
+    variable_del('messente_facebook_redirect_uri');
+    variable_del('messente_facebook_enter_redirect_uri');
+    variable_del('messente_register_picture_upload_enabled');
+    variable_del('messente_register_picture_upload_url');
+    variable_del('messente_field_user_avatar');
+    variable_del('messente_phone_mask_enabled');
+    variable_del('messente_form_email_register_enabled');
+    variable_del('messente_url_form_email_register');
+    variable_del('messente_url_form_email_request');
+    variable_del('messente_url_phone_change_form');
+    variable_del('messente_phone_change');
+    variable_del('messente_pincode_inputs_add_enabled');
+    variable_del('messente_test_mode');
+    variable_del('messente_input_type_selection_enabled');
+    variable_del('messente_redirect_url_google_and_facebook');
+    variable_del('messente_field_email_enabled');
+    db_drop_field('users', 'facebook');
+    db_drop_field('users', 'google');
+    drupal_uninstall_schema('messente_mask_phone');
+    drupal_uninstall_schema('messente_providers');
+    cache_clear_all('messente_mask_phone', 'cache', TRUE);
+    menu_rebuild();
+
+}
+
+function messente_update_7001() {
+
+    $schema['users']['fields']['google'] = array(
+        'description' => '',
+        'type' => 'varchar',
+        'length' => 45,
+        'not null' => TRUE,
+        'default' => '',
+    );
+
+    db_add_field('users', 'google', $schema['users']['fields']['google']);
+}
+
+function messente_update_7002() {
+    $schema['users']['fields']['facebook'] = array(
+        'description' => '',
+        'type' => 'varchar',
+        'length' => 45,
+        'not null' => TRUE,
+        'default' => '',
+    );
+    db_add_field('users', 'facebook', $schema['users']['fields']['facebook']);
+}
+
+function messente_update_7003() {
+
+  $schema['messente_mask_phone'] = array(
+    'fields'      => array(
+      'id'         => array('type' => 'serial',  'size'=>'normal',  'not null' => TRUE),
+      'code'       => array('type' => 'int', 'length' =>10, 'not null' => TRUE),
+      'count'        => array('type' => 'int', 'length' => 2, 'not null' => TRUE),
+      'country'       => array('type' => 'text', 'length' =>255, 'not null' => TRUE),
+      'mask' =>          array('type' => 'text', 'length' =>255, 'not null' => TRUE),
+    ),
+    'primary key' => array('id')
+  );
+    db_create_table('messente_mask_phone', $schema['messente_mask_phone']);
+}
+
+function messente_update_7004()
+{
+    $schema['messente_providers'] = array(
+        'fields'=> array(
+            'id'=> array('type' => 'serial',  'size'=>'normal',  'not null' => TRUE),
+            'name'=> array('type' => 'text', 'length' =>255, 'not null' => TRUE),
+            'sid'   => array('type' => 'text', 'length' =>255, 'not null' => TRUE),
+            'token' =>    array('type' => 'text', 'length' =>255, 'not null' => TRUE),
+            'status'  =>   array('type' => 'int', 'length' =>10, 'not null' => TRUE),
+            'default'  => array('type' => 'int', 'length' =>10, 'not null' => TRUE),
+        ),
+        'primary key' => array('id')
+    );
+    db_create_table('messente_providers', $schema['messente_providers']);
+}
+
+function messente_update_7005() {
+    $schema['messente_mask_phone']['fields']['img'] = array(
+        'type' => 'text',
+        'length' =>255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'URL Flag',
+    );
+    db_add_field('messente_mask_phone', 'img', $schema['messente_mask_phone']['fields']['img']);
+}

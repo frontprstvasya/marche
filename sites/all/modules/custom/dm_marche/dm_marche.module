@@ -1,0 +1,120 @@
+<?php
+/**
+ * Implements hook_form_alter().
+ *
+ * Change form-actions ID in Login, Pass, Register.
+ */
+
+function dm_marche_form_alter(&$form, &$form_state, $form_id) {
+
+  /**
+   * Transfer label to placeholder.
+   *
+   * On page ad advertise.
+   */
+
+  /**
+   * Adding uniq ID.
+   */
+  if($form_id == 'webform_client_form_2'){
+    $form['actions']['submit']['#id'] = 'edit-submit-email';
+  }
+
+  if($form_id == 'webform_client_form_17'){
+    $form['checkbox'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Je suis d\'accord avec la Politique de confidentialité'),
+      '#attributes' => [
+        'name' => 'checkbox',
+      ],
+      '#required' => TRUE,
+      '#weight' => 10,
+    ];
+  }
+
+  /**
+   * Change value submit on search button.
+   */
+  if($form['#id'] === 'views-exposed-form-views-categories-page') {
+    $form['submit']['#value'] = t('Chercher');
+  }
+
+  /**
+   * Adding script for working input mask.
+   */
+  if ($form_id == 'user_profile_form')  {
+    $form['#attached']['js'][] = drupal_get_path('module', 'dm_marche') . '/js/imask.js';
+    $form['#attached']['js'][] = drupal_get_path('module', 'dm_marche') . '/js/settings.mask.js';
+  }
+
+  /**
+   * Add uniq id to form.
+   */
+  if($form_id == 'webform_client_form_2'){
+    $form['actions']['submit']['#id'] = 'edit-submit-email';
+  }
+
+  /**
+   * Form on page create new ad.
+   */
+    if($form_id == 'submit_an_ad_node_form' || $form_id == 'create_cv_node_form') {
+
+      if(isset($form['#action'])){
+        $explode_action = explode( '/', strval($form['#action']));
+        $end =  end($explode_action);
+
+        if($end === 'submit-an-ad' || $end === 'create-cv'){
+          $alias = ' ';
+        }
+        if($end === 'edit' && isset($form['nid']['#value'])){
+          $alias = drupal_get_path_alias('node/'.$form['nid']['#value']);
+        }
+      }
+
+      $form['actions']['submit']['#value'] = t('Héberger');
+      $form['actions']['#attributes']['class'][] = 'form-actions--submit-an-ad-node';
+
+      /* Change weight to delete btn */
+      $form['actions']['delete']['#weight'] = 4;
+
+      /* Adding btn cancel -- history back */
+      $form['actions']['cancel'] = array(
+        '#prefix' => '<div class="form-actions--back-wrap"><a href="/'. $alias .'" class="form-actions--back-link" >' . t('Annuler') .'</a></div>',
+        '#weight' => 9,
+      );
+    }
+
+    if($form_id == 'submit_an_ad_node_form') {
+      /**
+       * Adding description under field photos insert.
+       *
+       * Get description from settings & insert to description_photos.
+       */
+
+      $description_photos = $form['field_photos']['und']['#file_upload_description'];
+      $form['field_photos']['und']['#file_upload_title'] = '+';
+      $form['description_photos'] = array(
+        '#type' => 'fieldset',
+        '#attributes' => array('class' => array('description-photos')),
+        '#description' => $description_photos,
+        '#weight' => 95,
+      );
+    }
+
+    if($form_id == 'create_cv_node_form') {
+
+      /**
+       * Adding description under field photo insert.
+       *
+       * Get description from settings & insert to description_photo.
+       */
+      $description_photo = $form['field_photo']['und'][0]['#description'];
+      $form['field_photo']['und'][0]['#title'] = '+';
+      $form['description_photo'] = array(
+        '#type' => 'fieldset',
+        '#attributes' => array('class' => array('description-photos')),
+        '#description' => $description_photo,
+        '#weight' => 6,
+      );
+    }
+}

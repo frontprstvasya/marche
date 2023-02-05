@@ -1,0 +1,146 @@
+/* Error page */
+@import "../variables";
+@import "../breakpoints";
+
+.node-type-page-error{
+  .links,
+  .action-links{
+    display: none;
+  }
+
+  .node-page-error{
+    display: block;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 35px;
+  }
+
+  .field-name-field-h1{
+    display: block;
+    text-align: center;
+    padding-top: 40px;
+
+    .field-item{
+      display: inline-block;
+      font-family: $text-700;
+      color: #017A61;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 27px;
+      text-align: center;
+    }
+
+    .odd{
+      position: relative;
+      margin-left: 12px;
+
+      &:before{
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -4px;
+        transform: translateY(-50%);
+        background-image: url(/sites/default/files/error-title-bg.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 32px;
+        height: 32px;
+        z-index: -1;
+      }
+    }
+  }
+
+  .field-name-field-description-error{
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    font-family: $text-400;
+    color: #171718;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
+
+    .field-item:first-child{
+      font-size: 12px;
+      line-height: 15px;
+      font-weight: 600;
+    }
+  }
+
+  .field-name-field-svg{
+    display: block;
+    padding-top: 50px;
+    margin-bottom: 30px;
+    text-align: center;
+
+    img{
+      display: inline-block;
+      width: 100%;
+      height: auto;
+      max-width: 925px;
+    }
+  }
+
+  .btn-internal{
+    &:hover{
+      transition: .3s;
+      background: #95C11F;
+      color: $white;
+    }
+  }
+}
+
+
+// Media
+@media only screen and ($ipad-pro) {
+  .node-type-page-error{
+
+    .field-name-field-h1{
+      padding-top: 60px;
+
+      .field-item{
+        font-size: 58px;
+        line-height: 70px;
+      }
+
+      .odd:before{
+        width: 80px;
+        height: 80px;
+        left: -8px;
+      }
+    }
+
+    .field-name-field-description-error{
+
+      .field-item{
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+      }
+
+      .field-item:first-child{
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 37px;
+        margin-bottom: 6px;
+      }
+    }
+
+    .field-name-field-btn-internal{
+      padding-top: 40px;
+      a{
+        font-size: 30px;
+        line-height: 37px;
+        padding: 18px 40px;
+      }
+    }
+
+    .field-name-field-svg{
+      padding-top: 60px;
+    }
+  }
+}
+

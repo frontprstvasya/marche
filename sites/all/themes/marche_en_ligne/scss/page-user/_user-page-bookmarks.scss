@@ -1,0 +1,10 @@
+/* User page bookmarks */
+@import "../variables";
+@import "../breakpoints";
+
+.view-flag-bookmarks-tab{
+  display: block;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 35px 0 35px;
+}

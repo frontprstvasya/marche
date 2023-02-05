@@ -1,0 +1,176 @@
+/* Body */
+@import "../variables";
+@import "../breakpoints";
+
+// ---------------------------------------------------------------- Develop
+body.admin-menu{
+ margin-top: 30px!important;
+}
+
+#block-menu-menu-testing-menu{
+  display: block;
+  width: calc(100%);
+  max-width: 1200px;
+  margin: 0 auto;
+
+  h2{
+    font-family: $text-700;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: block;
+    padding-bottom: 7px;
+  }
+}
+
+#block-menu-menu-menu-categories-taxonomy{
+  display: block;
+  width: 100%;
+  padding: 30px 0;
+}
+
+// ---------------------------------------------------------------- Develop
+
+
+body {
+  font-family: 'Mulish', sans-serif;
+}
+
+
+.visually-hidden{
+  display: none;
+}
+
+#admin-menu{
+  z-index: 99!important;
+}
+
+html{
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  font-family: $text-400;
+}
+
+body{
+  background: $white;
+  font-family: $text-400;
+  font-size: 10px;
+  overflow: hidden;
+}
+
+a{
+  text-decoration: none;
+}
+
+input{
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+}
+
+article{
+  min-height: 10vh;
+}
+
+// Form hidden
+.element-invisible{
+  display: none;
+}
+
+// User login
+#user-login,
+#user-register-form,
+#user-pass{
+  display: block;
+  width: calc(100%);
+
+  .form-item{
+    display: block;
+    margin-bottom: 17px;
+  }
+
+  label{
+    display: block;
+    text-align: left;
+    font-size: 15px;
+    line-height: 19px;
+    font-family: $text-700;
+    color: $header;
+    padding-bottom: 4px;
+  }
+
+  .description{
+    font-size: 10px;
+    line-height: 14px;
+    font-family: $text-400;
+    color: $header;
+    padding-top: 4px;
+  }
+
+  input{
+    display: flex;
+    width: 100%;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    color: #017A61;
+    transition: 0.3s;
+    cursor: pointer;
+    font-size: 15px;
+    line-height: 19px;
+    border: 2px solid #017A61;
+    border-radius: 9px;
+    padding: 0 15px;
+    font-family: $text-400;
+    box-sizing: border-box;
+    background: none;
+
+    &::placeholder{
+      text-align: center;
+      color: #017A61;
+      font-family: $text-400;
+    }
+
+    &:focus::placeholder{
+      opacity: 0;
+    }
+  }
+
+  .form-actions{
+    display: block;
+    text-align: center;
+    padding-top: 20px;
+
+    input{
+      display: inline-block;
+      background: #CD1426;
+      color: $white;
+      font-family: $text-700;
+      font-weight: 700;
+      border-color: #CD1426;
+    }
+  }
+}
+
+.main-content p {
+  margin: 0 30px 10px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.03em;
+  text-align: center;
+  color: #017A61;
+}
+
+@media only screen and (min-width: 1024px) {
+  .main-content p {
+    display: none;
+  }
+}
+
+
+body {
+  font-family: 'Mulish', sans-serif;
+}

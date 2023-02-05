@@ -1,0 +1,222 @@
+/* общие стили для страницы просмотра и редактирования  */
+
+.helper-wrap {
+    margin-top: 30px;
+}
+
+
+/**************************PAGE EDIT*********************/
+
+.page-node-edit {
+    background-color: #FCFAF4;
+}
+
+.page-node-edit .helper-wrap,
+.page-node-edit .helper-wrap .tabs {
+    background-color: #FCFAF4;
+}
+
+.page-node-edit .region-easy-breadcrumb,
+.page-node-add .region-easy-breadcrumb {
+    padding-left: 0;
+}
+
+.page-node-edit .main-content main .helper-wrap .container {
+    padding: 0;
+}
+
+.page-node-edit .main-content {
+    max-width: 785px;
+    margin: 0 auto;
+    padding: 0 20px 30px;
+}
+
+.page-node-edit #edit-field-sub-categories-und-0-tid-select-1,
+.page-node-edit #edit-field-location-und-0-tid-select-1 {
+    margin-top: 10px;
+}
+
+.page-node-edit .form-type-select:after {
+    content: "\e919";
+    position: absolute;
+    font-family: "new-marche";
+    display: flex;
+    align-items: center;
+    width: 10px;
+    height: calc(100% - 41px);
+    font-size: 17px;
+    color: #94B6AF;
+    background: #fff;
+    right: 15px;
+    bottom: 7px;
+    pointer-events: none;
+    border-radius: 9px;
+    outline: none;
+    border: none;
+    padding-right: 15px;
+    z-index: 2;
+    font-weight: bold;
+}
+
+.node-type-submit-an-ad .required-fields {
+    display: block;
+    width: 100%;
+    background: #fff;
+    box-shadow: 1px 2px 4px 2px rgb(0 0 0 / 15%);
+    border-radius: 12px;
+    padding: 16px 0;
+    margin-bottom: 20px;
+}
+
+.node-type-submit-an-ad .node-submit_an_ad-form .form-type-select {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+.node-submit_an_ad-form .required-fields {
+    padding: 16px 0;
+}
+
+.node-submit_an_ad-form .required-fields #edit-field-information {
+    padding: 0 10px;
+}
+
+.node-type-submit-an-ad .field-widget-number #field-price-add-more-wrapper .form-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.node-submit_an_ad-form .group-item-2-left {
+    box-shadow: none;
+    padding: 0 10px;
+    width: calc(100% - 20px);
+}
+
+.node-type-submit-an-ad .form-disabled label {
+    color: #017A61;
+}
+
+.node-type-submit-an-ad .form-type-textfield label .node-type-submit-an-ad.form-item-path-alias label {
+    display: block;
+    font-family: "Montserrat-Bold";
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 18px;
+    color: #017A61;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    float: left;
+}
+
+.node-type-submit-an-ad .form-type-textfield label span {
+    color: red;
+}
+
+.node-type-submit-an-ad .form-item-title .form-text {
+    width: 100%;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #777777;
+    box-sizing: border-box;
+}
+
+.node-type-submit-an-ad .views-row .author-info-content {
+    width: calc(100% - 104px);
+    word-wrap: break-word;
+}
+
+.node-submit_an_ad-form .form-field-type-image label,
+.page-node-add-page-error .form-item-field-svg-und-0 label {
+    position: relative;
+    display: flex;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border-radius: 12px;
+    font-size: 0;
+    float: left;
+    background-color: #BBDFD8;
+    cursor: pointer;
+}
+
+.node-submit_an_ad-form .form-field-type-image label::after,
+.page-node-add-page-error .form-item-field-svg-und-0 label::after {
+    content: '\e90c';
+    font-family: 'new-marche';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #017A61;
+    font-size: 50px;
+    transform: translate(-50%, -50%);
+}
+
+#edit-delete {
+    display: none;
+}
+
+.node-submit_an_ad-form .redirect-list tr th {
+    font-size: 10px;
+}
+
+.node-submit_an_ad-form .redirect-list tr td {
+    font-size: 10px;
+}
+
+.node-submit_an_ad-form .form-actions--back-link {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #F5B4B4;
+    color: #777777;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0;
+}
+
+
+/*******************STICK-MOBILE*************** */
+
+.page-node-edit .region-stick-mobile .menu .menu-link-810::before {
+    content: "\e902";
+    position: absolute;
+    display: block;
+    font-family: 'new-marche';
+    top: -26px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    z-index: 10;
+    font-size: 55px;
+    color: #BBDFD8;
+}
+
+.page-node-edit .nice-imagefield-element:not(:last-child) {
+    margin-right: 20px;
+}
+
+
+/*******************MEDIA*************** */
+
+@media only screen and (min-width: 768px) {
+    .node-submit_an_ad-form .form-field-type-image label,
+    .page-node-add-page-error .form-item-field-svg-und-0 label {
+        position: relative;
+        display: flex;
+        height: 97px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .page-node-edit .nice-imagefield-element:not(:last-child) {
+        margin-right: 38px;
+    }
+}

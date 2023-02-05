@@ -1,0 +1,159 @@
+/* Footer */
+@import "../variables";
+@import "../breakpoints";
+
+* {
+  font-family: 'Mulish', sans-serif;
+}
+
+#footer {
+  display: block;
+  width: 100%;
+  background: #94B6AF;
+  padding-bottom: 50px;
+}
+
+#footer .footer-container {
+  display: block;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+#block-block-7--2 {
+  margin-top: 18px;
+  margin-bottom: 16px;
+}
+
+#footer .footer-container #block-block-7--2 .block__title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20.08px;
+  color: #494949;
+  padding-left: 5px;
+}
+
+#footer .footer-container #block-block-7--2 p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17.57px;
+  color: #494949;
+}
+
+.footer-second-block {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  margin: 0px auto;
+}
+
+#footer .footer-container .footer-second-block h2 {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: left;
+  text-decoration: none;
+  color: #494949;
+}
+
+.menu-link-11649 .menu-link-11650 {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: left;
+  text-decoration: none;
+  color: #494949;
+}
+
+#footer .after-footer {
+  display: block;
+  width: 100%;
+  margin: 28px auto 0;
+}
+
+#footer .after-footer .copyright {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17.57px;
+  color: #494949;
+}
+
+.icon-marche_32-instagram {
+  position: relative;
+  margin-left: 15px;
+}
+
+.icon-marche_32-instagram:before {
+  content: "\e91f";
+  position: absolute;
+  font-family: 'new-marche';
+  font-size: 38px;
+  color: #494949;
+}
+
+#footer #block-social .block-social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 35px 0;
+}
+
+#footer #block-social .block-social li a {
+  display: flex;
+  text-align: center;
+  line-height: 44px;
+  margin: 0 5px;
+  height: 44px;
+  width: 44px;
+  font-size: 37px;
+  color: #494949;
+  border-radius: 10px;
+}
+
+#footer .block-menu-block .menu .menu-li-11763 {
+  order: -99;
+}
+
+#footer .block-menu-block .menu .menu-li-11765 {
+  order: -100;
+}
+
+#footer .block-menu-block .menu .menu-li-11768 {
+  order: -98;
+}
+
+#footer .block-menu-block .menu .menu-li-11774 {
+  order: -97;
+}
+
+#block-menu-menu-cameroun-douala .menu {
+  margin-top: 10px;
+}
+
+#block-menu-menu-cameroun-douala .menu .menu__item a {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  color: #494949;
+  text-decoration: none;
+}
+
+.block-menu-block .block__title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20.08px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  color: #494949;
+}
+
+.block-menu-block .menu-level-1 {
+  margin-top: 10px;
+}

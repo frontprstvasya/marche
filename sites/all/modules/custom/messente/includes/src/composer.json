@@ -1,0 +1,5 @@
+{
+    "require": {
+        "messente/messente-api-php": "^2.0"
+    }
+}

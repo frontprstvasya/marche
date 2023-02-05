@@ -1,0 +1,108 @@
+2022-09-16 14:53:56 Array
+(
+    [result] => Array
+        (
+            [res] => INVALID
+            [data] => Array
+                (
+                    [username] => 7cb94c36896542e388c2b28ffd099fb3
+                    [password] => 71f46de358664c528fb358f735a6a856
+                    [verification_id] => api2bd8f2a8dae74f7f3cd9c7c354f68e58f5187d5eb
+                    [pin] => 191919
+                )
+
+            [func] => SendSMSVerifyPin
+        )
+
+)
+
+2022-09-16 14:57:10 Array
+(
+    [result] => Array
+        (
+            [res] => INVALID
+            [data] => Array
+                (
+                    [username] => 7cb94c36896542e388c2b28ffd099fb3
+                    [password] => 71f46de358664c528fb358f735a6a856
+                    [verification_id] => api2bd8f2a8dae74f7f3cd9c7c354f68e58f5187d5eb
+                    [pin] => 191919
+                )
+
+            [func] => SendSMSVerifyPin
+        )
+
+)
+
+2022-09-16 14:57:23 Array
+(
+    [result] => Array
+        (
+            [res] => INVALID
+            [data] => Array
+                (
+                    [username] => 7cb94c36896542e388c2b28ffd099fb3
+                    [password] => 71f46de358664c528fb358f735a6a856
+                    [verification_id] => api2bd8f2a8dae74f7f3cd9c7c354f68e58f5187d5eb
+                    [pin] => 191919
+                )
+
+            [func] => SendSMSVerifyPin
+        )
+
+)
+
+2022-09-16 15:06:50 Array
+(
+    [result] => Array
+        (
+            [res] => EXPIRED
+            [data] => Array
+                (
+                    [username] => 7cb94c36896542e388c2b28ffd099fb3
+                    [password] => 71f46de358664c528fb358f735a6a856
+                    [verification_id] => api2bd8f2a8dae74f7f3cd9c7c354f68e58f5187d5eb
+                    [pin] => 191919
+                )
+
+            [func] => SendSMSVerifyPin
+        )
+
+)
+
+2022-09-16 15:09:41 Array
+(
+    [result] => Array
+        (
+            [res] => EXPIRED
+            [data] => Array
+                (
+                    [username] => 7cb94c36896542e388c2b28ffd099fb3
+                    [password] => 71f46de358664c528fb358f735a6a856
+                    [verification_id] => api2bd8f2a8dae74f7f3cd9c7c354f68e58f5187d5eb
+                    [pin] => 191919
+                )
+
+            [func] => SendSMSVerifyPin
+        )
+
+)
+
+2022-09-16 15:35:36 Array
+(
+    [result] => Array
+        (
+            [res] => INVALID
+            [data] => Array
+                (
+                    [username] => 7cb94c36896542e388c2b28ffd099fb3
+                    [password] => 71f46de358664c528fb358f735a6a856
+                    [verification_id] => api21538bfaac0f2c61d5aea6b90090b8aed5d1e6caf
+                    [pin] => 111111
+                )
+
+            [func] => SendSMSVerifyPin
+        )
+
+)
+

@@ -1,0 +1,261 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ *
+ * Upload IMG from chat room.
+ */
+function dm_chat_menu(): array {
+  $items = [];
+
+  /**
+   * API Create uniq room for chat.
+   */
+  $items['chat/cr'] = [
+    'title' => 'Create room',
+    'description' => 'Process for working chat',
+    'page callback' => 'dm_chat_create_chat_room',
+    'access callback' => 'user_is_logged_in',
+    'file' => 'include/dm_chat_create_room.inc',
+  ];
+
+  /**
+   * API adding arbitrage user for chat room.
+   */
+  $items['chat/ar'] = [
+    'title' => 'Adding arbitrage',
+    'description' => 'Process for working chat',
+    'page callback' => 'dm_chat_adding_arbitrage',
+    'access callback' => 'user_is_logged_in',
+    'file' => 'include/dm_chat_adding_arbitrage.inc',
+  ];
+
+  /**
+   * API send message for chat room.
+   */
+  $items['chat/ms'] = [
+    'title' => 'Send msg',
+    'description' => 'Process for working chat',
+    'page callback' => 'dm_chat_send_message_to_db',
+    'access callback' => TRUE,
+    'file' => 'include/dm_chat_send_message.inc',
+  ];
+
+  /**
+   * API pin message for list chat.
+   */
+  $items['chat/event'] = [
+    'title' => 'Pin message',
+    'description' => 'Process for working chat',
+    'page callback' => 'dm_chat_pin_message_list',
+    'access callback' => 'user_is_logged_in',
+    'file' => 'include/dm_chat_pin_message_list.inc',
+  ];
+
+  return $items;
+}
+
+
+/**
+ * Form builder. *********** upload file... crete 4 WS after upload file..
+ */
+function dm_chat_upload_img(): array {
+  $form = array(
+    '#prefix' => '<div id="chat--load-img--wrapper">',
+    '#suffix' => '</div>',
+  );
+
+  $form['file'] = array(
+    '#type' => 'file',
+    '#attributes' => array('class' => array('icon-nm_59-piper-clip')),
+  );
+
+  $form['name_img'] = array(
+    '#type' => 'hidden',
+    '#attributes' => array('id' => array('input--chat-load-img')),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Load-img',
+    '#prefix' => '<div class="form-item">',
+    '#suffix' => '</div>',
+    '#attributes' => array('class' => array('submit--load-img')),
+    '#ajax' => array(
+      'callback' => 'dm_chat_upload_img_submit',
+      'wrapper' => 'chat--load-img--wrapper',
+    ),
+  );
+
+  return $form;
+}
+
+/**
+ * Form validate callback.
+ */
+function dm_chat_upload_img_validate( &$form, &$form_state) {
+  $validators = array(
+    'file_validate_is_image' => array(), // Проверка, действительно ли файл является изображением
+    'file_validate_extensions' => array('png gif jpg jpeg'), // Проверка на расширения
+    'file_validate_size' => array(1 * 1024 * 1024), // Проверка на размер файла (максимум 1mb)
+  );
+
+
+  // Загружаем файл в sites/default/files (по умолчанию)
+  if ($file = file_save_upload('file', $validators, 'public://chat-img')) {
+    $form_state['values']['name_img'] = $file->filename;
+    $form_state['values']['file'] = $file;
+  }else {
+    $form['name_img']['#value'] = 'not_validate';
+    /* Clear error to continue load img */
+    form_clear_error();
+  }
+}
+
+/**
+ * Form submit callback.
+ */
+function dm_chat_upload_img_submit(&$form, &$form_state): array {
+  if(isset($form_state['values']['file'])){
+    if($form_state['values']['file']) {
+      $file = $form_state['values']['file'];
+      $form_state['values']['name_img'] = $file->filename;
+      $form['name_img']['#value'] = $file->uri;
+      $file->status = FILE_STATUS_PERMANENT;
+      file_save($file);
+    }
+  }
+  return $form;
+}
+
+/*******************************************************************************
+ * @param $variables
+ */
+/**
+ * Implements hook_preprocess().
+ */
+function dm_chat_preprocess_views_view(&$variables){
+  $name = $variables['view']->name;
+
+  if($name === 'views_chat_rooms') {
+
+    /* Get nid from room */
+    $arg = $variables['view']->args[0];
+    $argFragments = explode('-', $arg);
+    $nid = $argFragments[0];
+    $chat_room_path_content = drupal_get_path_alias('node/'.$nid);
+
+    $room = dm_chat::dmChatGetRoomFromUrl();
+    $arb_array = dm_chat::dmChatSelectTreeFields('dm_chat_room', $room, 'room', 'buyer', 'seller', 'arbitrage');
+
+    /* Get object node */
+    $nidObj = node_load($nid);
+
+    $price = $nidObj->field_price['und'][0]['value'];
+
+    $title = $nidObj->title;
+    $img_uri = $nidObj->field_photos['und'][0]['uri'];
+    $img_array = theme_image_style(
+      array(
+        'style_name' => 'style_220_220',
+        'width' => 220,
+        'height' => 220,
+        'path' => $img_uri,
+      )
+    );
+
+    if($title) {
+      $variables['chat_room_title'] = $title;
+    }
+    if($price) {
+      $variables['chat_room_price'] = $price;
+    }
+    if($img_array) {
+      $variables['chat_room_img'] = $img_array;
+    }
+    if($chat_room_path_content) {
+      $variables['chat_room_path_content'] = $chat_room_path_content;
+    }
+    if($arb_array['arbitrage'] === theme_get_setting('user_arbitrage')) {
+      $variables['chat_room_arbitrage_status'] = 'chat-arb--active';
+    }else{
+      $variables['chat_room_arbitrage_status'] = '';
+    }
+  }
+}
+
+/**
+ * implements hook_preprocess_views_view_unformatted().
+ */
+function dm_chat_preprocess_views_view_unformatted(&$variables) {
+    $name = $variables['view']->name;
+
+    if($name === 'views_chat_rooms' || $name === 'sidebar_user_info') {
+
+      $room = dm_chat::dmChatGetRoomFromUrl();
+
+      $current_id = $variables['user']->uid;
+      $user = user_load($current_id);
+      $timezone = $user->timezone;
+      $user->realname ? $real_name = $user->realname : $real_name = $user->name;
+      $user_path = drupal_get_path_alias("user/".$user->uid);
+
+
+      /* Image name */
+      $fid = $variables['user']->picture;
+      $user_img = file_load($fid);
+      /* Checking default img */
+      $user_img ? $img_name = $user_img->filename :  $img_name = 'avatar.jpg';
+
+      $room_explode= explode('-', $room);
+      $nid = $room_explode[0];
+
+      /* Arbitrage */
+      $arbitrage_id = theme_get_setting('user_arbitrage');
+      $arbitrage_obj = user_load($arbitrage_id);
+      if(isset($arbitrage_obj->field_realname['und'][0]['value'])) {
+        $arbitrage_name = $arbitrage_obj->field_realname['und'][0]['value'];
+      }else{
+        $arbitrage_name = 'Arbitrage';
+      }
+      /* Arbitrage img */
+      $arb_obj = user_load($arbitrage_id);
+      $arb_obj->picture->filename ? $arb_img_name =  $arb_obj->picture->filename : $arb_img_name = 'avatar.jpg';
+      /* Arbitrage path */
+      $arbitrage_path = drupal_get_path_alias("user/".$arbitrage_id);
+
+      /* Assign values */
+      $variables['real_name'] = $real_name;
+      $variables['room'] = $room;
+      $variables['current_id'] = $current_id;
+      $variables['result'] = $variables['view']->result;
+      $variables['arb_type'] = $variables['view']->result;
+      $variables['arb_id'] = $arbitrage_id;
+
+      /**
+       * Transfer json to dm-chat.js.
+       *
+       * room - id chat room.
+       * current_id - current id.
+       */
+      $settings = [
+        'json' => [
+          'room' => $room,
+          'current_id' => $current_id,
+          'real_name' => $real_name,
+          'path' => $user_path,
+          'img' => $img_name,
+          'nid' => $nid,
+          'timezone' => $timezone,
+          'arbitrage_id' => $arbitrage_id,
+          'arbitrage_name' => $arbitrage_name,
+          'arbitrage_img' => $arb_img_name,
+          'arbitrage_path' => $arbitrage_path,
+          'arbitrage_msg' => theme_get_setting('arbitrage_text'),
+          'url_ws' => theme_get_setting('url_ws'),
+        ],
+      ];
+      drupal_add_js(array('dmChat' => $settings), 'setting');
+    }
+
+}

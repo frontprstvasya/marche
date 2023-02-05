@@ -1,0 +1,881 @@
+$view = new view();
+$view->name = 'export_field_views';
+$view->description = '';
+$view->tag = 'default';
+$view->base_table = 'node';
+$view->human_name = 'Export field views';
+$view->core = 7;
+$view->api_version = '3.0';
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+/* Display: Master */
+$handler = $view->new_display('default', 'Master', 'default');
+$handler->display->display_options['title'] = 'Export fields';
+$handler->display->display_options['use_more_always'] = FALSE;
+$handler->display->display_options['use_more_text'] = 'ещё';
+$handler->display->display_options['access']['type'] = 'perm';
+$handler->display->display_options['cache']['type'] = 'none';
+$handler->display->display_options['query']['type'] = 'views_query';
+$handler->display->display_options['exposed_form']['type'] = 'basic';
+$handler->display->display_options['exposed_form']['options']['submit_button'] = 'Применить';
+$handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Сбросить';
+$handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Сортировать по';
+$handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'По возрастанию';
+$handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'По убыванию';
+$handler->display->display_options['pager']['type'] = 'full';
+$handler->display->display_options['pager']['options']['items_per_page'] = '50';
+$handler->display->display_options['pager']['options']['offset'] = '0';
+$handler->display->display_options['pager']['options']['id'] = '0';
+$handler->display->display_options['pager']['options']['quantity'] = '9';
+$handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Элементов на страницу';
+$handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Все -';
+$handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Пропустить';
+$handler->display->display_options['pager']['options']['tags']['first'] = '« первая';
+$handler->display->display_options['pager']['options']['tags']['previous'] = '‹ предыдущая';
+$handler->display->display_options['pager']['options']['tags']['next'] = 'следующая ›';
+$handler->display->display_options['pager']['options']['tags']['last'] = 'последняя »';
+$handler->display->display_options['style_plugin'] = 'table';
+$handler->display->display_options['style_options']['columns'] = array(
+  'title' => 'title',
+);
+$handler->display->display_options['style_options']['class'] = '';
+$handler->display->display_options['style_options']['default'] = '-1';
+$handler->display->display_options['style_options']['info'] = array(
+  'title' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+);
+/* Поле: Содержимое: Titre */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['label'] = 'Title';
+$handler->display->display_options['fields']['title']['exclude'] = TRUE;
+$handler->display->display_options['fields']['title']['node_in_colorbox_width'] = '600';
+$handler->display->display_options['fields']['title']['node_in_colorbox_height'] = '600';
+$handler->display->display_options['fields']['title']['node_in_colorbox_rel'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php']['id'] = 'php';
+$handler->display->display_options['fields']['php']['table'] = 'views';
+$handler->display->display_options['fields']['php']['field'] = 'php';
+$handler->display->display_options['fields']['php']['label'] = 'entity_type';
+$handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php']['php_output'] = '<?php
+echo \'node\';
+?>';
+$handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_1']['id'] = 'php_1';
+$handler->display->display_options['fields']['php_1']['table'] = 'views';
+$handler->display->display_options['fields']['php_1']['field'] = 'php';
+$handler->display->display_options['fields']['php_1']['label'] = 'bundle';
+$handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_1']['php_output'] = '<?php
+echo \'submit_an_ad\';
+?>';
+$handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_2']['id'] = 'php_2';
+$handler->display->display_options['fields']['php_2']['table'] = 'views';
+$handler->display->display_options['fields']['php_2']['field'] = 'php';
+$handler->display->display_options['fields']['php_2']['label'] = 'deleted';
+$handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_2']['php_output'] = '<?php
+echo \'0\';
+?>';
+$handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_2']['php_click_sortable'] = '';
+/* Поле: Содержимое: Nid */
+$handler->display->display_options['fields']['nid']['id'] = 'nid';
+$handler->display->display_options['fields']['nid']['table'] = 'node';
+$handler->display->display_options['fields']['nid']['field'] = 'nid';
+$handler->display->display_options['fields']['nid']['label'] = 'entity_id';
+$handler->display->display_options['fields']['nid']['node_in_colorbox_width'] = '600';
+$handler->display->display_options['fields']['nid']['node_in_colorbox_height'] = '600';
+$handler->display->display_options['fields']['nid']['node_in_colorbox_rel'] = '';
+/* Поле: Содержимое: Nid */
+$handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
+$handler->display->display_options['fields']['nid_1']['table'] = 'node';
+$handler->display->display_options['fields']['nid_1']['field'] = 'nid';
+$handler->display->display_options['fields']['nid_1']['label'] = 'revision_id';
+$handler->display->display_options['fields']['nid_1']['node_in_colorbox_width'] = '600';
+$handler->display->display_options['fields']['nid_1']['node_in_colorbox_height'] = '600';
+$handler->display->display_options['fields']['nid_1']['node_in_colorbox_rel'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_3']['id'] = 'php_3';
+$handler->display->display_options['fields']['php_3']['table'] = 'views';
+$handler->display->display_options['fields']['php_3']['field'] = 'php';
+$handler->display->display_options['fields']['php_3']['label'] = 'language';
+$handler->display->display_options['fields']['php_3']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_3']['php_output'] = '<?php
+echo \'und\';
+?>';
+$handler->display->display_options['fields']['php_3']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_3']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_4']['id'] = 'php_4';
+$handler->display->display_options['fields']['php_4']['table'] = 'views';
+$handler->display->display_options['fields']['php_4']['field'] = 'php';
+$handler->display->display_options['fields']['php_4']['label'] = 'delta';
+$handler->display->display_options['fields']['php_4']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_4']['php_output'] = '<?php
+echo \'0\';
+?>';
+$handler->display->display_options['fields']['php_4']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_4']['php_click_sortable'] = '';
+/* Поле: Содержимое: Prix */
+$handler->display->display_options['fields']['field_prix']['id'] = 'field_prix';
+$handler->display->display_options['fields']['field_prix']['table'] = 'field_data_field_prix';
+$handler->display->display_options['fields']['field_prix']['field'] = 'field_prix';
+$handler->display->display_options['fields']['field_prix']['label'] = 'field_price_value';
+$handler->display->display_options['fields']['field_prix']['settings'] = array(
+  'thousand_separator' => '',
+  'prefix_suffix' => 0,
+  'field_formatter_class' => '',
+);
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_6']['id'] = 'php_6';
+$handler->display->display_options['fields']['php_6']['table'] = 'views';
+$handler->display->display_options['fields']['php_6']['field'] = 'php';
+$handler->display->display_options['fields']['php_6']['label'] = 'field_categories_tid';
+$handler->display->display_options['fields']['php_6']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_6']['php_output'] = '<?php
+$node = node_load($data->nid);
+$tid = $node->field_category[\'und\'][0][\'tid\'];
+
+  $q=db_select(\'taxonomy_term_hierarchy\',\'s\');
+  $q->condition(\'s.tid\',$tid);
+  $q->fields(\'s\',array(\'parent\'));
+  $res=$q->execute();
+
+  while($rec=$res->fetchAssoc()){
+    $parent = $rec[\'parent\'];
+    if($parent == \'627\' || $parent == \'0\' || $parent == \'625\'){
+        echo \'10000\';
+    }else{
+      $taxonomy = [
+        "423"=>"1",
+        "531"=>"231",
+        "1284"=>"232",
+        "424"=>"233",
+        "3"=>"2",
+        "403" => "234",
+        "1266"=> "235",
+        "119" => "236",
+        "404" => "237",
+        "624" => "238",
+        "236" => "239",
+        "405" => "240",
+        "408" => "241",
+        "406" => "242",
+        "409" => "297",
+        "464" => "3",
+        "1283" => "209",
+        "976" => "210",
+        "975" => "211",
+        "875" => "212",
+        "876" => "213",
+        "467" => "214",
+        "472" => "215",
+        "619" => "216",
+        "470" => "217",
+        "1336" => "217",
+        "1337" => "217",
+        "1338" => "217",
+        "491"=>"4",
+        "546"=>"243",
+        "542"=>"244",
+        "495"=>"245",
+        "492"=>"246",
+        "511"=>"5",
+        "512"=>"161",
+        "513"=>"300",
+        "517"=>"163",
+        "577"=>"164",
+        "622"=>"165",
+        "516"=>"166",
+        "551"=>"167",
+        "514"=>"168",
+        "518"=>"169",
+        "552"=>"300",
+        "437"=>"6",
+        "438"=>"125",
+        "529"=>"126",
+        "439"=>"127",
+        "538"=>"301",
+        "431"=>"7",
+        "436"=>"151",
+        "432"=>"152",
+        "623"=>"153",
+        "954"=>"154",
+        "553"=>"155",
+        "434"=>"156",
+        "435"=>"157",
+        "433"=>"158",
+        "554"=>"302",
+        "4"=>"8",
+        "135"=>"221",
+        "134"=>"222",
+        "368"=>"223",
+        "136"=>"224",
+        "497"=>"225",
+        "367"=>"226",
+        "440"=>"227",
+        "498"=>"228",
+        "579"=>"9",
+        "580"=>"129",
+        "587"=>"130",
+        "586"=>"131",
+        "588"=>"132",
+        "878"=>"133",
+        "877"=>"134",
+        "582"=>"135",
+        "583"=>"136",
+        "584"=>"137",
+        "585"=>"138",
+        "581"=>"139",
+        "589"=>"304",
+        "2"=>"10",
+        "331"=>"185",
+        "333"=>"208",
+        "350"=>"187",
+        "348"=>"188",
+        "352"=>"189",
+        "349"=>"190",
+        "351"=>"191",
+        "110"=>"192",
+        "575"=>"193",
+        "490"=>"194",
+        "572"=>"195",
+        "486"=>"196",
+        "489"=>"207",
+        "332"=>"206",
+        "Others"=>"305",
+        "6"=>"11",
+        "396"=>"143",
+        "398"=>"144",
+        "402"=>"145",
+        "401"=>"146",
+        "400"=>"147",
+        "555"=>"148",
+        "397"=>"149",
+        "558"=>"306",
+        "476"=>"286",
+        "477"=>"12",
+        "1255"=>"307",
+        "1256"=>"307",
+        "1268"=>"307",
+        "1275"=>"288",
+        "1276"=>"307",
+        "1277"=>"307",
+        "478"=>"299",
+        "1258"=>"307",
+        "1257"=>"307",
+        "1269"=>"307",
+        "479"=>"300",
+        "1259"=>"307",
+        "1260"=>"307",
+        "1267"=>"307",
+        "1261"=>"307",
+        "480"=>"301",
+        "1262"=>"307",
+        "1263"=>"307",
+        "1274"=>"307",
+        "481"=>"302",
+        "482"=>"303",
+        "1264"=>"307",
+        "1265"=>"307",
+        "621"=>"304",
+        "550"=>"295",
+        "1281"=>"307",
+        "425"=>"13",
+        "426"=>"247",
+        "427"=>"248",
+        "428"=>"249",
+        "519"=>"250",
+        "430"=>"251",
+        "429"=>"252",
+        "520"=>"253",
+        "521"=>"254",
+        "522"=>"308",
+        "155"=>"14",
+        "369"=>"255",
+        "373"=>"256",
+        "370"=>"257",
+        "372"=>"258",
+        "374"=>"259",
+        "1271"=>"260",
+        "549"=>"309",
+        "8"=>"15",
+        "507"=>"261",
+        "380"=>"262",
+        "1280"=>"263",
+        "500"=>"264",
+        "384"=>"265",
+        "895"=>"266",
+        "893"=>"267",
+        "376"=>"268",
+        "896"=>"269",
+        "395"=>"270",
+        "385"=>"271",
+        "505"=>"272",
+        "504"=>"273",
+        "383"=>"274",
+        "382"=>"275",
+        "379"=>"276",
+        "501"=>"277",
+        "508"=>"278",
+        "506"=>"279",
+        "125"=>"280",
+        "503"=>"281",
+        "509"=>"282",
+        "390"=>"283",
+        "393"=>"284",
+        "394"=>"285",
+        "510"=>"310",
+        "453"=>"16",
+        "463"=>"173",
+        "457"=>"174",
+        "458"=>"175",
+        "456"=>"176",
+        "455"=>"177",
+        "460"=>"178",
+        "462"=>"179",
+        "459"=>"180",
+        "461"=>"181",
+        "454"=>"182",
+        "564"=>"183",
+        "568"=>"311",
+        "625" => "312",
+        "626" => "313",
+        "627" => "313",
+        "1285" => "313",
+        "1287" => "313",
+        "1286" => "313",
+      ];
+      echo $taxonomy[$parent];
+    }
+  }
+?>';
+$handler->display->display_options['fields']['php_6']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_6']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_5']['id'] = 'php_5';
+$handler->display->display_options['fields']['php_5']['table'] = 'views';
+$handler->display->display_options['fields']['php_5']['field'] = 'php';
+$handler->display->display_options['fields']['php_5']['label'] = 'field_sub_categories_tid';
+$handler->display->display_options['fields']['php_5']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_5']['php_output'] = '<?php
+$node = node_load($data->nid);
+$tid = $node->field_category[\'und\'][0][\'tid\'];
+
+$taxonomy = [
+    "423"=>"1",
+    "531"=>"231",
+    "1284"=>"232",
+    "424"=>"233",
+    "3"=>"2",
+    "403" => "234",
+    "1266"=> "235",
+    "119" => "236",
+    "404" => "237",
+    "624" => "238",
+    "236" => "239",
+    "405" => "240",
+    "408" => "241",
+    "406" => "242",
+    "409" => "297",
+    "464" => "3",
+    "1283" => "209",
+    "976" => "210",
+    "975" => "211",
+    "875" => "212",
+    "876" => "213",
+    "467" => "214",
+    "472" => "215",
+    "619" => "216",
+    "470" => "217",
+    "1336" => "217",
+    "1337" => "217",
+    "1338" => "217",
+    "491"=>"4",
+    "546"=>"243",
+    "542"=>"244",
+    "495"=>"245",
+    "492"=>"246",
+    "511"=>"5",
+    "512"=>"161",
+    "513"=>"300",
+    "517"=>"163",
+    "577"=>"164",
+    "622"=>"165",
+    "516"=>"166",
+    "551"=>"167",
+    "514"=>"168",
+    "518"=>"169",
+    "552"=>"300",
+    "437"=>"6",
+    "438"=>"125",
+    "529"=>"126",
+    "439"=>"127",
+    "538"=>"301",
+    "431"=>"7",
+    "436"=>"151",
+    "432"=>"152",
+    "623"=>"153",
+    "954"=>"154",
+    "553"=>"155",
+    "434"=>"156",
+    "435"=>"157",
+    "433"=>"158",
+    "554"=>"302",
+    "4"=>"8",
+    "135"=>"221",
+    "134"=>"222",
+    "368"=>"223",
+    "136"=>"224",
+    "497"=>"225",
+    "367"=>"226",
+    "440"=>"227",
+    "498"=>"228",
+    "579"=>"9",
+    "580"=>"129",
+    "587"=>"130",
+    "586"=>"131",
+    "588"=>"132",
+    "878"=>"133",
+    "877"=>"134",
+    "582"=>"135",
+    "583"=>"136",
+    "584"=>"137",
+    "585"=>"138",
+    "581"=>"139",
+    "589"=>"304",
+    "2"=>"10",
+    "331"=>"185",
+    "333"=>"208",
+    "350"=>"187",
+    "348"=>"188",
+    "352"=>"189",
+    "349"=>"190",
+    "351"=>"191",
+    "110"=>"192",
+    "575"=>"193",
+    "490"=>"194",
+    "572"=>"195",
+    "486"=>"196",
+    "489"=>"207",
+    "332"=>"206",
+    "Others"=>"305",
+    "6"=>"11",
+    "396"=>"143",
+    "398"=>"144",
+    "402"=>"145",
+    "401"=>"146",
+    "400"=>"147",
+    "555"=>"148",
+    "397"=>"149",
+    "558"=>"306",
+    "476"=>"286",
+    "477"=>"12",
+    "1255"=>"307",
+    "1256"=>"307",
+    "1268"=>"307",
+    "1275"=>"288",
+    "1276"=>"307",
+    "1277"=>"307",
+    "478"=>"299",
+    "1258"=>"307",
+    "1257"=>"307",
+    "1269"=>"307",
+    "479"=>"300",
+    "1259"=>"307",
+    "1260"=>"307",
+    "1267"=>"307",
+    "1261"=>"307",
+    "480"=>"301",
+    "1262"=>"307",
+    "1263"=>"307",
+    "1274"=>"307",
+    "481"=>"302",
+    "482"=>"303",
+    "1264"=>"307",
+    "1265"=>"307",
+    "621"=>"304",
+    "550"=>"295",
+    "1281"=>"307",
+    "425"=>"13",
+    "426"=>"247",
+    "427"=>"248",
+    "428"=>"249",
+    "519"=>"250",
+    "430"=>"251",
+    "429"=>"252",
+    "520"=>"253",
+    "521"=>"254",
+    "522"=>"308",
+    "155"=>"14",
+    "369"=>"255",
+    "373"=>"256",
+    "370"=>"257",
+    "372"=>"258",
+    "374"=>"259",
+    "1271"=>"260",
+    "549"=>"309",
+    "8"=>"15",
+    "507"=>"261",
+    "380"=>"262",
+    "1280"=>"263",
+    "500"=>"264",
+    "384"=>"265",
+    "895"=>"266",
+    "893"=>"267",
+    "376"=>"268",
+    "896"=>"269",
+    "395"=>"270",
+    "385"=>"271",
+    "505"=>"272",
+    "504"=>"273",
+    "383"=>"274",
+    "382"=>"275",
+    "379"=>"276",
+    "501"=>"277",
+    "508"=>"278",
+    "506"=>"279",
+    "125"=>"280",
+    "503"=>"281",
+    "509"=>"282",
+    "390"=>"283",
+    "393"=>"284",
+    "394"=>"285",
+    "510"=>"310",
+    "453"=>"16",
+    "463"=>"173",
+    "457"=>"174",
+    "458"=>"175",
+    "456"=>"176",
+    "455"=>"177",
+    "460"=>"178",
+    "462"=>"179",
+    "459"=>"180",
+    "461"=>"181",
+    "454"=>"182",
+    "564"=>"183",
+    "568"=>"311",
+    "625" => "312",
+    "626" => "313",
+    "627" => "313",
+    "1285" => "313",
+    "1287" => "313",
+    "1286" => "313",
+  ];
+  echo $taxonomy[$tid];
+?>';
+$handler->display->display_options['fields']['php_5']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_5']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_7']['id'] = 'php_7';
+$handler->display->display_options['fields']['php_7']['table'] = 'views';
+$handler->display->display_options['fields']['php_7']['field'] = 'php';
+$handler->display->display_options['fields']['php_7']['label'] = 'field_type_ad_tid';
+$handler->display->display_options['fields']['php_7']['exclude'] = TRUE;
+$handler->display->display_options['fields']['php_7']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_7']['php_output'] = '<?php
+echo \'19\';
+?>';
+$handler->display->display_options['fields']['php_7']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_7']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_8']['id'] = 'php_8';
+$handler->display->display_options['fields']['php_8']['table'] = 'views';
+$handler->display->display_options['fields']['php_8']['field'] = 'php';
+$handler->display->display_options['fields']['php_8']['label'] = 'field_views_gallery_view_id';
+$handler->display->display_options['fields']['php_8']['exclude'] = TRUE;
+$handler->display->display_options['fields']['php_8']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_8']['php_output'] = '<?php
+    echo \'views_slideshow_ad:block\';
+?>';
+$handler->display->display_options['fields']['php_8']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_8']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_9']['id'] = 'php_9';
+$handler->display->display_options['fields']['php_9']['table'] = 'views';
+$handler->display->display_options['fields']['php_9']['field'] = 'php';
+$handler->display->display_options['fields']['php_9']['label'] = 'field_views_gallery_arguments';
+$handler->display->display_options['fields']['php_9']['exclude'] = TRUE;
+$handler->display->display_options['fields']['php_9']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_9']['php_output'] = '<?php
+    echo \'NULL\';
+?>';
+$handler->display->display_options['fields']['php_9']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_9']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_10']['id'] = 'php_10';
+$handler->display->display_options['fields']['php_10']['table'] = 'views';
+$handler->display->display_options['fields']['php_10']['field'] = 'php';
+$handler->display->display_options['fields']['php_10']['label'] = 'field_btn_call_value';
+$handler->display->display_options['fields']['php_10']['exclude'] = TRUE;
+$handler->display->display_options['fields']['php_10']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_10']['php_output'] = '<?php
+    echo \'Appelez\';
+?>';
+$handler->display->display_options['fields']['php_10']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_10']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_11']['id'] = 'php_11';
+$handler->display->display_options['fields']['php_11']['table'] = 'views';
+$handler->display->display_options['fields']['php_11']['field'] = 'php';
+$handler->display->display_options['fields']['php_11']['label'] = 'field_btn_chat_value';
+$handler->display->display_options['fields']['php_11']['exclude'] = TRUE;
+$handler->display->display_options['fields']['php_11']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_11']['php_output'] = '<?php
+    echo \'Écrivez\';
+?>';
+$handler->display->display_options['fields']['php_11']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_11']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_12']['id'] = 'php_12';
+$handler->display->display_options['fields']['php_12']['table'] = 'views';
+$handler->display->display_options['fields']['php_12']['field'] = 'php';
+$handler->display->display_options['fields']['php_12']['label'] = 'field_btn_whatsapp_value';
+$handler->display->display_options['fields']['php_12']['exclude'] = TRUE;
+$handler->display->display_options['fields']['php_12']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_12']['php_output'] = '<?php
+    echo \'Whatsapp\';
+?>';
+$handler->display->display_options['fields']['php_12']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_12']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_13']['id'] = 'php_13';
+$handler->display->display_options['fields']['php_13']['table'] = 'views';
+$handler->display->display_options['fields']['php_13']['field'] = 'php';
+$handler->display->display_options['fields']['php_13']['label'] = 'field_btn_call_format';
+$handler->display->display_options['fields']['php_13']['exclude'] = TRUE;
+$handler->display->display_options['fields']['php_13']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_13']['php_output'] = '<?php
+    echo \'NULL\';
+?>';
+$handler->display->display_options['fields']['php_13']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_13']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_14']['id'] = 'php_14';
+$handler->display->display_options['fields']['php_14']['table'] = 'views';
+$handler->display->display_options['fields']['php_14']['field'] = 'php';
+$handler->display->display_options['fields']['php_14']['label'] = 'field_btn_chat_format';
+$handler->display->display_options['fields']['php_14']['exclude'] = TRUE;
+$handler->display->display_options['fields']['php_14']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_14']['php_output'] = '<?php
+    echo \'NULL\';
+?>';
+$handler->display->display_options['fields']['php_14']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_14']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_15']['id'] = 'php_15';
+$handler->display->display_options['fields']['php_15']['table'] = 'views';
+$handler->display->display_options['fields']['php_15']['field'] = 'php';
+$handler->display->display_options['fields']['php_15']['label'] = 'field_btn_whatsapp_format';
+$handler->display->display_options['fields']['php_15']['exclude'] = TRUE;
+$handler->display->display_options['fields']['php_15']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_15']['php_output'] = '<?php
+    echo \'NULL\';
+?>';
+$handler->display->display_options['fields']['php_15']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_15']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_16']['id'] = 'php_16';
+$handler->display->display_options['fields']['php_16']['table'] = 'views';
+$handler->display->display_options['fields']['php_16']['field'] = 'php';
+$handler->display->display_options['fields']['php_16']['label'] = 'field_location_tid';
+$handler->display->display_options['fields']['php_16']['exclude'] = TRUE;
+$handler->display->display_options['fields']['php_16']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_16']['php_output'] = '<?php
+    $node = node_load($data->nid);
+    $tid = $node->field_location[\'und\'][0][\'tid\'];
+
+     if($tid == \'320\') {
+        echo \'320\';
+     }else{
+     $city = [
+      "339"=>"64",
+      "325"=>"44",
+      "323"=>"41",
+      "1270"=>"46",
+      "338"=>"67",
+      "335"=>"312",
+      "321"=>"38",
+      "1288"=>"53",
+      "336"=>"49",
+      "1272"=>"40",
+      "334"=>"66",
+      "328"=>"48",
+      "337"=>"54",
+      "1273"=>"42",
+      "340"=>"313",
+      "327"=>"45",
+      "330"=>"43",
+      "341"=>"110",
+      "322"=>"39",
+      ];
+      echo $city[$tid];
+     }
+
+?>';
+$handler->display->display_options['fields']['php_16']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_16']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_17']['id'] = 'php_17';
+$handler->display->display_options['fields']['php_17']['table'] = 'views';
+$handler->display->display_options['fields']['php_17']['field'] = 'php';
+$handler->display->display_options['fields']['php_17']['label'] = 'field_location_2_value';
+$handler->display->display_options['fields']['php_17']['exclude'] = TRUE;
+$handler->display->display_options['fields']['php_17']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_17']['php_output'] = '<?php
+echo \'-\';
+?>';
+$handler->display->display_options['fields']['php_17']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_17']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_18']['id'] = 'php_18';
+$handler->display->display_options['fields']['php_18']['table'] = 'views';
+$handler->display->display_options['fields']['php_18']['field'] = 'php';
+$handler->display->display_options['fields']['php_18']['label'] = 'field_location_2_format';
+$handler->display->display_options['fields']['php_18']['exclude'] = TRUE;
+$handler->display->display_options['fields']['php_18']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_18']['php_output'] = '<?php
+echo \'NULL\';
+?>';
+$handler->display->display_options['fields']['php_18']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_18']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_19']['id'] = 'php_19';
+$handler->display->display_options['fields']['php_19']['table'] = 'views';
+$handler->display->display_options['fields']['php_19']['field'] = 'php';
+$handler->display->display_options['fields']['php_19']['label'] = 'field_author_info_view_id';
+$handler->display->display_options['fields']['php_19']['exclude'] = TRUE;
+$handler->display->display_options['fields']['php_19']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_19']['php_output'] = '<?php
+echo \'views_author_info:block\';
+?>
+';
+$handler->display->display_options['fields']['php_19']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_19']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_20']['id'] = 'php_20';
+$handler->display->display_options['fields']['php_20']['table'] = 'views';
+$handler->display->display_options['fields']['php_20']['field'] = 'php';
+$handler->display->display_options['fields']['php_20']['label'] = 'field_author_info_arguments';
+$handler->display->display_options['fields']['php_20']['exclude'] = TRUE;
+$handler->display->display_options['fields']['php_20']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_20']['php_output'] = '<?php
+echo \'NULL\';
+?>';
+$handler->display->display_options['fields']['php_20']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_20']['php_click_sortable'] = '';
+/* Поле: Содержимое: Body */
+$handler->display->display_options['fields']['body']['id'] = 'body';
+$handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+$handler->display->display_options['fields']['body']['field'] = 'body';
+$handler->display->display_options['fields']['body']['label'] = 'field_description_value';
+$handler->display->display_options['fields']['body']['exclude'] = TRUE;
+$handler->display->display_options['fields']['body']['settings'] = array(
+  'field_formatter_class' => '',
+);
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_21']['id'] = 'php_21';
+$handler->display->display_options['fields']['php_21']['table'] = 'views';
+$handler->display->display_options['fields']['php_21']['field'] = 'php';
+$handler->display->display_options['fields']['php_21']['label'] = 'field_description_format';
+$handler->display->display_options['fields']['php_21']['exclude'] = TRUE;
+$handler->display->display_options['fields']['php_21']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_21']['php_output'] = '<?php
+echo \'filtered_html\';
+?>';
+$handler->display->display_options['fields']['php_21']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_21']['php_click_sortable'] = '';
+/* Критерий сортировки: Содержимое: Дата публикации */
+$handler->display->display_options['sorts']['created']['id'] = 'created';
+$handler->display->display_options['sorts']['created']['table'] = 'node';
+$handler->display->display_options['sorts']['created']['field'] = 'created';
+$handler->display->display_options['sorts']['created']['order'] = 'DESC';
+/* Критерий фильтра: Содержимое: Статус публикации */
+$handler->display->display_options['filters']['status']['id'] = 'status';
+$handler->display->display_options['filters']['status']['table'] = 'node';
+$handler->display->display_options['filters']['status']['field'] = 'status';
+$handler->display->display_options['filters']['status']['value'] = 1;
+$handler->display->display_options['filters']['status']['group'] = 1;
+$handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+/* Критерий фильтра: Содержимое: Тип */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'node';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['value'] = array(
+  'ad' => 'ad',
+);
+
+/* Display: Page */
+$handler = $view->new_display('page', 'Page', 'page');
+$handler->display->display_options['path'] = 'export-fields';
+
+/* Display: Экспорт данных */
+$handler = $view->new_display('views_data_export', 'Экспорт данных', 'views_data_export_1');
+$handler->display->display_options['pager']['type'] = 'some';
+$handler->display->display_options['pager']['options']['items_per_page'] = '3000';
+$handler->display->display_options['pager']['options']['offset'] = '0';
+$handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+$handler->display->display_options['path'] = 'exp-fields';
+$handler->display->display_options['displays'] = array(
+  'page' => 'page',
+  'default' => 0,
+);
+$translatables['export_field_views'] = array(
+  t('Master'),
+  t('Export fields'),
+  t('ещё'),
+  t('Применить'),
+  t('Сбросить'),
+  t('Сортировать по'),
+  t('По возрастанию'),
+  t('По убыванию'),
+  t('Элементов на страницу'),
+  t('- Все -'),
+  t('Пропустить'),
+  t('« первая'),
+  t('‹ предыдущая'),
+  t('следующая ›'),
+  t('последняя »'),
+  t('Title'),
+  t('entity_type'),
+  t('bundle'),
+  t('deleted'),
+  t('entity_id'),
+  t('revision_id'),
+  t('language'),
+  t('delta'),
+  t('field_price_value'),
+  t('field_categories_tid'),
+  t('field_sub_categories_tid'),
+  t('field_type_ad_tid'),
+  t('field_views_gallery_view_id'),
+  t('field_views_gallery_arguments'),
+  t('field_btn_call_value'),
+  t('field_btn_chat_value'),
+  t('field_btn_whatsapp_value'),
+  t('field_btn_call_format'),
+  t('field_btn_chat_format'),
+  t('field_btn_whatsapp_format'),
+  t('field_location_tid'),
+  t('field_location_2_value'),
+  t('field_location_2_format'),
+  t('field_author_info_view_id'),
+  t('field_author_info_arguments'),
+  t('field_description_value'),
+  t('field_description_format'),
+  t('Page'),
+  t('Экспорт данных'),
+);

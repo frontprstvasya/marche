@@ -1,0 +1,658 @@
+/* Submit ad body */
+@import "../variables";
+@import "../breakpoints";
+
+.node-submit-an-ad{
+  display: block;
+  overflow: hidden;
+
+  h1{
+    font-family: $text-700;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: $header;
+    display: block;
+    padding: 10px 0 25px 0;
+  }
+
+  .field-btn-chat {
+    padding: 0;
+    background: none;
+
+    button {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      font-family: $text-700;
+      font-weight: bold;
+      text-transform: uppercase;
+      outline: none;
+      box-shadow: none;
+      font-size: 15px;
+      line-height: 18px;
+      border: 0 solid #CD1426;
+      padding: 11px 0;
+      z-index: 11;
+      background: #CD1426;
+      color: #FCD216;
+      border-radius: $br-9px;
+      cursor: pointer;
+      transition: .3s;
+
+      &:hover{
+        background: #FCD216;
+        color: #017A61;
+        transition: 0.3s;
+      }
+    }
+  }
+}
+
+// ITEM 2
+.content-ad--item-2,
+.view-views-author-info{
+display: block;
+width: 100%;
+padding-bottom: 30px;
+
+.content-ad--price{
+display: flex;
+align-items: center;
+margin-bottom: 34px;
+}
+
+// Price
+.field-field-price{
+padding: 11px 19px;
+display: inline-block;
+color: #CD1426;
+font-family: $text-700;
+font-weight: bold;
+font-size: 15px;
+line-height: 18px;
+text-align: center;
+background: #FCD216;
+border-radius: $br-9px;
+z-index: 10;
+margin-right: 20px;
+}
+
+// Description
+.field-name-field-description{
+display: block;
+width: 100%;
+color: $text_color;
+font-weight: 00;
+font-size: 14px;
+line-height: 17px;
+font-family: $text-400;
+
+p{
+  display: block;
+  margin-bottom: 15px;
+
+  br{
+    display: block;
+    height: 15px;
+    content: "";
+    margin-top: 0;
+
+    &:after{
+      content: '';
+      display: block;
+      width: 100%;
+    }
+  }
+}
+}
+
+// Location
+.field-name-field-location{
+width: 100%;
+font-family: $text-700;
+font-weight: bold;
+font-size: 14px;
+line-height: 17px;
+display: block;
+}
+
+// BTN
+.content-ad--btn-desktop{
+display: none;
+}
+}
+
+.view-views-author-info{
+  .field--location{
+  width: 100%;
+  font-family: $text-700;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  display: none;
+  padding-bottom: 30px;
+  }
+}
+
+// ITEM 3
+.content-ad--item-3{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .field-type-taxonomy-term-reference{
+    display: block;
+    width: calc(50% - 10px);
+    margin-bottom: 15px;
+
+    div{
+      display: block;
+      color: #171718;
+      font-size: 14px;
+      line-height: 16px;
+    }
+
+    .field-label{
+      font-family: $text-700;
+      font-weight: bold;
+      padding-bottom: 2px;
+    }
+
+    .field-item{
+      font-family: $text-400;
+    }
+  }
+}
+
+// ITEM 4
+.content-ad--btn-mobile{
+  position: relative;
+
+  &:before{
+  content: '';
+  position: absolute;
+  display: block;
+  width: 150%;
+  height: 2px;
+  background: #95C11F;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  }
+}
+
+.field-name-field-author-info{
+display: block;
+padding-bottom: 30px;
+padding-top: 15px;
+
+// Display for mobile
+.views--content-ad--price,
+.views-field-field-description{
+display: none
+}
+
+// BTN
+.content-ad--btn-mobile{
+display: block;
+width: 100%;
+
+  .wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+
+    .sms-relative{
+      position: relative;
+
+      .icon-marche_29-watsapp{
+        position: absolute;
+        bottom: -55px;
+        right: 50%;
+        transform: translateX(50%);
+      }
+    }
+  }
+}
+
+.views-field-name{
+display: block;
+width: 100%;
+padding: 35px 0 5px 0;
+
+a,
+span{
+  display: block;
+  padding-right: 130px;
+  font-family: $text-400;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  color: $header;
+}
+}
+
+.views-field-create-date{
+display: block;
+font-family: $text-400;
+font-weight: 500;
+font-size: 8px;
+line-height: 10px;
+color: #171718;
+}
+
+.views-field-number-ad{
+display: block;
+padding: 7px 0 5px 0;
+color: #171718;
+font-weight: 500;
+font-size: 10px;
+line-height: 12px;
+font-family: $text-400;
+}
+
+.views-field-totalcount{
+display: block;
+
+.icon-marche_21-view{
+  display: flex;
+  align-items: center;
+
+  &:before{
+    font-size: 16px;
+    color: #B6B6B6;
+    transform: translateY(1px);
+  }
+
+  .total-count,
+  .day-count{
+    font-style: normal;
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .total-count{
+    padding-left: 12px;
+    font-family: $text-700;
+    font-weight: bold;
+    color: #171718;
+  }
+
+  .day-count{
+    padding-left: 3px;
+    font-family: $text-400;
+    font-weight: 500;
+    color: #7A7A7A;
+  }
+}
+}
+}
+
+.node-type-submit-an-ad{
+.wrap--breadcrumb-navbar{
+position: relative;
+display: block;
+width: 100%;
+margin-top: 15px;
+
+#navbar{
+  position: initial;
+}
+
+.region-easy-breadcrumb{
+  padding: 15px 35px 15px 35px;
+
+  .easy-breadcrumb{
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 700;
+    color: #017A61;
+
+    a{
+      color: #017A61;
+    }
+  }
+}
+}
+}
+
+// Media
+@media only screen and ($ipad) {
+
+  .node-type-submit-an-ad{
+    .wrap--breadcrumb-navbar {
+      margin-top: 20px;
+
+      #block-menu-menu-menu-categories-taxonomy{
+        top: 11px;
+     }
+
+      .region-easy-breadcrumb .easy-breadcrumb{
+        font-size: 23px;
+        line-height: 30px;
+
+        a{
+          font-size: 23px;
+          line-height: 30px;
+        }
+      }
+    }
+    }
+
+    .node-submit-an-ad {
+    h1 {
+      width: calc(50% - 55px);
+      text-align: left;
+      font-size: 26px;
+      line-height: 33px;
+      padding-top: 20px;
+    }
+
+    .view-views-slideshow-ad{
+      width: calc(100% - 55px);
+      margin-right: 55px;
+    }
+
+    .view-views-author-info{
+      .field--location {
+        display: block;
+      }
+    }
+    }
+
+    .content-ad--section{
+    display: block;
+    padding-bottom: 40px;
+
+    .field-name-field-author-info{
+        .content-ad--btn-mobile{
+        display: none;
+      }
+    }
+
+    .field-name-field-author-info {
+      // Display for desktop
+      .views--content-ad--price,
+      .views-field-field-description {
+        display: block
+      }
+    }
+
+    .views-field-field-description{
+      display: block;
+      width: 100%;
+      color: #171718;
+      font-size: 14px;
+      line-height: 17px;
+      font-family: $text-400;
+
+      p{
+        display: block;
+        margin-bottom: 15px;
+
+        br{
+          display: block;
+          height: 15px;
+          content: "";
+          margin-top: 0;
+        }
+      }
+    }
+    }
+
+    .content-ad--section{
+    display: flex;
+    flex-wrap: wrap;
+
+    .content-ad--left{
+      display: block;
+      width: 50%;
+    }
+
+    .content-ad--item-2{
+      display: none;
+    }
+
+    .field-name-field-author-info{
+      width: 50%;
+      padding-top: 0;
+
+      .content-ad--btn-mobile{
+        display: block;
+
+        &:before{
+          display: none;
+        }
+
+        .wrapper {
+          justify-content: start;
+
+          .feedback-btn{
+            margin-right: 20px;
+          }
+
+          .sms-relative {
+            display: flex;
+
+            .icon-marche_29-watsapp {
+              position: initial;
+              transform: translate(0);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and ($ipad-pro) {
+  .node-submit-an-ad {
+    h1 {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 30px;
+      line-height: 37px;
+      padding-top: 30px;
+    }
+
+    .content-ad--item-3 {
+      margin-top: 25px;
+      width: calc(100% - 80px);
+      margin-right: 80px;
+
+      .field-type-taxonomy-term-reference{
+        margin-bottom: 27px;
+        .field-label,
+        .field-item{
+          font-size: 20px;
+          line-height: 22px;
+        }
+
+        .field-label{
+          padding-bottom: 5px;
+        }
+      }
+    }
+
+    .view-views-author-info{
+      .field-field-price{
+        font-size: 20px;
+        line-height: 24px;
+        padding: 17px 36px;
+      }
+
+      .views-field-field-description{
+        font-size: 22px;
+        line-height: 27px;
+        font-weight: 700;
+      }
+
+      .field--location{
+        font-size: 22px;
+        line-height: 27px;
+      }
+
+      .content-ad--btn-mobile {
+        .wrapper {
+
+          .feedback-btn {
+            font-size: 20px;
+            line-height: 24px;
+            padding: 17px 36px;
+            margin-right: 28px;
+            min-width: 114px;
+          }
+
+          .field-btn-chat {
+            margin-right: 20px;
+            padding: 0;
+
+            button{
+              font-size: 20px;
+              line-height: 24px;
+              padding: 17px 36px;
+              min-width: 114px;
+              margin-right: 20px;
+            }
+          }
+
+          .icon-marche_29-watsapp {
+            width: 57px;
+            height: 57px;
+
+            &:before {
+              font-size: 57px;
+            }
+          }
+        }
+      }
+    }
+
+    .field-name-field-author-info{
+      .views-field-name{
+        padding-top: 45px;
+        padding-bottom: 5px;
+
+        a,
+        span{
+          font-size: 22px;
+          line-height: 27px;
+        }
+      }
+
+      .views-field-create-date{
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 18px;
+      }
+
+      .views-field-number-ad{
+        font-size: 20px;
+        line-height: 24px;
+        padding: 18px 0 10px 0;
+      }
+    }
+
+    .views-field-totalcount{
+      .icon-marche_21-view{
+        &:before{
+          font-size: 30px;
+          transform: translateY(0px);
+        }
+
+        .total-count,
+        .day-count{
+          font-size: 20px;
+          line-height: 24px;
+        }
+      }
+    }
+
+    // FAVORITES
+    .flag-outer-bookmarks .flag-bookmarks{
+      a{
+        width: 40px;
+        height: 40px;
+
+        &:before{
+          font-size: 40px;
+          top: 0;
+        }
+      }
+    }
+    }
+
+    .node-type-submit-an-ad .wrap--breadcrumb-navbar{
+    margin-top: 40px;
+
+    .region-easy-breadcrumb .easy-breadcrumb{
+      font-size: 28px;
+      line-height: 35px;
+
+      a{
+        font-size: 28px;
+        line-height: 35px;
+      }
+    }
+  }
+}
+
+@media only screen and ($desktop1200) {
+
+  .node-submit-an-ad {
+    h1{
+      width: calc(50% - 80px);
+      margin-right: 80px;
+    }
+
+    .view-views-slideshow-ad{
+      width: calc(100% - 80px);
+      margin-right: 80px;
+    }
+
+
+    .view-views-author-info{
+      .content-ad--btn-mobile {
+        .wrapper {
+          .feedback-btn {
+            //min-width: 129px;
+          }
+        }
+      }
+    }
+
+    .field-btn-chat {
+      button{
+        min-width: 129px;
+      }
+    }
+  }
+}
+
+@media only screen and ($desktop) {
+
+  .node-type-submit-an-ad {
+    .wrap--breadcrumb-navbar{
+      max-width: 1200px;
+      margin: 40px auto 0;
+
+      #block-menu-menu-menu-categories-taxonomy{
+        left: 0!important;
+      }
+
+      .icon-premium{
+        right: 0;
+      }
+
+      .navbar-burger{
+        left: 0;
+      }
+    }
+  }
+}
+
+

@@ -1,0 +1,70 @@
+/* Hidden menu */
+@import "../variables";
+@import "../breakpoints";
+
+.hidden-menu__top-blog {
+  display: flex;
+  justify-content: space-between;
+  margin: 34px 25px;
+}
+
+.hidden-menu .menu .menu__link {
+  font-family: 'Mulish', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #494949;
+  margin: 0 auto 50px 25px;
+}
+
+.hidden-menu .block-system .menu li:nth-child(2n) {
+  margin-top: 50px;
+}
+
+.hidden-menu .block-system .menu li .menu-link-11660 {
+  font-weight: 700;
+}
+
+.hidden-menu .block-system .menu li .menu-link-15 {
+  color: #CD1426;
+  font-weight: 700;
+}
+
+.menu-li-15 {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-left: 25px;
+}
+
+.menu-li-15::before {
+  content: "\e915";
+  position: absolute;
+  font-size: 20px;
+  font-family: 'new-marche';
+  color: #CD1426;
+  font-weight: 700;
+}
+
+.hidden-menu__label {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22.59px;
+  font-family: 'Mulish', sans-serif;
+  color: #494949;
+}
+
+.deconnecter {
+  display: block;
+  margin-left: 23px;
+}
+
+.deconnecter__container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.hidden-menu .hidden-menu__top-blog .icon-nm_2-close:before {
+  font-size: 18px;
+}

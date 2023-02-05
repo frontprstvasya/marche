@@ -1,0 +1,1000 @@
+@charset "UTF-8";
+select:focus {
+    outline: none;
+}
+
+
+/*******************HEADER**************************/
+
+.header-container-node-ad,
+.node-type-page-error header {
+    margin-bottom: 20px;
+    background-color: #bbdfd8;
+}
+
+
+/*******************REGION-CONTENT**************************/
+
+.page-node-add-submit-an-ad .hide-banner {
+    margin: 22px 12px;
+}
+
+@media only screen and (min-width: 1140px) {
+    .page-node-add-submit-an-ad .hide-banner {
+        margin: 22px auto 80px;
+    }
+}
+
+
+/*******************REQUIRED-FIELDS**************************/
+
+
+/* .section-node-add .node-submit_an_ad-form, */
+
+.section-node-add .main-content {
+    max-width: 785px;
+    margin: 0 auto;
+    padding: 0 10px 30px;
+}
+
+.page-node-add-submit-an-ad .required-fields,
+.page-node-add-submit-an-ad .group-item-2,
+.section-node-add .section-content .node-type-list,
+.page-node-add-page-error #page-error-node-form {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 1px 2px 4px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    padding: 16px 10px;
+    margin-bottom: 20px;
+}
+
+.section-node-add .section-content .node-type-list {
+    width: calc(100% - 20px);
+}
+
+.section-node-add .section-content .node-type-list dd {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #777;
+}
+
+.section-node-add .section-content .node-type-list dt a {
+    display: block;
+    width: 100%;
+    color: #017a61;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+}
+
+.page-node-add-submit-an-ad .form-type-select label,
+.page-node-add-page-error .form-item label {
+    display: block;
+    width: 100%;
+    color: #017a61;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.page-node-add-submit-an-ad #field-information-add-more-wrapper .form-item-field-information-und-0-moddelta label {
+    padding: 0 0 20px;
+    display: block;
+    color: #017a61;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 20px;
+}
+
+.page-node-add-submit-an-ad #field-information-add-more-wrapper .form-item-field-information-und-0-moddelta input {
+    display: none;
+}
+
+.page-node-add-submit-an-ad .form-type-select label span,
+.page-node-add-page-error .form-item label span {
+    color: red;
+}
+
+.page-node-add-submit-an-ad .shs-wrapper-processed select {
+    margin-top: 8px;
+}
+
+.page-node-add-submit-an-ad .form-select {
+    cursor: pointer;
+}
+
+.node-submit_an_ad-form label {
+    display: block;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 18px;
+    color: #017a61;
+}
+
+.node-submit_an_ad-form .form-type-select select {
+    box-sizing: border-box;
+    position: relative;
+    border: 0.5px solid #017a61;
+    color: #017a61;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 10px 10px 10px 15px;
+    margin-top: 8px;
+    width: 100%;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.node-submit_an_ad-form textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    background: none;
+    resize: vertical;
+    padding: 10px 10px 10px 10px;
+    border-radius: 10px;
+    font-family: 'Mulish', sans-serif;
+    color: #017a61;
+    font-size: 16px;
+    margin-top: 7px;
+}
+
+.node-submit_an_ad-form textarea:focus {
+    outline: none;
+}
+
+.node-submit_an_ad-form .field-widget-text-textarea .description {
+    color: #777;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    margin-top: 0;
+}
+
+.form-type-select select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.form-type-select select::-ms-expand {
+    display: none;
+}
+
+.page-node-add-submit-an-ad .node-submit_an_ad-form .form-type-select {
+    position: relative;
+    padding: 0 10px;
+    margin-bottom: 20px;
+    height: 72px;
+}
+
+.page-node-add-submit-an-ad .node-submit_an_ad-form .form-type-select:after {
+    content: "\e919";
+    position: absolute;
+    font-family: "new-marche";
+    display: flex;
+    align-items: center;
+    width: 10px;
+    height: calc(100% - 41px);
+    font-size: 17px;
+    color: #94b6af;
+    background: #fff;
+    right: 15px;
+    bottom: 7px;
+    pointer-events: none;
+    border-radius: 9px;
+    outline: none;
+    border: none;
+    padding-right: 15px;
+    z-index: 2;
+    font-weight: bold;
+}
+
+.click .shs-select-level-2 {
+    position: absolute;
+    top: 20px;
+    display: flex;
+    width: calc(100% - 20px);
+    left: 10px;
+}
+
+.removeSelect .shs-select-level-2 {
+    display: none;
+}
+
+.form-actions--submit-an-ad-node,
+.page-node-add-page-error .form-actions {
+    display: block;
+    margin-top: 30px;
+}
+
+#field-price-add-more-wrapper .form-item .form-text {
+    width: calc(100% - 55px);
+}
+
+.field-suffix {
+    display: none;
+}
+
+.page-node-add-submit-an-ad .form-item-field-communication-und,
+.page-node-edit .form-item-field-communication-und {
+    padding: 0 10px;
+}
+
+.page-node-add-submit-an-ad .form-type-textfield label {
+    color: #777;
+}
+
+.form-item-field-communication-und label,
+.page-node-add-submit-an-ad .form-type-textfield label {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0;
+    text-align: left;
+    color: #017a61;
+}
+
+.form-item-field-communication-und label span {
+    color: red;
+}
+
+.form-field-name-field-surface {
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+.form-field-name-field-photos .messages {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.form-field-name-field-photos .messages__icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.required-fields .form-item-title,
+.page-node-add-submit-an-ad .group-item-2-left #edit-title,
+.page-node-add-submit-an-ad #edit-field-price #edit-field-price-und-0-value,
+.page-node-edit .form-type-textfield input,
+.page-node-edit #edit-field-price #edit-field-price-und-0-value,
+.page-node-add-page-error .form-type-textfield input,
+.form-field-name-field-surface .form-type-textfield input {
+    border: 0.5px solid #017a61;
+    color: #017a61;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 10px 10px 10px 15px;
+    margin-top: 8px;
+    border-radius: 12px;
+}
+
+.page-node-add-submit-an-ad .group-item-2-left #edit-title,
+.page-node-add-submit-an-ad .group-item-2-left #edit-field-price #edit-field-price-und-0-value,
+.page-node-edit .form-field-type-number-integer input,
+.page-node-edit .group-item-2-left #edit-field-price #edit-field-price-und-0-value,
+.page-node-add-page-error .form-type-textfield input,
+.form-field-name-field-surface .form-type-textfield input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.page-node-add-submit-an-ad .form-item-path-alias label {
+    display: block;
+    font-family: "Montserrat-Bold";
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 18px;
+    color: #017a61;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.page-node-add-submit-an-ad .form-type-textfield label span {
+    color: red;
+}
+
+.page-node-add-submit-an-ad .form-item-title .form-text {
+    width: calc(100% - 55px);
+}
+
+.form-item-field-price-und-0-value {
+    border: 0.5px solid #017a61;
+    color: #017a61;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 10px 10px 10px 30px;
+    margin-top: 8px;
+    border-radius: 12px;
+}
+
+.page-node-add-submit-an-ad .group-item-2-left {
+    box-shadow: none;
+    padding: 0 10px;
+    width: calc(100% - 20px);
+}
+
+.vertical-tabs-pane .fieldset-wrapper p {
+    width: 100%;
+    margin: 0;
+    font-family: 'Mulish', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 20px;
+    letter-spacing: -0.03em;
+    text-align: start;
+    color: #171718;
+}
+
+@media only screen and (min-width: 768px) {
+    .form-actions--submit-an-ad-node {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+
+/* *******************BUTTONS**************************** */
+
+.form-actions--submit-an-ad-node .form-submit,
+.node-create_cv-form .form-actions #edit-submit,
+.page-node-add-page-error .form-actions #edit-submit {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 12px;
+    width: 100%;
+    background-color: #017a61;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0em;
+}
+
+.form-actions--submit-an-ad-node .form-submit:hover,
+.node-create_cv-form .form-actions #edit-submit:hover,
+.page-node-add-page-error .form-actions #edit-submit:hover {
+    background-color: #8bcdbf;
+    color: #494949;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.page-node-add-submit-an-ad .form-actions--submit-an-ad-node .form-actions--back-wrap a,
+.node-create_cv-form .form-actions--back-link,
+.page-node-add-page-error .form-actions #edit-preview {
+    display: flex;
+    justify-content: center;
+    background-color: #f5b4b4;
+    border-radius: 12px;
+    padding: 12px;
+    color: #777;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0em;
+    margin-top: 20px;
+}
+
+.form-actions--submit-an-ad-node .form-actions--back-wrap a:hover,
+.node-create_cv-form .form-actions--back-link:hover,
+.page-node-add-page-error .form-actions #edit-preview:hover {
+    background-color: #cd1426;
+    color: #fff;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+
+/* ВРЕМЕННО */
+
+.premium-link--wrapper {
+    display: none;
+}
+
+
+/* ******************LOADING PHOTOS*************************** */
+
+.loading {
+    display: none;
+}
+
+.node-submit_an_ad-form div.loading {
+    border: 3px solid #017a61;
+    border-radius: 16px;
+    background-color: #017a61;
+}
+
+.form-field-name-field-photos {
+    display: block;
+    position: relative;
+    width: 100%;
+    background: #fff;
+    box-shadow: 1px 2px 4px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.form-field-name-field-photos .form-wrapper {
+    padding: 16px 10px;
+}
+
+.form-field-name-field-photos .fieldset-wrapper {
+    display: block;
+    margin-top: 30px;
+}
+
+div.nice-imagefield-sortable>div {
+    margin: 0 15px 15px 0 !important;
+    width: calc(50% - 11px) !important;
+    height: 100px !important;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 480px) {
+    div.nice-imagefield-sortable>div,
+    .node-submit_an_ad-form .form-field-type-image label {
+        width: calc(50% - 11px) !important;
+    }
+    .nice-imagefield-sortable .nice-imagefield-element:nth-child(2n) {
+        margin-right: 0 !important;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+    .nice-imagefield-sortable .nice-imagefield-element:nth-child(3n) {
+        margin-right: 0 !important;
+    }
+    div.nice-imagefield-sortable>div,
+    .node-submit_an_ad-form .form-field-type-image label {
+        width: calc(33% - 11px) !important;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .nice-imagefield-sortable .nice-imagefield-element:nth-child(5n) {
+        margin-right: 0 !important;
+    }
+    div.nice-imagefield-sortable>div,
+    .node-submit_an_ad-form .form-field-type-image label {
+        width: calc(20% - 15px) !important;
+    }
+}
+
+.page-node-add-submit-an-ad #edit-field-photos-und-ajax-wrapper .form-wrapper {
+    padding: 10px;
+}
+
+.form-field-name-field-photos .form-wrapper legend {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0;
+    color: #017a61;
+    display: block;
+    position: absolute;
+    width: 100%;
+}
+
+.form-field-name-field-photos label .form-field-name-field-photos label {
+    display: flex;
+    width: 141px;
+    height: 96px;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #017a61;
+    box-sizing: border-box;
+    border-radius: 9px;
+    font-size: 96px !important;
+    font-weight: 600;
+    float: left;
+    color: #017a61;
+    background-color: #bbdfd8;
+}
+
+.node-submit_an_ad-form div.nice-imagefield-image div.buttons {
+    display: block;
+    position: relative;
+    z-index: 101;
+}
+
+.node-submit_an_ad-form div.nice-imagefield-image div.buttons:before {
+    content: "\e90c";
+    position: absolute;
+    display: block;
+    text-align: center;
+    font-family: "new-marche";
+    font-weight: 700;
+    top: -4px;
+    right: 17px;
+    width: 20px;
+    height: 20px;
+    line-height: 22px;
+    border-radius: 50%;
+    background: #ffffff80;
+    color: #808080;
+    font-size: 8px;
+    transform: rotate(45deg);
+}
+
+.node-submit_an_ad-form div.nice-imagefield-image div.buttons input {
+    position: absolute;
+    top: -4px;
+    right: 17px;
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    background: none;
+    color: #fff;
+    text-indent: -150px;
+    overflow: hidden;
+}
+
+.nice-imagefield-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.nice-imagefield-image img {
+    width: 100%;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.form-type-mfw-managed-file .description {
+    display: none;
+}
+
+.form-type-mfw-managed-file .description strong {
+    color: #494949;
+}
+
+.node-submit_an_ad-form .form-field-type-image .form-file {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.node-submit_an_ad-form .form-field-type-image .form-type-mfw-managed-file .form-submit {
+    display: none;
+}
+
+.fieldset-description {
+    color: #777;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.fieldset-description strong {
+    color: #494949;
+}
+
+#field-description-add-more-wrapper .text-format-wrapper .form-type-textarea {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.page-node-add-submit-an-ad .text-format-wrapper .form-type-textarea label {
+    display: block;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 18px;
+    color: #017a61;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.node-submit_an_ad-form .form-field-name-field-description .filter-wrapper {
+    display: none;
+}
+
+.visually-hidden {
+    display: none;
+}
+
+.vertical-tabs .vertical-tabs-list .vertical-tab-button a strong {
+    font-size: 12px;
+    font-weight: bold;
+    color: #0074bd;
+}
+
+.vertical-tabs .vertical-tabs-list .vertical-tab-button a .summary {
+    color: #666;
+    display: block;
+    font-size: 12px;
+    padding-top: 0.4em;
+}
+
+.vertical-tabs .vertical-tabs-panes .form-wrapper:first-child {
+    padding-top: 25px;
+}
+
+.vertical-tabs .vertical-tabs-panes fieldset {
+    border: solid 1px #ddd;
+    border-top: none;
+    box-shadow: 0 -3px 0 #017a61;
+    padding: 12px;
+    margin: 20px 0 20px 0 !important;
+    display: block;
+}
+
+.vertical-tabs .vertical-tabs-panes legend {
+    background: #fcfaf4;
+    padding: 0 6px;
+    margin: 0 0 0 -3px;
+    font-size: 20px;
+    font-weight: 300;
+    display: inherit !important;
+}
+
+.vertical-tabs-pane .fieldset-wrapper {
+    margin-bottom: 1em;
+    overflow-x: scroll;
+    width: calc(100vw - 67px);
+}
+
+.text-format-wrapper .description {
+    font-size: 18px;
+    line-height: 22px;
+    color: #017a61;
+    margin-bottom: 15px;
+}
+
+.fieldset-wrapper .form-item-path-pathauto {
+    margin-bottom: 1em;
+}
+
+.vertical-tabs .vertical-tabs-panes .fieldset-wrapper .form-type-checkbox input:checked,
+.vertical-tabs .vertical-tabs-panes .fieldset-wrapper .form-type-radio input:checked {
+    background: #fcd216;
+    position: absolute;
+}
+
+.vertical-tabs .vertical-tabs-panes .fieldset-wrapper .form-type-checkbox label,
+.vertical-tabs .vertical-tabs-panes .fieldset-wrapper .form-type-radio label {
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 18px;
+    color: #017a61;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 30px;
+}
+
+.vertical-tabs .description {
+    color: #949494;
+    margin: 10px 0 0 0;
+    font-size: 10px;
+    line-height: 14px;
+}
+
+.vertical-tabs a {
+    color: #0074bd;
+    text-decoration: none;
+    font-size: 10px;
+}
+
+.vertical-tabs .vertical-tabs-panes .fieldset-wrapper .form-item {
+    position: relative;
+    margin-bottom: 45px;
+    margin-top: 5px;
+}
+
+.field-widget-number #field-price-add-more-wrapper .form-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.field-widget-number #field-price-add-more-wrapper .form-item input:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+.group-item-2-left .form-item-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.group-item-2-left .form-item-title input:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+.vertical-tabs .vertical-tabs-panes .fieldset-wrapper .form-item input {
+    position: absolute;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    color: #017a61;
+    border-radius: 9px;
+    outline: none;
+    font-family: "Montserrat-Regular";
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 15px;
+    border: 2px solid #017a61;
+    box-sizing: border-box;
+}
+
+.form-radios {
+    margin-top: 20px;
+}
+
+#edit-comment-1 {
+    right: 48%;
+}
+
+#edit-comment-2 {
+    right: 48%;
+}
+
+.vertical-tabs .vertical-tabs-panes {
+    margin: 0;
+    width: 100%;
+    clear: both;
+    display: block;
+    padding-top: 25px;
+}
+
+.vertical-tabs .vertical-tabs-panes .fieldset-wrapper p {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #171718;
+    max-width: 100%;
+    text-align: start;
+}
+
+.vertical-tabs .vertical-tabs-panes .fieldset-wrapper .form-item #edit-path-alias {
+    position: relative;
+}
+
+#edit-field-communication-und {
+    display: block;
+    width: 100%;
+    border: 1px solid #017a61;
+    border-radius: 9px;
+    padding: 25px 15px 10px 15px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+.form-checkboxes .form-type-checkbox {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.form-item-field-communication-und-24 .option {
+    padding-left: 10px;
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400 !important;
+    font-size: 15px !important;
+    line-height: 20px;
+    margin: 0;
+    cursor: pointer;
+    color: #171718 !important;
+}
+
+.form-item-field-communication-und-25 .option {
+    padding-left: 10px;
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400 !important;
+    font-size: 15px !important;
+    line-height: 20px;
+    margin: 0;
+    cursor: pointer;
+    color: #171718 !important;
+}
+
+.form-item-field-communication-und-27 .option {
+    padding-left: 10px;
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400 !important;
+    font-size: 15px !important;
+    line-height: 20px;
+    margin: 0;
+    cursor: pointer;
+    color: #171718 !important;
+}
+
+#edit-field-photos-und--4 legend {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #017a61;
+}
+
+.page-node-add-submit-an-ad #edit-field-photos-und--2-ajax-wrapper .form-wrapper {
+    padding: 0 10px;
+}
+
+#edit-field-photos-und--2 legend {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0;
+    text-align: left;
+    color: #017a61;
+}
+
+.form-field-type-text-long {
+    padding: 0 10px;
+}
+
+.vertical-tabs-processed {
+    width: 100%;
+}
+
+.form-item-log .resizable-textarea #edit-log {
+    display: block;
+    width: 100%
+}
+
+#edit-metatags-und-description-value {
+    width: 100%;
+}
+
+#edit-metatags-und-abstract-value {
+    width: 100%;
+}
+
+#edit-metatags-und-rating-value {
+    width: 100%;
+}
+
+.edit-metatags-und-revisit-after-period {
+    width: 100%;
+}
+
+.page-node-add-submit-an-ad .description-photos {
+    margin-bottom: 20px;
+}
+
+.page-node-add-submit-an-ad .group-item-3 .form-item,
+.page-node-edit .group-item-3 .form-item {
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.page-node-add-submit-an-ad .group-item-3 .form-item label,
+.page-node-edit .group-item-3 .form-item label {
+    position: absolute;
+    padding-left: 15px;
+    font-weight: 200;
+}
+
+.page-node-add-submit-an-ad .group-item-3 .form-item input,
+.page-node-edit .group-item-3 .form-item input {
+    width: 100%;
+    border: 1px solid #017a61;
+    border-radius: 12px;
+    padding: 10px 10px 10px 80px;
+}
+
+.page-node-add .group-item-2-left .form-item-title,
+.page-node-add #field-price-add-more-wrapper .form-item-field-price-und-0-value,
+.page-node-edit .group-item-2-left .form-item-title,
+.page-node-edit #edit-field-price #field-price-add-more-wrapper .form-item {
+    position: relative;
+    padding: 0 0 15px;
+    display: block;
+    border: none;
+}
+
+
+/* ***************ПЕРЕБИВАЮ КЛАССЫ VERTICAL-TABS.CSS***************** */
+
+div .vertical-tabs {
+    margin: 30px 0 0;
+    display: flex;
+}
+
+.vertical-tabs ul.vertical-tabs-list {
+    margin: 0;
+}
+
+
+/*******************STICK-MOBILE*************** */
+
+.page-node-add .region-stick-mobile .menu .menu-link-810::before {
+    color: #bbdfd8;
+}
+
+.unClick {
+    position: relative;
+}
+
+
+/******************* MEDIA*************** */
+
+@media only screen and (max-width: 478px) {
+    .form-field-name-field-photos label {
+        height: 116px;
+    }
+    .nice-imagefield-image img {
+        height: 116px;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+}
+
+@media only screen and (min-width: 567px) {
+    .vertical-tabs-pane .fieldset-wrapper {
+        margin-bottom: 1em;
+        overflow-x: scroll;
+        width: auto;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .node-submit_an_ad-form .form-field-type-image label {
+        position: relative;
+        display: flex;
+        height: 97px;
+    }
+    .page-node-add-page-error .form-actions {
+        display: flex;
+        justify-content: space-between;
+    }
+    .form-actions--submit-an-ad-node .form-submit,
+    .page-node-add-page-error .form-actions #edit-submit,
+    .page-node-add-page-error .form-actions #edit-preview {
+        width: 47%;
+    }
+    .form-actions--submit-an-ad-node .form-actions--back-wrap {
+        width: 47%;
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 1023px) {
+    div .vertical-tabs {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .vertical-tabs ul.vertical-tabs-list {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .fieldset-wrapper .form-disabled label {
+        font-size: 26px;
+        line-height: 33px;
+        margin-top: 40px;
+    }
+    div.nice-imagefield-sortable>div {
+        margin: 0;
+    }
+    .node-submit_an_ad-form .form-field-name-field-photos label {
+        width: 100px;
+    }
+}

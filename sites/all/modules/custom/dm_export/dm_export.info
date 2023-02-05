@@ -1,0 +1,5 @@
+name = DM Export
+description = Export Node && profile Drupal 7 -> Drupal 7
+core = 7.x
+version = 1.0
+package = Custom

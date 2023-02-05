@@ -1,0 +1,28 @@
+# French translation of Session API (7.x-1.0)
+# Copyright (c) 2021 by the French translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Session API (7.x-1.0)\n"
+"POT-Creation-Date: 2021-12-15 13:42+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Language-Team: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n>1);\n"
+
+msgid "Session API Configuration"
+msgstr "Configuration de Session API"
+msgid "Session API"
+msgstr "Session API"
+msgid "Provides an interface for storing session information."
+msgstr "Fournit une interface pour stocker les informations de session."
+msgid "Cookie expire time"
+msgstr "Délai d'expiration du cookie"
+msgid "Configure Session API behavior."
+msgstr "Configurer le comportement de Session API."
+msgid "Cookie name"
+msgstr "Nom du cookie"
+msgid "Added a timestamp field and index to the session_api table."
+msgstr "Ajout d'un champ d'horodatage et d'un index pour la table session_api."

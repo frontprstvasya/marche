@@ -1,0 +1,28 @@
+/* Add node category hide dynamic */
+@import "../variables";
+@import "../breakpoints";
+
+#category-dynamic{
+  .form-field-type-taxonomy-term-reference{
+    display: none;
+  }
+}
+
+/* Hidden categories depends on the chosen. --------------------------------------------------------------------------*/
+
+// SPORT
+.category-tid-7{
+  .form-field-name-field-condition{
+    display: block!important;
+  }
+}
+
+// ANIMAUX
+.category-tid-8{
+  .form-field-name-field-test-vacaansy{
+    display: block!important;
+  }
+}
+
+
+

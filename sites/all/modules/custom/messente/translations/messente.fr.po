@@ -1,0 +1,300 @@
+msgid "Service unavailable, please try again later"
+msgstr "Service indisponible, veuillez réessayer plus tard"
+
+msgid "This user is already registered"
+msgstr "Cet utilisateur est déjà enregistré"
+
+msgid "The Phone field cannot be empty"
+msgstr "Le champ Téléphone ne peut pas être vide"
+
+msgid "Please enter a valid phone number"
+msgstr "s'il vous plaît entrer un numéro de téléphone valide"
+
+msgid "Wrong CODE entered"
+msgstr "Mauvais CODE entré"
+
+msgid "Enter the correct Pin Code"
+msgstr "Entrez le code PIN correct"
+
+msgid "Something went wrong, try again later"
+msgstr "Quelque chose s'est mal passé, réessayez plus tard"
+
+msgid "Please enter a valid Pin Code"
+msgstr "Veuillez saisir un code PIN valide"
+
+msgid "A user with this phone number is already registered"
+msgstr "Un utilisateur avec ce numéro de téléphone est déjà enregistré"
+
+msgid "This field can not be empty"
+msgstr "ce champ ne peut pas être vide"
+
+msgid "Please enter the correct phone number"
+msgstr "Veuillez entrer le bon numéro de téléphone"
+
+msgid "The PIN field cannot be empty"
+msgstr "Le champ PIN ne peut pas être vide"
+
+
+msgid "Password field cannot be empty"
+msgstr "Le champ du mot de passe ne peut pas être vide"
+
+msgid "The password is too short, at least characters"
+msgstr "Le mot de passe est trop court, au moins caractères"
+
+msgid "The password is too short, at least 6 characters"
+msgstr "Le mot de passe est trop court, au moins 6 caractères"
+
+msgid "User not found"
+msgstr "Utilisateur non trouvé"
+
+msgid "Log in to your account with a new password"
+msgstr "Connectez-vous à votre compte avec un nouveau mot de passe"
+
+msgid "The phone number is incorrect"
+msgstr "Le numéro de téléphone est incorrect"
+
+msgid "Phone number not found"
+msgstr "Numéro de téléphone introuvable"
+
+msgid "No file uploaded"
+msgstr "Aucun fichier téléchargé"
+
+msgid "Email and Phone fields cannot be empty"
+msgstr "Les champs E-mail et Téléphone ne peuvent pas être vides"
+
+msgid "The user with this email is already registered"
+msgstr "L'utilisateur avec cet e-mail est déjà enregistré"
+
+msgid "Username field cannot be empty"
+msgstr "Le champ Nom d'utilisateur ne peut pas être vide"
+
+msgid "Invalid characters in username field"
+msgstr "Caractères non valides dans le champ du nom d'utilisateur"
+
+msgid "The password field cannot be empty"
+msgstr "Le champ du mot de passe ne peut pas être vide"
+
+msgid "User with this email address not found"
+msgstr "Utilisateur avec cette adresse e-mail introuvable"
+
+msgid "Please enter the correct email address"
+msgstr "Veuillez saisir la bonne adresse e-mail"
+
+msgid "Please enter a valid Email"
+msgstr "Veuillez saisir un e-mail valide"
+
+msgid "Invalid characters in email field"
+msgstr "Caractères invalides dans le champ e-mail"
+
+msgid "This email address is already registered"
+msgstr "Cette email adresse est déjà enregistrée"
+
+msgid "Email field cannot be empty"
+msgstr "Le champ e-mail ne peut pas être vide"
+
+msgid "Please enter correct Pin Code"
+msgstr "Veuillez entrer le code PIN correct"
+
+msgid "Service temporarily unavailable, please try again later"
+msgstr "Service temporairement indisponible, veuillez réessayer plus tard"
+
+msgid "Pin Code has been sent, please wait, it remains:"
+msgstr "Le code PIN a été envoyé, veuillez patienter, il reste :"
+
+msgid "Something went wrong, please try again later"
+msgstr "Quelque chose c'est mal passé. Merci d'essayer plus tard"
+
+msgid "This email address has not yet been registered on the site"
+msgstr "Cette adresse e-mail n'a pas encore été enregistrée sur le site"
+
+msgid "SMS with a code has been sent to the phone number. You can resend the code via "
+msgstr "SMS avec un code a été envoyé au numéro de téléphone. Vous pouvez renvoyer le code via "
+
+msgid "The PIN code has been sent, please wait, there is still:"
+msgstr "Le code PIN a été envoyé, veuillez patienter, il reste:"
+
+msgid "The user with this phone number has not been registered"
+msgstr "L'utilisateur avec ce numéro de téléphone n'a pas été enregistré"
+
+msgid "This user is not yet registered"
+msgstr "Cet utilisateur n'est pas encore enregistré"
+
+msgid "Phone number"
+msgstr "Numéro de téléphone"
+
+msgid "Phone number*"
+msgstr "Numéro de téléphone"
+
+msgid "Phone number/email*"
+msgstr "Numéro de téléphone/courriel*"
+
+msgid "Phone number/email"
+msgstr "Numéro de téléphone/courriel"
+
+msgid "Pin Code"
+msgstr "Code PIN"
+
+msgid "Back"
+msgstr "Retour"
+
+msgid "Send PIN CODE again"
+msgstr "Envoyez à nouveau le Code PIN"
+
+msgid "Send PIN code again"
+msgstr "Envoyez à nouveau le code PIN"
+
+msgid "Send pin code again"
+msgstr "Envoyez à nouveau le code pin"
+
+
+msgid "password"
+msgstr "le mot de passe"
+
+msgid "Password"
+msgstr "Le mot de passe"
+
+msgid "Confirm password"
+msgstr "Confirmez le mot de passe"
+
+msgid "Next"
+msgstr "Prochain"
+
+msgid "Complete registration"
+msgstr "Enregistrer"
+
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+msgid "Your new phone number has been verified, thank you!"
+msgstr "Votre nouveau numéro de téléphone a été vérifié, merci!"
+
+msgid "Upload"
+msgstr "Télécharger"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Email*"
+msgstr "E-mail*"
+
+msgid "Complete Password recovery"
+msgstr "Changer mot de passe"
+
+msgid "User registration via Google account"
+msgstr "Enregistrement de l'utilisateur via un compte Google"
+
+msgid "Password recovery to Email"
+msgstr "Récupération de mot de passe par e-mail"
+
+msgid "address"
+msgstr "adresse"
+
+msgid "Access"
+msgstr "Accéder"
+
+msgid "User registration via Facebook"
+msgstr "Enregistrement de l'utilisateur via Facebook"
+
+
+msgid "User registration via Google account"
+msgstr "Enregistrement de l'utilisateur via un compte Google"
+
+
+msgid "User registration by email"
+msgstr "Enregistrement de l'utilisateur par e-mail"
+
+msgid "Create an account"
+msgstr "Créer un compte"
+
+msgid "Password recovery"
+msgstr "Mot de passe oublié"
+
+msgid "phone number or username or email"
+msgstr "numéro de téléphone ou nom d'utilisateur ou email"
+
+msgid "Please select a country"
+msgstr "Veuillez sélectionner un pays"
+
+msgid "phone number or username"
+msgstr "numéro de téléphone ou nom d'utilisateur"
+
+msgid "User change phone number"
+msgstr "L'utilisateur change de numéro de téléphone"
+
+
+msgid "Creating an account"
+msgstr "Création d’un compte"
+
+msgid "You have already verified this phone number before, please try another one"
+msgstr "Vous avez déjà vérifié ce numéro de téléphone auparavant, veuillez en essayer un autre"
+
+msgid "Change phone number"
+msgstr "Changer de numéro de téléphone"
+
+msgid "Set phone numbers"
+msgstr "Définir des numéros de téléphone"
+
+msgid "No user found with this phone number"
+msgstr "Aucun utilisateur trouvé avec ce numéro de téléphone"
+
+msgid "Surname field cannot be empty"
+msgstr "Le champ du nom de famille ne peut pas être vide"
+
+msgid "Invalid characters in surname field"
+msgstr "Caractères invalides dans le champ du nom de famille"
+
+msgid "We have sent an SMS with a verification code to the phone number"
+msgstr "Nous avons envoyé le code d’acces à votre numéro de téléphone par SMS - saisissez le ici pour réinitialiser le mot de passe:"
+
+msgid "You can repeat the code request after"
+msgstr "Vous pouvez répéter la demande de code après"
+
+msgid "You can repeat the code request after"
+msgstr "Vous pouvez répéter la demande de code après"
+
+msgid "sec"
+msgstr "seconde"
+
+msgid "mb"
+msgstr "mo"
+
+msgid "Mb"
+msgstr "Mo"
+
+msgid "Add a photo for your profile"
+msgstr "Ajoutez un photo pour votre profil"
+
+msgid "Extensions allowed:"
+msgstr "Extensions autorisées:"
+
+msgid "The file must weigh less than"
+msgstr "Le fichier doit peser moins de"
+
+msgid "The image that is wider than"
+msgstr "L’image qui est plus larges que"
+
+msgid "pixels will be resized."
+msgstr "pixels sera redimensionnée."
+
+msgid "You need to add and verify a phone number"
+msgstr "Vous devez ajouter et valider un numéro de téléphone"
+
+msgid "Login to the site using your phone number"
+msgstr "Connectez-vous au site avec votre numéro de téléphone"
+
+msgid "Login to the site using your email"
+msgstr "Connectez-vous au site en utilisant votre email"
+
+msgid "Add phone number"
+msgstr "Ajouter un numéro de téléphone"
+
+msgid "File not selected"
+msgstr "Fichier non sélectionné"
+
+msgid "File creation error"
+msgstr "Erreur de création de fichier"
+
+
+
+
+

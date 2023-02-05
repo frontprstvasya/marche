@@ -1,0 +1,120 @@
+/* Users */
+@import "../variables";
+@import "../breakpoints";
+
+
+.user__container {
+  display: block;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 35px;
+
+  * {
+    font-family: $text-400;
+  }
+}
+
+.user__sidebar,
+.user__sidebar .region-sidebar-user {
+  display: flex;
+  flex-direction: column;
+}
+
+.user__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user__img {
+  margin-bottom: 12px;
+  width: 72.8px;
+  height: 72.8px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.user__name {
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 17px;
+  letter-spacing: 0;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.user__sidebar .tabs__tab-link {
+  color: #171718;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: 0;
+  text-align: left;
+}
+
+.user__sidebar .is-active {
+  color: #017A61;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 15px;
+  letter-spacing: 0;
+  text-align: left;
+}
+
+.page-user .user__content .section-content {
+  margin-top: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .user__img {
+    margin-bottom: 18px;
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .user__container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .user__container_center {
+    justify-content: center;
+  }
+  .user__sidebar {
+    padding-right: 15px;
+    width: 100%;
+    max-width: 250px;
+  }
+  .user__name {
+    margin-bottom: 24px;
+    font-size: 20px;
+    line-height: 24.38px;
+    font-weight: 700;
+  }
+  .user__sidebar .tabs__tab:not(:last-child) {
+    margin-bottom: 15px;
+  }
+  .user__sidebar .tabs__tab-link {
+    font-size: 20px;
+    line-height: 24.38px;
+  }
+  .user__sidebar .tabs__tab-link:hover {
+    color: #017A61;
+  }
+  .user__content {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 790px;
+  }
+  .user__sidebar .is-active {
+    font-size: 25px;
+    line-height: 30.48px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .user__sidebar {
+    max-width: 340px;
+  }
+}

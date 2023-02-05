@@ -1,0 +1,386 @@
+/* Webform */
+@import "../variables";
+@import "../breakpoints";
+
+.page-node-webform #webform-components-form, .page-node-webform #webform-emails-form{
+  overflow-x: auto;
+  padding-bottom: 15px;
+}
+
+.page-node-webform #webform-components, #webform-emails {
+  width: 100%;
+  margin: 0 0 10px;
+}
+
+.page-node-webform #webform-components {
+
+  min-width: 1024px;
+  overflow-x: auto;
+}
+
+.page-node-webform #webform-emails{
+  min-width: 600px;
+}
+
+.page-node-webform #webform-components th, #webform-emails th {
+  background: none repeat scroll 0 0 #E1E2DC;
+  font-family: $text-400;
+  font-size: 18px;
+  font-weight: 300;
+  padding: 10px;
+}
+
+.page-node-webform #webform-components td{
+  vertical-align: middle;
+  padding: 8px 10px;
+  border: 0;
+  color: #000;
+  font-size: 12px;
+}
+
+.page-node-webform #webform-components  tr.even, #webform-emails tr{
+  border-style: solid;
+  border-color: #ddd;
+  background: #f3f4ee;
+  transition: all, 0.15s;
+}
+
+.page-node-webform #webform-components .webform-component-name a {
+  cursor: move;
+  float: left;
+  height: 1.7em;
+  margin-left: -1em;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.page-node-webform #webform-components .webform-component-name .handle{
+  position: relative;
+  height: 5px;
+  padding: 0.42em 10px;
+  width: 5px;
+}
+
+.page-node-webform #webform-components .webform-component-name .handle::before{
+  content: '▶';
+  position: absolute;
+  top: 0;
+  left: 5px;
+  color: #171717;
+  width: 3px;
+  height: 3px;
+}
+
+.page-node-webform #webform-components-form .form-item-add-name{
+  margin-left: 10px;
+  padding: 5px 7px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #333;
+  vertical-align: baseline;
+  box-sizing: inherit;
+  outline: 2px solid transparent;
+  outline-offset: 0;
+  transition: all, 0.1s;
+}
+
+.page-node-webform #webform-components-form .form-item-add-name input{
+  width: 100%;
+}
+
+.page-node-webform #webform-components select{
+  -webkit-appearance: none;
+  -webkit-padding-start: 8px;
+  -webkit-padding-end: 16px;
+  -webkit-padding-before: 5px;
+  -webkit-padding-after: 5px;
+  border-radius: 0;
+  min-height: 16px;
+  padding: 5px 7px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #333;
+  vertical-align: baseline;
+  box-sizing: inherit;
+  outline: 2px solid transparent;
+  outline-offset: 0;
+  transition: all, 0.1s;
+  background: url('../images/select-arrow.svg') no-repeat right 50% #fff;
+}
+
+.page-node-webform #webform-components-form .form-type-checkbox{
+  display: flex;
+  justify-content: center;
+}
+
+.page-node-webform  .form-type-checkbox input[type=checkbox]:not(.element-hidden)
+{
+  -webkit-appearance: none;
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  margin-right: 0.25em;
+  padding: 0;
+  background: #fff;
+  border: 1px solid #B5B5B5;
+  width: 16px !important;
+  height: 16px !important;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: background 0.5s ease;
+  outline: none;
+}
+
+.page-node-webform  .form-type-checkbox input[type=checkbox]:hover{
+  border-color: #017A61;
+  cursor: pointer;
+}
+
+.page-node-webform .form-type-checkbox input[type=checkbox]:checked{
+  background: #017A61;
+  box-shadow: inset 0 0 0 4px #fff;
+}
+
+.page-node-webform #webform-components-form  .webform-component-edit a,
+.page-node-webform #webform-components-form  .webform-component-clone a,
+.page-node-webform #webform-components-form  .webform-component-delete a{
+  color: #017A61;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.page-node-webform  .form-submit, .page-node-webform-results .form-submit{
+  display: inline-block;
+  margin-right: 10px;
+  padding: 10px;
+  font-family: $text-400;
+  border-radius: 9px;
+  background: #017A61;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.page-node-webform  #webform-emails tbody .odd{
+  border-style: solid;
+  border-color: #ddd;
+  transition: all, 0.15s;
+}
+
+.page-node-webform  #webform-emails tbody .odd td{
+  vertical-align: middle;
+  padding: 8px 15px;
+  border: 0;
+  color: #000;
+  font-size: 12px;
+}
+
+.page-node-webform .form-type-radio{
+  margin-bottom: 5px;
+}
+
+.page-node-webform fieldset, .page-node-webform-results fieldset {
+  border: solid 1px #ddd;
+  border-top: none;
+  box-shadow: 0px -3px 0 #017A61;
+  padding: 12px;
+  margin: 0 0 20px;
+}
+
+.page-node-webform fieldset .collapsed, .page-node-webform-results fieldset .collapsed{
+  border-bottom-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+  height: 1em;
+}
+
+.page-node-webform fieldset legend, .page-node-webform-results fieldset legend {
+  background: white;
+  padding: 0 6px;
+  margin: 0 0 0 -3px;
+  //margin-left: -3px;
+  font-family: $text-400;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.page-node-webform fieldset div, .page-node-webform-results fieldset div{
+  max-width: 100%;
+  padding-top: 10px;
+
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.page-node-webform .fieldset-title, .page-node-webform-results .fieldset-title{
+  font-size: 24px;
+  color: #017A61;
+}
+
+.page-node-webform fieldset textarea, .page-node-webform-results fieldset textarea{
+  width: 100%;
+}
+
+.page-node-webform .ckeditor_links{
+  border-left: 1px solid #DDDDDD;
+  border-right: 1px solid #DDDDDD;
+  display: block;
+  padding: 10px;
+  width: auto;
+  font-size: 14px;
+  color: #017A61;
+}
+
+.page-node-webform .ckeditor_links:hover{
+  background-color: #DDDDDD;
+}
+
+.page-node-webform #edit-confirmation-format-help a, .page-node-webform .token-dialog {
+  font-size: 12px;
+  color: #017A61;
+}
+
+.page-node-webform #edit-confirmation-format-help a:hover, .page-node-webform .token-dialog:hover{
+  text-decoration: underline;
+  transition: all .3s ease;
+}
+
+.page-node-webform .form-item input[type=text]{
+  width: 80%;
+  max-width: 300px;
+  padding: 5px 7px 5px 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #333;
+  vertical-align: baseline;
+  box-sizing: inherit;
+  outline: 2px solid transparent;
+  outline-offset: 0;
+  transition: all, 0.1s
+}
+
+.page-node-webform #block-system-help, #webform-results-download-form{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 35px;
+}
+
+.page-node-webform .form-text{
+  margin-bottom: 10px;
+}
+
+.page-node-webform .form-item label{
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.page-node-webform .description{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.page-node-webform  .webform-conditional-if {
+  position: absolute;
+  left: -2.5em;
+  margin-top: 0.2em;
+}
+
+.page-node-webform .webform-conditional-value .form-text, .page-node-webform .webform-conditional-argument .form-text{
+  margin-top: 10px;
+}
+
+.page-node-webform #webform-conditionals-ajax{
+  margin-bottom: 15px;
+  overflow-x: auto;
+}
+
+.node-type-webform .tableheader-processed, .page-node-webform-results .tableheader-processed{
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 35px;
+  min-width: 700px;
+  overflow-x: auto;
+}
+
+.node-type-webform .sticky-header{
+  display: none;
+}
+
+.node-type-webform .tableheader-processed th, .node-type-webform .sticky-header th, .page-node-webform-results .tableheader-processed th{
+  padding: 7px 10px;
+  font-size: 16px;
+  color: #017A61;
+  font-weight: 700;
+  background-color: #ddd;
+}
+
+.node-type-webform .tableheader-processed th a, .node-type-webform .sticky-header th a, .page-node-webform-results .tableheader-processed th a{
+  color: #017A61;
+}
+
+.node-type-webform .tableheader-processed td{
+  padding: 5px 7px;
+  font-size: 12px;
+}
+
+.node-type-webform .tableheader-processed td a{
+  color: #000;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.node-type-webform .section-content, .page-node-webform-results .section-content{
+  overflow-x: auto;
+}
+
+.node-type-webform .pager{
+  padding: 15px 35px;
+  display: flex;
+  justify-content: center;
+}
+
+.node-type-webform .pager li{
+  margin-right: 5px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.node-type-webform .pager li a{
+  color: #017A61;
+}
+
+.page-node-webform-results .webform-analysis, .page-node-webform-results .confirmation{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 35px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 700;
+  color: #017A61;
+}
+
+.page-node-webform-results .webform-analysis p, .page-node-webform-results .webform-component-select-wrapper, .page-node-webform-results .fieldset-description{
+  margin-bottom: 10px;
+}
+
+.page-node-webform-results .confirmation .form-actions{
+  margin-top: 10px;
+}
+
+.page-node-webform-results .webform-component-select-wrapper td{
+  text-align: left;
+}
+
+.page-node-webform-results .form-type-radios{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .node-type-webform .sticky-header{
+    display: block;
+  }
+
+}

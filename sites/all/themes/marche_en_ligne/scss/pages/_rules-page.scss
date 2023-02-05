@@ -1,0 +1,120 @@
+/* Rules page */
+@import "../variables";
+@import "../breakpoints";
+
+.node-type-rules .field-name-field-description,
+.node-type-rules .field-name-field-description-2 .field-item {
+  margin-bottom: 30px;
+  font-size: 14px;
+  line-height: 17.07px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.node-type-rules{
+  .field-name-field-description{
+    padding-top: 30px;
+  }
+}
+
+.node-type-rules .field-name-field-description-2 .field-item {
+  margin-bottom: 15px;
+}
+
+.node-type-rules .field-name-field-file-image-title-text {
+  margin: 0 auto 30px auto;
+  padding-top: 14px;
+  padding-bottom: 17px;
+  max-width: 1200px;
+  color: #017A61;
+  font-size: 14px;
+  line-height: 17.07px;
+  font-weight: 600;
+  text-align: center;
+  background-color: #FCD216;
+}
+
+.node-type-rules .field-name-field-description-2 {
+  margin-bottom: 30px;
+}
+
+.node-type-rules .field-items,
+.node-type-rules .rules-list {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 35px;
+}
+
+.node-type-rules .rules-list {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.rules-list .field-items {
+  padding: 0;
+  margin: 0;
+}
+
+.node-type-rules .rules-list .field-item {
+  position: relative;
+  margin-bottom: 12px;
+  padding-left: 10px;
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 400;
+}
+
+.node-type-rules .rules-list .field-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  border-radius: 100%;
+  width: 4px;
+  height: 4px;
+  background-color: #000;
+}
+
+@media only screen and (min-width: 1024px) {
+
+  .node-type-rules{
+    .field-name-field-description{
+      padding-top: 50px;
+    }
+  }
+
+  .node-type-rules .field-name-field-description,
+  .node-type-rules .field-name-field-description-2 .field-item,
+  .node-type-rules .field-name-field-file-image-title-text {
+    margin-bottom: 40px;
+    font-size: 25px;
+    line-height: 30.48px;
+  }
+  .node-type-rules .rules-list {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+  .node-type-rules .rules-list .field-name-field-rules-item,
+  .node-type-rules .rules-list .field-name-field-rules-item2 {
+    width: calc(50% - 50px);
+  }
+  .node-type-rules .rules-list .field-item {
+    margin-bottom: 20px;
+    font-size: 20px;
+    line-height: 25.4px;
+  }
+  .node-type-rules .rules-list .field-item::before {
+    top: 12px;
+  }
+}
+
+@media only screen and ($desktop) {
+  .node-type-rules{
+    .field-name-field-file-image-title-text{
+      border-radius: $br-9px;
+    }
+  }
+}
+

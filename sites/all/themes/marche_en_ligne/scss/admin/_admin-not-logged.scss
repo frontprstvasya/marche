@@ -1,0 +1,16 @@
+/* Admin not logged */
+@import "../variables";
+@import "../breakpoints";
+
+.not-logged-in{
+  .helper-wrap{
+    .tabs{
+      display: none;
+    }
+  }
+
+  .region-stick-mobile .menu .menu-li-6267{
+    display: none;
+  }
+
+}

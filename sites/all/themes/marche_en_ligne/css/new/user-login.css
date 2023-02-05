@@ -1,0 +1,680 @@
+/* User login/register */
+
+.is-not-admin .helper-wrap {
+    display: none;
+}
+
+.page-user.is-not-admin *,
+.page-messente * {
+    box-sizing: border-box;
+    font-family: 'Mulish';
+}
+
+.page-user.is-not-admin .main-content {
+    margin: 0 auto;
+}
+
+
+/* 
+.page-messente .messages.error.messages-inline {
+    display: none;
+} */
+
+.page-messente .header {
+    margin-bottom: 15px;
+}
+
+.page-user-login .main-content,
+.page-messente .main-content,
+.page-user-register .main-content,
+.page-user-password .main-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.page-user.is-not-admin .region-easy-breadcrumb,
+.page-messente.is-not-admin .region-easy-breadcrumb {
+    display: block;
+    margin-bottom: 45px;
+}
+
+.page-user.is-not-admin .header {
+    display: block;
+}
+
+.page-user.is-not-admin .user-login--container,
+.page-messente .user-login--container {
+    position: relative;
+    padding-bottom: 60px;
+    background: none;
+}
+
+.page-user.is-not-admin .user-login--title,
+.page-messente .user-login--title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.page-user.is-not-admin .user-login--title span,
+.page-messente .user-login--title span,
+.user-register-title,
+.page-user-password.is-not-admin .user-login--title {
+    color: #017A61;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 23px;
+}
+
+.user-register-title {
+    display: block;
+    margin-bottom: 40px;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.page-user.is-not-admin .user-login--title a,
+.page-messente .user-login--title a,
+.page-messente #edit-request-code,
+.page-messente #back-to-change-number {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #494949;
+    text-decoration-line: underline;
+    cursor: pointer;
+    background: none;
+}
+
+.page-user.is-not-admin form div:not([class]) {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-user.is-not-admin .box-shadow,
+.page-messente .box-shadow {
+    position: relative;
+    margin-bottom: 145px;
+    padding: 25px 13px;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 1px 2px 4px 2px rgba(0, 0, 0, 0.15);
+}
+
+.page-messente .box-shadow.stage-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+}
+
+.page-messente .box-shadow.stage-2 .user-login--title {
+    width: 100%;
+}
+
+.page-messente .box-shadow.stage-2 #edit-prev {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    padding-left: 36px;
+    font-size: 16px;
+    line-height: 20px;
+    color: #777;
+    font-weight: 700;
+    background: none;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.page-messente .return-arrow {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    z-index: 2;
+}
+
+.page-messente .return-arrow::before {
+    content: '\e917';
+    font-family: "new-marche";
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 20px;
+    color: #777;
+}
+
+.page-user-edit .main-content {
+    max-width: 1200px;
+    padding: 0 10px;
+}
+
+.page-user-edit .form-item-pass-pass1 label::after,
+.page-user-edit.page-user.is-not-admin .form-submit {
+    position: relative;
+    bottom: 0;
+}
+
+.page-user-edit.page-user.is-not-admin .form-submit {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.page-user-edit.page-user.is-not-admin .form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.page-user-edit.page-user.is-not-admin .password-strength {
+    right: 0;
+}
+
+.page-user-edit.page-user.is-not-admin .region-easy-breadcrumb {
+    padding: 0;
+}
+
+.page-user-edit.page-user.is-not-admin #edit-timezone--2 {
+    width: 100%;
+    height: 45px;
+    padding: 0 10px;
+    margin: 45px 0;
+}
+
+.page-user-edit.page-user.is-not-admin #edit-cancel {
+    background-color: #F5B4B4;
+    color: #777777;
+}
+
+.page-user-edit.page-user.is-not-admin #edit-cancel:hover {
+    background-color: #CD1426;
+    color: #FFFFFF;
+}
+
+@media only screen and (min-width: 768px) {
+    .page-user.is-not-admin .box-shadow {
+        margin-bottom: 125px;
+    }
+    .page-user-edit.page-user.is-not-admin .form-submit {
+        width: 40%;
+    }
+}
+
+.page-user.is-not-admin .form-type-ulogin-widget {
+    order: 10;
+}
+
+.page-user.is-not-admin .description {
+    display: none;
+}
+
+.page-user.is-not-admin label,
+.page-messente label,
+.page-user-password.is-not-admin .user-benefit--title {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #494949;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
+}
+
+.page-user.is-not-admin label span {
+    color: red;
+}
+
+.page-user.is-not-admin .form-type-textfield,
+.page-user.is-not-admin .form-type-password {
+    margin-bottom: 30px;
+}
+
+.page-user.is-not-admin .form-text,
+.page-messente .form-text {
+    display: inline-block;
+    padding-left: 32px;
+    width: 100%;
+    height: 40px;
+    background: #FFFFFF;
+    border: 0.5px solid #017A61;
+    border-radius: 12px;
+}
+
+.page-messente .form-text.error {
+    border-color: #CD1426;
+}
+
+.page-messente .form-text.error::placeholder {
+    color: #CD1426;
+}
+
+.page-messente #edit-code {
+    display: none;
+}
+
+.page-user.is-not-admin .form-text::placeholder {
+    font-size: 0;
+}
+
+.page-user.is-not-admin .forgot-pass {
+    position: absolute;
+    top: 190px;
+    right: 28px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #494949;
+    text-decoration-line: underline;
+}
+
+.page-user.is-not-admin .form-submit {
+    position: absolute;
+    bottom: -80px;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 45px;
+    border-radius: 12px;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    background: #017A61;
+    cursor: pointer;
+}
+
+.page-user-password.is-not-admin .form-submit {
+    position: inherit;
+}
+
+.page-user-password.is-not-admin .main-content {
+    position: relative;
+}
+
+.page-messente [disabled="disabled"] {
+    opacity: .5;
+    pointer-events: none;
+}
+
+.page-messente #edit-request-code {
+    position: absolute;
+    right: 13px;
+    bottom: 18px;
+}
+
+.pincode-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    order: 3;
+    margin-bottom: 20px;
+}
+
+.pincode-wrap p {
+    margin-bottom: 20px;
+    width: 260px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #777;
+    text-align: center;
+}
+
+#block_inputs_pincodes {
+    display: flex;
+    justify-content: space-between;
+    width: 365px;
+}
+
+.pincode__input {
+    padding: 10px;
+    width: 45px;
+    height: 55px;
+    border: 0.5px solid #017A61;
+    border-radius: 12px;
+    font-size: 35px;
+    line-height: 45px;
+    color: #494949;
+    font-weight: 700;
+}
+
+.form-item-phone-and-mail label,
+.form-item-pass-pass1 label,
+.form-item-pass-pass2 label {
+    position: relative;
+    padding-right: 10px;
+}
+
+.form-item-phone-and-mail label::after,
+.form-item-pass-pass1 label::after,
+.form-item-pass-pass2 label::after {
+    content: '*';
+    position: absolute;
+    right: 0;
+    color: #CD1426;
+    font-size: 16px;
+}
+
+@media only screen and (max-width: 480px) {
+    .page-user.is-not-admin .user-login--title span {
+        margin-right: 15px;
+    }
+    .page-user.is-not-admin .user-login--title a {
+        max-width: 85px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .page-user-chats .user__container {
+        position: relative;
+    }
+    .page-user-login .region-easy-breadcrumb {
+        position: relative;
+    }
+    .page-user.is-not-admin .form-submit:hover {
+        color: #494949;
+        background-color: #8BCDBF;
+        transition: all 0.5s ease;
+    }
+}
+
+.page-user.is-not-admin .widget--container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page-user.is-not-admin .widget--title {
+    margin-bottom: 30px;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 700;
+    color: #017A61;
+}
+
+.page-user.is-not-admin .widget--content {
+    display: flex;
+}
+
+.page-user.is-not-admin .form-type-password {
+    position: relative;
+}
+
+.page-user.is-not-admin .form-type-password input {
+    padding-right: 50px;
+}
+
+.page-user.is-not-admin .eyeBtn,
+.page-messente.is-not-admin .eyeBtn {
+    position: absolute;
+    right: 15px;
+    bottom: 0px;
+    width: 20px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.page-user.is-not-admin .eyeBtn:after,
+.page-messente.is-not-admin .eyeBtn:after {
+    content: "\e921";
+    position: absolute;
+    display: flex;
+    align-items: center;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    font-family: "new-marche";
+    font-size: 20px;
+    transform: translateY(-50%);
+}
+
+.page-user.is-not-admin .openEye:after,
+.page-messente.is-not-admin .openEye:after {
+    content: "\e922";
+}
+
+.page-user.is-not-admin .google-img,
+.page-user.is-not-admin .fb-container {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 1px 2px 4px 2px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 1024px) {
+    .page-user.is-not-admin .google-img:hover,
+    .page-user.is-not-admin .fb-container:hover {
+        background-color: #FCD216;
+        opacity: 1 !important;
+        transition: all 0.5s ease;
+    }
+}
+
+.page-user.is-not-admin .fb-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+}
+
+.page-user.is-not-admin .fb-img {
+    border-radius: 100%;
+}
+
+@media only screen and (min-width: 1024px) {
+    .page-user.is-not-admin .fb-img:hover {
+        opacity: 1 !important;
+    }
+}
+
+.page-user.is-not-admin .active-menu {
+    left: 0 !important;
+}
+
+.section-user.is-not-admin .second-header-menu,
+.section-users.is-not-admin .second-header-menu {
+    left: auto !important;
+    right: 20px;
+}
+
+.password-parent,
+.confirm-parent {
+    width: 100%;
+}
+
+.page-user-view .region-easy-breadcrumb,
+.page-user-edit .region-easy-breadcrumb {
+    position: relative;
+}
+
+.page-user.is-not-admin .user__content .form-submit {
+    position: static;
+    margin-top: 30px;
+}
+
+.page-user.is-not-admin .form-type-password-confirm {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-user.is-not-admin .form-type-password-confirm .confirm-parent {
+    order: 5;
+}
+
+.page-user.is-not-admin .password-suggestions,
+.page-messente.is-not-admin .password-suggestions {
+    position: relative;
+    padding: 10px 20px 10px 60px;
+    border: 1px solid #017A61;
+    border-radius: 12px;
+    width: 100%;
+    color: #017A61;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.page-user.is-not-admin .password-suggestions::before,
+.page-messente .password-suggestions::before {
+    content: '\e920';
+    font-family: "new-marche";
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 33px;
+    line-height: 33px;
+    color: #017A61;
+}
+
+.page-user.is-not-admin .password-suggestions ul,
+.page-messente .password-suggestions ul {
+    margin-left: 18px;
+    list-style: disc;
+}
+
+.page-user.is-not-admin .password-strength,
+.page-messente.is-not-admin .password-strength {
+    position: absolute;
+    right: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin-top: 4px;
+}
+
+.page-user.is-not-admin div.password-confirm,
+.page-messente.is-not-admin div.password-confirm {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+    width: auto;
+}
+
+.password-indicator {
+    position: absolute;
+    width: 100px;
+    opacity: 0;
+}
+
+.page-user.is-not-admin .password-strength-title,
+.page-user.is-not-admin .password-strength-text,
+.page-user.is-not-admin .password-confirm,
+.page-messente.is-not-admin .password-strength-title,
+.page-messente.is-not-admin .password-strength-text,
+.page-messente.is-not-admin .password-confirm {
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 15px;
+    color: #494949;
+}
+
+.page-messente .form-item {
+    margin-bottom: 20px;
+}
+
+.page-user-login .messages-inline,
+.page-user-register .messages-inline,
+.page-user-login .messages-inline a,
+.page-user-register .messages-inline a {
+    color: #CD1426;
+    font-size: 12px;
+}
+
+.stage-3-mark {
+    position: relative;
+    padding-left: 50px;
+}
+
+.stage-3-mark::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 0;
+    background-image: url("/sites/default/files/svg/stage-3.svg");
+    width: 40px;
+    height: 45px;
+}
+
+.page-user.is-not-admin .password-strength-text,
+.page-messente.is-not-admin .password-strength-text {
+    display: none;
+}
+
+.page-user.is-not-admin .password-strength-text.active-ind,
+.page-user.is-not-admin .password-confirm .error,
+.page-user.is-not-admin .password-confirm .ok,
+.page-messente.is-not-admin .password-strength-text.active-ind,
+.page-messente.is-not-admin .password-confirm .error,
+.page-messente.is-not-admin .password-confirm .ok {
+    display: block;
+    margin-left: 5px;
+    padding: 3px 10px;
+    border-radius: 9px;
+    background-color: #F5B4B4;
+}
+
+.page-user.is-not-admin .password-confirm .ok,
+.page-messente.is-not-admin .password-confirm .ok {
+    background-color: #B9F5B4;
+}
+
+.form-item-pass-pass1,
+.form-item-pass-pass2 {
+    position: relative;
+}
+
+label[for="edit-pass"] {
+    display: none;
+}
+
+@media only screen and (max-width: 480px) {
+    .form-item-pass-pass1 {
+        display: flex;
+        flex-direction: column;
+    }
+    .form-type-password label {
+        margin-bottom: 40px !important;
+    }
+    .page-user.is-not-admin .password-strength,
+    .page-user.is-not-admin div.password-confirm,
+    .page-messente.is-not-admin .password-strength,
+    .page-messente.is-not-admin div.password-confirm {
+        top: 25px;
+        right: auto;
+        left: 0;
+    }
+    .page-user.is-not-admin .password-strength,
+    .page-messente.is-not-admin .password-strength {
+        width: auto;
+    }
+    #block_inputs_pincodes {
+        width: 250px;
+    }
+    .pincode__input {
+        padding: 5px;
+        width: 35px;
+        height: 45px;
+    }
+}
+
+
+/* @media only screen and (min-width: 480px) and (max-width: 767px) {
+    .page-messente.is-not-admin .confirm-parent label {
+        width: calc(100% - 240px);
+    }
+} */
+
+.page-user-services-payants .region-easy-breadcrumb .easy-breadcrumb span:nth-child(3),
+.page-user-chats .region-easy-breadcrumb .easy-breadcrumb span:nth-child(3),
+.page-user-services-payants .region-easy-breadcrumb .easy-breadcrumb span:nth-child(3)+.easy-breadcrumb_segment-separator,
+.page-user-chats .region-easy-breadcrumb .easy-breadcrumb span:nth-child(3)+.easy-breadcrumb_segment-separator {
+    display: none;
+}

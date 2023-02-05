@@ -1,0 +1,38 @@
+/* _user-page-comment. */
+@import "../variables";
+@import "../breakpoints";
+
+.page-user{
+  .comment__section{
+
+    .form-actions{
+      input{
+        display: inline-block;
+        font-weight: bold;
+        font-size: 15px;
+        line-height: 18px;
+        text-align: center;
+        text-transform: uppercase;
+        font-family: $text-700;
+        padding: 11px 25px;
+        border-radius: 9px;
+        min-width: 129px;
+        cursor: pointer;
+
+      }
+
+      input:first-child{
+        margin-right: 10px;
+        background: #017A61;
+        color: #FFFFFF;
+      }
+
+      input:last-child{
+        background: #CD1426;
+        color: #FCD216;
+        transition: 0.3s;
+        margin-left: 10px;
+      }
+    }
+  }
+}

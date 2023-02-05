@@ -1,0 +1,330 @@
+/*************HEADER BUTTON*************/
+
+.node-type-page-error .header .container .menu .menu-li-12684 a,
+.node-type-page-error .header .container .menu .menu-li-12685 a,
+.node-type-page-error #button-header a::before {
+    color: #777777;
+}
+
+
+/************MAIN-CONTENT********************/
+
+.node-type-page-error .region-easy-breadcrumb,
+.node-type-page-error .action-links {
+    display: none;
+}
+
+.node-type-page-error .node-page-error,
+.page-search .view-empty {
+    margin: 20px auto 120px;
+    padding: 0 20px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #777777;
+}
+
+.page-search .view-empty .view-empty--text {
+    margin: 0 auto 40px;
+}
+
+.node-type-page-error .node-page-error .field-items {
+    margin-bottom: 10px;
+}
+
+.node-type-page-error .node-page-error .field-name-field-h1 .field-items .even {
+    font-size: 48px;
+}
+
+.node-type-page-error .field-name-field-svg {
+    margin-top: 45px;
+}
+
+.node-type-page-error .field-name-field-svg .field-item img {
+    width: 100%;
+    height: auto;
+}
+
+
+/*******************BUTTONS*************************/
+
+.node-type-page-error .field-name-field-btn-internal .field-items,
+.page-search .view-empty--wrap-btn {
+    display: block;
+}
+
+.node-type-page-error .field-name-field-btn-internal .field-items .even,
+.node-type-page-error .field-name-field-btn-internal .field-items .odd,
+.page-search .view-empty--wrap-btn .view-empty--btn {
+    position: relative;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid #017A61;
+    border-radius: 12px;
+}
+
+.node-type-page-error .field-name-field-btn-internal .field-items .even:hover,
+.node-type-page-error .field-name-field-btn-internal .field-items .odd:hover,
+.page-search .view-empty--wrap-btn .view-empty--btn:hover {
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    background-color: #017A61;
+}
+
+.node-type-page-error .field-name-field-btn-internal .field-items a,
+.page-views .view-empty--btn,
+.page-search .view-empty--wrap-btn .view-empty--btn a {
+    font-size: 14px;
+    font-weight: 400;
+    color: #017A61;
+}
+
+.page-views .view-empty--btn,
+.page-search .view-empty--wrap-btn .view-empty--btn {
+    position: relative;
+}
+
+.node-type-page-error .field-name-field-btn-internal .field-items a::before,
+.page-views .view-empty--btn a::before,
+.page-search .view-empty--wrap-btn .view-empty--btn a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.page-views .view-empty--btn:hover,
+.page-search .view-empty--btn:hover {
+    background-color: #017A61;
+}
+
+.node-type-page-error .field-name-field-btn-internal .field-items a:hover,
+.page-views .view-empty--btn a:hover,
+.page-search .view-empty--btn a:hover {
+    color: #FFF;
+}
+
+
+/* Adding node page Error */
+
+.page-node-add-page-error .field-multiple-table,
+.page-node-add-page-error .form-textarea-wrapper textarea,
+.page-node-add-page-error #edit-field-svg {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.page-node-add-page-error #edit-field-svg {
+    margin: 0 auto 65px;
+}
+
+.page-node-add-page-error .form-item-field-svg-und-0 label {
+    margin: 0 20px 0 10px;
+    max-width: 138px;
+}
+
+.page-node-add-page-error .form-item-title,
+.page-node-add-page-error #edit-field-description-error,
+.page-node-add-page-error #edit-field-btn-internal,
+.page-node-add-page-error .link-field-subrow {
+    margin: 0 auto 35px;
+}
+
+.page-node-add-page-error #edit-field-navbar-title {
+    margin: 35px auto;
+}
+
+.page-node-add-page-error .link-field-subrow {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+/****************STICK-MOBILE********************/
+
+.node-type-page-error .region-stick-mobile .menu .menu-link-810::before,
+.node-type-page-error .region-stick-mobile .menu .menu-link-1235::before {
+    content: "\e902";
+    position: absolute;
+    display: block;
+    font-family: 'new-marche';
+    top: -26px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    font-size: 55px;
+    color: #C6C6C6;
+    z-index: 10;
+}
+
+.node-type-page-error .region-stick-mobile .menu .menu-link-6645::before,
+.node-type-page-error .region-stick-mobile .menu .menu-link-811::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 70px;
+    height: 42px;
+    border-top-left-radius: 22%;
+    border-top-right-radius: 22%;
+    background-color: #C6C6C6;
+    top: -15px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    z-index: -1;
+}
+
+.node-type-page-error .region-stick-mobile .menu .menu-link-6267::before,
+.node-type-page-error .region-stick-mobile .menu .menu-link-3664::before {
+    content: "\e906";
+    position: absolute;
+    display: block;
+    font-family: 'new-marche';
+    top: -22px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    z-index: 10;
+    font-size: 35px;
+    color: #C6C6C6;
+}
+
+.node-type-page-error form {
+    display: block;
+    background: #fff;
+    box-shadow: 1px 2px 4px 2px rgb(0 0 0 / 15%);
+    border-radius: 12px;
+    margin-top: 20px;
+    padding: 20px 10px
+}
+
+.node-type-page-error th {
+    text-align: left;
+}
+
+.node-type-page-error label {
+    font-size: 16px;
+    font-weight: 700;
+    color: #017A61;
+}
+
+.node-type-page-error label span {
+    color: red;
+}
+
+.node-type-page-error .form-item {
+    margin: 15px auto 0;
+}
+
+.node-type-page-error .link-field-column,
+.page-search .view-empty--svg svg,
+.node-type-page-error form .field-multiple-table,
+.node-type-page-error .link-field-column .form-text,
+.node-type-page-error div .vertical-tabs {
+    width: 100%;
+}
+
+.node-type-page-error .form-type-textfield input,
+.node-type-page-error .resizable-textarea textarea,
+.page-node-add-page-error .form-textarea-wrapper textarea {
+    margin-top: 8px;
+    padding: 10px 10px 10px 30px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 0.5px solid #017A61;
+    border-radius: 12px;
+    color: #017A61;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.node-type-page-error .form-managed-file {
+    margin: 20px auto;
+    display: flex;
+    gap: 50px;
+}
+
+.vertical-tabs .vertical-tabs-panes fieldset {
+    padding: 0;
+}
+
+
+/***************************СТРАНИЦА ТАКСОНОМИИ, КОГДА ПРИ ПОИСКЕ НИЧЕГО НЕ НАХОДИТ*********************/
+
+.page-taxonomy .frontpage-content .view-empty,
+.page-node .frontpage-content .view-empty {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+}
+
+.page-taxonomy .view-empty--text,
+.page-node .view-empty--text,
+.page-taxonomy .view-empty--svg,
+.page-node .view-empty--svg {
+    margin: 0 auto 30px;
+}
+
+.page-taxonomy .view-empty--wrap-btn,
+.page-node .view-empty--wrap-btn {
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.page-taxonomy .view-empty--btn,
+.page-node .view-empty--btn {
+    border: 1px solid #017A61;
+    border-radius: 12px;
+    padding: 10px 20px;
+}
+
+.page-taxonomy .view-empty--btn a,
+.page-node .view-empty--btn a {
+    font-size: 14px;
+    color: #017A61;
+}
+
+
+/******************MEDIA***************/
+
+@media only screen and (max-width: 767px) {
+    .page-node-add-page-error .form-actions #edit-preview {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .node-type-page-error .field-name-field-svg .field-item img {
+        max-width: 542px;
+    }
+    .node-type-page-error .field-name-field-btn-internal .field-items,
+    .page-search .view-empty--wrap-btn {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+    }
+    .node-type-page-error .field-name-field-btn-internal .field-items .even,
+    .page-search .view-empty--wrap-btn .view-empty--btn {
+        padding: 10px 53px;
+    }
+    .node-type-page-error .field-name-field-btn-internal .field-items .odd {
+        padding: 10px 75px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .node-type-page-error #button-header a {
+        border: 1px solid #C6C6C6;
+        background-color: #C6C6C6;
+    }
+    .page-views .wrapper-categories--content--empty .section-content {
+        width: 100%;
+    }
+}

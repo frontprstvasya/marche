@@ -1,0 +1,969 @@
+/* Add node submit ad */
+@import "../variables";
+@import "../breakpoints";
+
+.page-node-add-submit-an-ad,
+.page-node-edit{
+  .section-content{
+    display: block;
+    padding: 0 0 0 0!important;
+  }
+
+  .node-submit_an_ad-form {
+    label {
+      display: block;
+      font-family: $text-700;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 18px;
+      color: #017A61;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.node-submit_an_ad-form{
+  display: block;
+  max-width: 1200px;
+  margin: 30px auto 30px;
+  padding: 10px 35px;
+  width: calc(100% - 70px);
+
+  // Disable arrow on input number
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  label{
+    display: block;
+    font-family: $text-700;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 18px;
+    color: #017A61;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+
+  .form-type-select{
+    display: block;
+    position: relative;
+    width: 100%;
+    font-family: $text-700;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 15px;
+
+    select{
+      display: block;
+      width: 100%;
+      padding: 10px;
+      color: #017A61;
+      border-radius: 9px;
+      outline: none;
+      font-family: $text-400;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 15px;
+      border-width: 2px;
+      margin-top: 0;
+
+      option {
+        color: #171718;
+        font-size: 12px;
+        line-height: 15px;
+      }
+    }
+
+    &:after{
+      content: "\e90a";
+      position: absolute;
+      font-family: $marche;
+      display: flex;
+      align-items: center;
+      width: 10px;
+      height: calc(100% - 34px);
+      font-size: 14px;
+      color: #017A61;
+      background: #ffff;
+      right: 2px;
+      bottom: 2px;
+      pointer-events: none;
+      border-radius: 9px;
+      outline: none;
+      border: none;
+      padding-right: 15px;
+      z-index: 2;
+    }
+  }
+
+  #edit-field-categories-und-0-tid-select-2{
+    display: none!important;
+  }
+
+  .form-item-field-categories-und{
+    label{
+      margin-top: 0;
+    }
+  }
+
+  .form-item-field-sub-categories-und-0-tid{
+    position: relative;
+    width: 100%;
+
+    .shs-select-level-1{
+      pointer-events: none;
+      padding:10px;
+      color: $white;
+    }
+
+    #edit-field-sub-categories-und-0-tid-select-2{
+      position: absolute;
+      display: flex;
+      align-items: center;
+      left: 0;
+      bottom: 0;
+      z-index: 2;
+      padding: 10px;
+    }
+  }
+
+  #edit-field-categories-und-0-tid-select-1{
+    option{
+      display: none;
+    }
+
+    option:first-child{
+      display: block;
+    }
+
+    .has-children{
+      display: block;
+    }
+  }
+
+  // Feedback list
+  #edit-field-communication-und{
+    display: block;
+    width: 100%;
+    border: 2px solid #017A61;
+    border-radius: 9px;
+    padding: 25px 15px 10px 15px;
+    box-sizing: border-box;
+
+    .form-type-checkbox{
+      display: block;
+      position: relative;
+      width: 100%;
+
+      label{
+        display: inline-block;
+        font-family: $text-400;
+        color: #171718;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        margin: 0;
+        padding-left: 32px;
+        cursor: pointer;
+
+        &:before{
+          content: '';
+          display: block;
+          position: absolute;
+          width: 18px;
+          height: 18px;
+          left: 0;
+          top: calc(50% - 1px);
+          transform: translateY(-50%);
+          border: 1.25px solid #B6B6B6;
+          border-radius: 3px;
+          box-sizing: border-box;
+          font-weight: bold;
+        }
+
+        &:after{
+          content: '\e917';
+          position: absolute;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 18px;
+          height: 18px;
+          left: 0;
+          top: calc(50% - 1px);
+          transform: translateY(-50%);
+          font-family: $marche;
+          font-size: 12px;
+          font-weight: 700;
+          color: #017A61;
+          opacity: 0;
+        }
+      }
+
+      input{
+        position: absolute;
+        left: -30px;
+        top: 0;
+        pointer-events: none;
+        opacity: 0;
+      }
+    }
+
+    .form-item{
+      margin-bottom: 17px;
+
+      input:checked + label:after{
+        opacity: 1!important;
+      }
+    }
+  }
+
+  // Description
+  .form-field-name-field-description{
+    .filter-wrapper{
+      display: none;
+    }
+
+    textarea{
+      display: block;
+      width: 100%;
+      margin: 0;
+      border: 2px solid #017A61;
+      color: #767676;
+      border-radius: $br-9px;
+      box-sizing: border-box;
+      resize: vertical;
+      min-height: 290px;
+      padding: 15px 10px ;
+    }
+
+    .description{
+      font-family: $text-400;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 15px;
+      color: #017A61;
+      margin: 10px 0;
+    }
+  }
+
+  // Price
+  #field-price-add-more-wrapper,
+  .form-item-title{
+    display: block;
+    width: 100%;
+
+    .field-suffix{
+      display: none;
+    }
+
+    input{
+      display: block;
+      width: 100%;
+      padding: 10px;
+      color: #017A61;
+      border-radius: 9px;
+      outline: none;
+      font-family: $text-400;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 15px;
+      border: 2px solid #017A61;
+      box-sizing: border-box;
+    }
+  }
+
+  // Photos list
+  // Loading progress
+  div.loading{
+    border: 3px solid $header;
+    border-radius: 16px;
+    background-color: $header;
+  }
+
+  div.nice-imagefield-image{
+    div.buttons{
+      display: block;
+      position: relative;
+      z-index: 101;
+
+      &:before{
+        content: '\e90e';
+        position: absolute;
+        display: block;
+        text-align: center;
+        font-family: $marche;
+        font-weight: 700;
+        top: -4px;
+        right: 17px;
+        width: 20px;
+        height: 20px;
+        line-height: 22px;
+        border-radius: 50%;
+        background: #ffffff80;
+        color: #808080;
+        font-size: 8px;
+      }
+
+      &:hover:before{
+        background: #ffffff;
+      }
+
+      input{
+        position: absolute;
+        top: -4px;
+        right: 17px;
+        width: 20px;
+        height: 20px;
+        opacity: 0;
+        border-radius: 50%;
+        cursor: pointer;
+        background: none;
+        color: $white;
+        text-indent: -150px;
+        overflow: hidden;
+      }
+    }
+  }
+
+  div.nice-imagefield-sortable{
+    > div{
+      margin: 0 12px 10px 0;
+      width: calc(33.33% - 10px)!important;
+      height: 100px!important;
+      border-radius: $br-9px;
+      overflow: hidden;
+
+      img{
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 9px;
+      }
+    }
+
+   > div:nth-child(3n+3) {
+     margin-right: 0;
+   }
+  }
+
+  .form-field-type-image{
+    position: relative;
+
+    label{
+      display: flex;
+      width: calc(33.33% - 8px);
+      height: 100px;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #017A61;
+      box-sizing: border-box;
+      border-radius: 9px;
+      font-size: 50px!important;
+      font-family: $text-400;
+      font-weight: 600;
+      float: left;
+    }
+
+    .form-file{
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+    }
+
+    .form-type-mfw-managed-file{
+      padding-top: 0;
+      .form-submit{
+        display: none;
+      }
+    }
+  }
+
+  .description-photos{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #017A61;
+    margin: 5px 0 10px 0;
+  }
+
+  .form-field-name-field-photos{
+    display: block;
+    position: relative;
+    margin-top: 30px;
+    width: 100%;
+    overflow: hidden;                /* Фото уезжат сильно высоко при перетаскиваниию. Разобраться и отключить hidden */
+
+    .fieldset-wrapper{
+      display: block;
+      margin-top: 30px;
+    }
+
+    .description{
+      display: none;
+      font-family: $text-400;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 15px;
+      color: #017A61;
+      margin: 10px 0;
+    }
+
+    .form-type-mfw-managed-file{
+      display: block;
+      margin-top: 30px;
+    }
+
+    legend{
+      display: block;
+      position: absolute;
+      width: 100%;
+      font-family: $text-700;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 18px;
+      color: #017A61;
+    }
+
+    label{
+      margin-top: 0;
+      font-family: $text-400;
+      font-size: 13px;
+      line-height: 16px;
+
+      .form-required{
+        display: none;
+      }
+    }
+  }
+
+  // Question
+  #edit-question{
+    display: block;
+    width: 100%;
+
+    .fieldset-description{
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    #help-link,
+    #help-link--before{
+      display: inline-block;
+      text-align: center;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 25px;
+      color: #6F6F6F;
+      background: #C4C4C4;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+    }
+
+    #help-link--before{
+      display: none;
+    }
+
+    .help-link--wrap{
+      display: block;
+      padding-top: 5px;
+      font-size: 15px;
+      line-height: 25px;
+      color: #171718;
+      font-family: $text-400;
+      text-align: left;
+      height: 100%;
+      max-height: 0;
+      overflow: hidden;
+      transition: .3s;
+    }
+
+    .help-link--title,
+    .help-link--bottom{
+      font-family: $text-700;
+      font-weight: 700;
+      margin: 25px 0;
+    }
+  }
+
+  .form-actions{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .premium-link--wrapper{
+      display: none;
+    }
+
+    #edit-submit{
+      display: inline-block;
+      padding: 10px 27px;
+      background: #017A61;
+      color: $white;
+      font-family: $text-400;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 18px;
+      border-radius: $br-9px;
+      margin: 10px 0;
+      min-width: 130px;
+    }
+
+    .form-actions--back-wrap{
+      .form-actions--back-link{
+        text-align: center;
+        display: inline-block;
+        padding: 10px 27px;
+        background: #CD1426;
+        color: $white;
+        font-family:$text-400;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 18px;
+        border-radius: 9px;
+        margin: 10px 0;
+        cursor: pointer;
+        min-width: 130px;
+        box-sizing: border-box;
+      }
+    }
+
+    .premium-link--wrapper{
+      a{
+        display: inline-block;
+        padding: 15px 30px;
+        background: #FCD216;
+        color: #017A61;
+        font-family: $text-400;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 18px;
+        border-radius: $br-9px;
+        margin: 10px 0;
+      }
+    }
+  }
+
+  // Active
+  .help-link--action{
+    line-height: 24px!important;
+
+    #help-link{
+      display: none!important;
+    }
+
+    #help-link--before{
+      display: inline-block!important;
+    }
+
+    #help-wrap{
+      max-height: 300px!important;
+      transition: .3s;
+    }
+  }
+}
+
+// Style from page only not admin role
+.is-not-admin{
+  .node-submit_an_ad-form{
+
+    .form-actions{
+      flex-wrap: wrap!important;
+      text-align: center!important;
+      justify-content: center!important;
+
+      .form-submit{
+        width: auto!important;
+      }
+
+      .form-actions--back-wrap{
+        display: block;
+        width: 100%;
+      }
+
+      .premium-link--wrapper{
+        display: block;
+      }
+    }
+  }
+}
+
+// Media
+@media only screen and ($ipad) {
+
+  // Style from page only not admin role
+  .is-not-admin{
+    .node-submit_an_ad-form{
+      .form-actions{
+        flex-wrap: nowrap!important;
+        display: flex!important;
+        justify-content: flex-start!important;
+
+        .form-actions--back-wrap{
+          margin-right: 20px;
+          width: auto!important;
+
+          .form-actions--back-link{
+            padding: 14px 30px;
+          }
+        }
+
+        .premium-link--wrapper{
+          position: relative;
+
+          .form-actions--premium-link{
+            padding: 15px 40px;
+          }
+
+          #edit-question{
+            position: absolute;
+            top: 65px;
+            right: 0;
+
+            #help-link,
+            #help-link--before{
+              position: absolute;
+              right: -60px;
+              top: -64px;
+              transform: translateY(13px);
+              width: 40px!important;
+              height: 40px!important;
+              line-height: 40px!important;
+            }
+
+            #help-wrap{
+              padding: 10px 35px 30px 35px!important;
+              background: $white;
+              box-shadow: -4px 4px 7px rgba(0, 0, 0, 0.15);
+              max-height: inherit;
+              overflow: inherit;
+              transform: scale(0);
+              transform-origin: top;
+              line-height: 17px;
+
+              .help-link--bottom{
+                margin-bottom: 0!important;
+              }
+            }
+          }
+        }
+
+        .form-submit{
+          width: auto!important;
+          margin-right: 20px!important;
+        }
+
+        #edit-submit{
+          padding: 14px 30px;
+        }
+      }
+    }
+  }
+
+  .node-submit_an_ad-form {
+    .form-actions{
+      .premium-link--wrapper{
+
+      }
+    }
+
+    .form-field-name-field-photos label{
+      width: calc(20% - 12px);
+    }
+
+    div.nice-imagefield-sortable{
+      > div {
+        width: calc(20% - 12px) !important;
+      }
+
+      > div:nth-child(3n+3){
+        margin-right: 12px;
+      }
+
+      > div:nth-child(3n+5){
+        margin-right: 0;
+      }
+    }
+  }
+
+  // Active
+  .node-submit_an_ad-form{
+
+      .help-link--action{
+
+        #help-link{
+          display: none!important;
+        }
+
+        #help-link--before{
+          display: inline-block!important;
+        }
+
+        #help-wrap{
+          transform: scale(1) !important;
+          max-height: initial!important;
+        }
+    }
+  }
+}
+
+@media only screen and ($ipad-pro) {
+
+  .page-node-add-submit-an-ad,
+  .page-node-edit{
+    .node-submit_an_ad-form {
+
+      .description-photos{
+        font-size: 18px;
+        line-height: 22px;
+      }
+
+      .form-field-name-field-description{
+        .description{
+          font-size: 18px;
+          line-height: 22px;
+        }
+      }
+
+      #edit-field-communication-und{
+        padding-left: 20px;
+
+        .form-type-checkbox{
+          label{
+            font-size: 20px;
+            line-height: 39px;
+            padding-left: 50px;
+
+            &:before{
+              width: 30px;
+              height: 30px;
+              border-width: 2px;
+            }
+
+            &:after{
+              font-size: 20px;
+              width: 30px;
+              height: 30px;
+            }
+          }
+        }
+      }
+
+      div.nice-imagefield-sortable > div{
+        margin-top: 10px;
+      }
+
+      .form-field-name-field-photos{
+
+        legend{
+          margin-top: 0;
+          font-size: 26px;
+          line-height: 33px;
+        }
+
+        label{
+          margin-top: 10px;
+        }
+      }
+
+
+      .group-category-dynamic{
+        select,
+        option{
+          font-size: 20px;
+          line-height: 25px;
+          padding: 16px 14px;
+        }
+      }
+
+      .form-item-field-sub-categories-und-0-tid #edit-field-sub-categories-und-0-tid-select-2{
+        font-size: 20px;
+        line-height: 25px;
+        padding: 16px 14px;
+      }
+
+      #field-price-add-more-wrapper,
+      .form-item-title{
+        input{
+          font-size: 20px;
+          line-height: 25px;
+          padding: 16px 14px;
+        }
+      }
+
+      label{
+        font-size: 26px;
+        line-height: 33px;
+        margin-top: 40px;
+      }
+
+      .form-type-select{
+
+        &:after{
+          height: calc(100% - 49px);
+        }
+      }
+    }
+  }
+
+  .node-submit_an_ad-form {
+    .group-item-1,
+    .group-item-2,
+    .group-category-dynamic{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .group-item-1{
+      .form-field-type-taxonomy-term-reference{
+        width: calc(50% - 20px);
+
+        .form-type-select{
+          margin-bottom: 0;
+
+          select {
+            font-size: 20px;
+            line-height: 25px;
+            padding: 16px 14px;
+
+            option{
+              font-size: 20px;
+              line-height: 25px;
+            }
+          }
+
+          &:after{
+            width: 15px;
+            font-size: 18px;
+          }
+        }
+      }
+    }
+
+    .group-item-2{
+      .group-item-2-left{
+        width: calc(50% - 20px);
+        order: -1;
+      }
+
+      .form-field-name-field-communication{
+        width: calc(50% - 20px);
+      }
+    }
+
+    .group-category-dynamic{
+      .form-field-type-taxonomy-term-reference{
+        display: block;
+        width: calc(50% - 20px);
+      }
+    }
+
+    .form-type-select:after{
+      bottom: 3px;
+    }
+
+    .form-field-name-field-photos label{
+      width: 100px;
+    }
+
+    div.nice-imagefield-sortable{
+
+      > div {
+        width: 100px !important;
+      }
+
+      > div:nth-child(3n+3){
+        margin-right: 12px;
+      }
+
+      > div:nth-child(3n+5){
+        margin-right: 12px;
+      }
+    }
+  }
+}
+
+@media only screen and ($desktop1200) {
+  // Style from page only not admin role
+  .is-not-admin{
+    .node-submit_an_ad-form{
+      .form-actions {
+
+        #edit-submit{
+          width: 260px!important;
+          height: 60px;
+          font-size: 26px;
+          line-height: 32px;
+          border-radius: 18px;
+        }
+
+        .form-actions--back-wrap{
+          .form-actions--back-link{
+            width: 260px;
+            height: 60px;
+            font-size: 26px;
+            display: flex!important;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+          }
+        }
+
+        .premium-link--wrapper{
+          .form-actions--premium-link {
+            box-sizing: border-box;
+            width: 570px;
+            padding: 21px 30px;
+            border-radius: 18px;
+            font-size: 26px;
+          }
+
+          #edit-question{
+            top: 90px;
+
+            .fieldset-description{
+              display: flex;
+              justify-content: right;
+            }
+
+            #help-link,
+            #help-link--before{
+              width: 48px !important;
+              height: 48px !important;
+              line-height:48px!important;
+              top: -87px;
+              right: -70px;
+            }
+
+            #help-wrap{
+              width: 290px;
+              transform-origin: top right;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and ($desktop) {
+  .page-node-add-submit-an-ad{
+    .node-submit_an_ad-form{
+      width: 100%;
+      padding: 10px 0;
+    }
+  }
+}

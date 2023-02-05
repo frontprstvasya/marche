@@ -1,0 +1,148 @@
+/* Categories empty */
+@import "../variables";
+@import "../breakpoints";
+
+.view-taxonomy-term{
+  .view-empty{
+    display: block;
+    max-width: 800px;
+
+    .view-empty--text{
+      font-family: $text-700;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 17px;
+      text-align: center;
+
+      span{
+        display: block;
+      }
+    }
+
+    .view-empty--svg{
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 35px 0;
+
+      svg{
+        width: 70%;
+        height: auto;
+        max-width: 475px;
+      }
+    }
+
+    .view-empty--wrap-btn{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+
+      .view-empty--btn{
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 17px;
+
+        a{
+          display: inline-block;
+          width: 100%;
+          padding: 11px 0;
+          border-radius: 9px;
+          font-family: $text-700;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 15px;
+          line-height: 18px;
+          text-align: center;
+          text-transform: uppercase;
+          color: $white;
+          background: $header;
+          transition: .3s;
+          max-width: 290px;
+
+          &:hover{
+            color: $white;
+            background: #95C11F;
+            transition: .3s;
+          }
+        }
+
+        .view-empty--search{
+          color: $header;
+          background: #FCD216;
+
+          &:hover{
+            color: #FCD216;
+            background: #CD1426;
+            transition: .3s;
+          }
+        }
+      }
+    }
+  }
+}
+
+//.empty-categories-hide{
+//  display: none!important;
+//}
+
+// Media
+@media only screen and ($ipad) {
+  .view-taxonomy-term{
+    .view-empty {
+
+      .view-empty--text{
+        text-align: center;
+        font-size: 20px;
+        line-height: 24px;
+
+        span{
+          display: inline-block;
+        }
+
+        span:last-child{
+          display: block;
+        }
+      }
+
+      .view-empty--wrap-btn{
+        width: calc(100% - 25px);
+        .view-empty--btn{
+          width: 50%;
+
+          a{
+            max-width: 365px;
+            font-size: 20px;
+            line-height: 24px;
+            padding: 18px 0;
+          }
+
+          .view-empty--create{
+            margin-right: 25px;
+          }
+
+          .view-empty--search{
+            margin-left: 25px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and ($ipad-pro) {
+  .view-taxonomy-term{
+    .view-empty {
+      margin: 0 auto;
+      .view-empty--svg{
+        text-align: center;
+        svg{
+          max-width: 350px;
+        }
+      }
+    }
+  }
+}
+

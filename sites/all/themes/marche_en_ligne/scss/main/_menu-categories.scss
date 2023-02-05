@@ -1,0 +1,104 @@
+/* Menu categories */
+@import "../variables";
+@import "../breakpoints";
+
+#block-menu-menu-menu-categories{
+  margin: 0 auto;
+  padding: 10px 0;
+
+  .menu{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: space-between;
+
+    li{
+      display: block;
+      width: 30%;
+      margin-bottom: 20px;
+
+      a{
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        transition: .3s;
+
+        img{
+          display: flex;
+          width: 100%;
+          height: auto;
+          order: -1;
+          border: 3px solid rgba(89, 98, 115, 0.5);
+          box-sizing: border-box;
+          box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.15);
+          border-radius: 9px;
+          transition: .3s;
+        }
+
+        span{
+          display: block;
+          padding-top: 14px;
+          width: 100%;
+          text-align: center;
+          font-family: $text-400;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 10px;
+          line-height: 12px;
+          color: #171718;
+        }
+
+        &:hover{
+          img{
+            border-color: #95C11F;
+            transition: .3s;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Media
+@media only screen and ($ipad) {
+  #block-menu-menu-menu-categories{
+    .menu {
+      li {
+        width: 22%;
+
+        a{
+          img{
+            border-radius: 12px;
+          }
+          span{
+            font-size: 12px;
+            line-height: 14px;
+          }
+        }
+     }
+    }
+  }
+}
+
+@media only screen and ($ipad-pro) {
+  #block-menu-menu-menu-categories{
+    .menu {
+      li {
+        width: calc(16% - 15px);
+
+
+        a{
+          img{
+            border-radius: 20px;
+          }
+          span{
+            font-size: 20px;
+            line-height: 24px;
+          }
+        }
+      }
+    }
+  }
+}
+

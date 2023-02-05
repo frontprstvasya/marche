@@ -1,0 +1,58 @@
+/* Admin tabs */
+@import "../variables";
+@import "../breakpoints";
+
+.helper-wrap{
+  display: block;
+  width: 100%;
+  background: #E5E5E5;
+
+  h2{
+    display: none;
+  }
+
+  .tabs{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 35px;
+    display: block;
+    width: calc(100% - 70px);
+    background: #E5E5E5;
+    position: relative;
+
+    .tabs__tab{
+      display: inline-block;
+      margin-right: 10px;
+      padding: 10px;
+      font-family: $text-400;
+      border-radius: $br-9px;
+    }
+
+    .is-active{
+      background: $header;
+      color: $white;
+      pointer-events: none;
+    }
+  }
+
+  .messages,
+  .messages--warning{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 35px 10px 55px;
+    position: relative;
+
+    .messages__icon{
+      position: absolute;
+      left: 35px;
+      top: 50%;
+      transform: translateY(-50%);
+      svg{
+        width: 10px;
+        height: auto;
+        fiil: $header
+      }
+    }
+  }
+}
+

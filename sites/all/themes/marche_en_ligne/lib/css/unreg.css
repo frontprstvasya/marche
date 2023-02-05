@@ -1,0 +1,95 @@
+/* unreg window */
+.unreg-window, .modal-window{
+  box-sizing: border-box;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 12px;
+  padding: 23px;
+  width: 290px;
+  height: 230px;
+  background: #BBDFD8;
+  box-shadow: 1px 2px 4px 2px #00000026;
+  z-index: 100;
+  transform: translate(-50%, -50%) scale(0);
+  transition: all .3s ease;
+}
+
+.unreg-window *{
+  box-sizing: border-box;
+}
+
+.unreg-window .buttons{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 20px;
+}
+
+.unreg-window a{
+  display: block;
+  width: 100%;
+  padding: 10px;
+  color: #fff3e0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  background: #017A61;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.unreg-window p{
+  max-width: 205px;
+  color: #494949;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.visible-window{
+  top: 49%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: all .5s ease !important;
+}
+
+.overlay.shadow{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.7;
+  z-index: 99;
+  cursor: pointer;
+}
+html{
+  position: relative;
+}
+
+html.shadow{
+  overflow: hidden;
+}
+
+.window-close{
+  position: absolute;
+  top: 23px;
+  right: 23px;
+  cursor: pointer;
+}
+
+.window-close::before {
+  content: '\e901';
+  font-family: 'new-marche';
+  font-size: 20px;
+  font-weight: 400;
+  color: #494949;
+}

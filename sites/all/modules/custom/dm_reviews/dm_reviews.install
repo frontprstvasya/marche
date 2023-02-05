@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ *
+ */
+function dm_reviews_schema(): array {
+  $schema = [];
+
+  $schema['dm_reviews'] = [
+    'fields' => [
+      'rid' => [
+        'description' => 'Review ID',
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+      ],
+      'nid' => [
+        'description' => 'Node ID',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+      ],
+      'buyer' => [
+        'description' => 'Buyer ID',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+      ],
+      'grade' => [
+        'description' => 'Grade seller',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+      ],
+      'review' => [
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => TRUE,
+        'description' => 'Review text',
+      ],
+      'timestamp' => [
+        'description' => 'The Unix timestamp when the XMPP account was created',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+      ],
+    ],
+    'primary key' => ['rid'],
+    'indexes' => [
+      'rid' => ['rid'],
+      'buyer' => ['buyer'],
+      'nid' => ['nid'],
+    ],
+  ];
+  $schema['dm_reviews_user_rating'] = [
+    'fields' => [
+      'uid' => [
+        'description' => 'Uid (seller or CV)',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+      ],
+      'count' => [
+        'description' => 'Reviews count',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+      ],
+      'rating' => [
+        'description' => 'General user rating',
+        'type' => 'float',
+        'unsigned' => TRUE,
+        'size' => 'normal',
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['uid'],
+    'indexes' => [
+      'uid' => ['uid'],
+    ],
+  ];
+  return $schema;
+}
+
+/**
+ *  Uninstall table.
+ */
+function dm_reviews_uninstall() {
+  cache_clear_all('dm_reviews', 'cache', TRUE);
+  drupal_uninstall_schema('dm_reviews');
+  drupal_uninstall_schema('dm_reviews_user_rating');
+}

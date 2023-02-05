@@ -1,0 +1,27 @@
+/* Favorite */
+@import "../variables";
+@import "../breakpoints";
+
+.view-flag-bookmarks-tab {
+  display: block;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 35px 0 35px;
+}
+
+.user__content .view-views-categories {
+  padding: 0 0 15px 0;
+}
+
+.user__content .view-views-categories .view-content .views-field-info {
+  justify-content: flex-end;
+}
+
+@media only screen and (min-width: 1024px) {
+  .user__content .view-views-categories .view-content {
+    width: unset;
+  }
+  .user__content .view-views-categories .views-row {
+    width: unset;
+  }
+}

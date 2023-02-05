@@ -1,0 +1,259 @@
+$view = new view();
+$view->name = 'uhpone_views';
+$view->description = '';
+$view->tag = 'default';
+$view->base_table = 'users';
+$view->human_name = 'EXP uhpone_views';
+$view->core = 7;
+$view->api_version = '3.0';
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+/* Display: Master */
+$handler = $view->new_display('default', 'Master', 'default');
+$handler->display->display_options['title'] = 'uhpone_views';
+$handler->display->display_options['use_more_always'] = FALSE;
+$handler->display->display_options['use_more_text'] = 'ещё';
+$handler->display->display_options['access']['type'] = 'perm';
+$handler->display->display_options['access']['perm'] = 'access user profiles';
+$handler->display->display_options['cache']['type'] = 'none';
+$handler->display->display_options['query']['type'] = 'views_query';
+$handler->display->display_options['query']['options']['distinct'] = TRUE;
+$handler->display->display_options['exposed_form']['type'] = 'basic';
+$handler->display->display_options['exposed_form']['options']['submit_button'] = 'Применить';
+$handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Сбросить';
+$handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Сортировать по';
+$handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'По возрастанию';
+$handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'По убыванию';
+$handler->display->display_options['pager']['type'] = 'full';
+$handler->display->display_options['pager']['options']['items_per_page'] = '670';
+$handler->display->display_options['pager']['options']['offset'] = '0';
+$handler->display->display_options['pager']['options']['id'] = '0';
+$handler->display->display_options['pager']['options']['quantity'] = '9';
+$handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Элементов на страницу';
+$handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Все -';
+$handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Пропустить';
+$handler->display->display_options['pager']['options']['tags']['first'] = '« первая';
+$handler->display->display_options['pager']['options']['tags']['previous'] = '‹ предыдущая';
+$handler->display->display_options['pager']['options']['tags']['next'] = 'следующая ›';
+$handler->display->display_options['pager']['options']['tags']['last'] = 'последняя »';
+$handler->display->display_options['style_plugin'] = 'table';
+$handler->display->display_options['style_options']['columns'] = array(
+  'php' => 'php',
+  'php_1' => 'php_1',
+  'nothing_2' => 'nothing_2',
+  'uid' => 'uid',
+  'uid_1' => 'uid_1',
+  'nothing_3' => 'nothing_3',
+  'nothing_4' => 'nothing_4',
+  'field_telephone_1' => 'field_telephone_1',
+);
+$handler->display->display_options['style_options']['class'] = '';
+$handler->display->display_options['style_options']['default'] = 'field_telephone_1';
+$handler->display->display_options['style_options']['info'] = array(
+  'php' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'php_1' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'nothing_2' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'uid' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'uid_1' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'nothing_3' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'nothing_4' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_telephone_1' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+);
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php']['id'] = 'php';
+$handler->display->display_options['fields']['php']['table'] = 'views';
+$handler->display->display_options['fields']['php']['field'] = 'php';
+$handler->display->display_options['fields']['php']['label'] = 'entity_type';
+$handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php']['php_output'] = '<?php
+echo \'user\';
+?>';
+$handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_1']['id'] = 'php_1';
+$handler->display->display_options['fields']['php_1']['table'] = 'views';
+$handler->display->display_options['fields']['php_1']['field'] = 'php';
+$handler->display->display_options['fields']['php_1']['label'] = 'bundle';
+$handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_1']['php_output'] = '<?php
+echo \'user\';
+?>';
+$handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
+/* Поле: Глобальный: Пользовательский текст */
+$handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';
+$handler->display->display_options['fields']['nothing_2']['table'] = 'views';
+$handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing_2']['label'] = 'deleted';
+$handler->display->display_options['fields']['nothing_2']['alter']['text'] = '0';
+/* Поле: Пользователь: Uid */
+$handler->display->display_options['fields']['uid']['id'] = 'uid';
+$handler->display->display_options['fields']['uid']['table'] = 'users';
+$handler->display->display_options['fields']['uid']['field'] = 'uid';
+$handler->display->display_options['fields']['uid']['label'] = 'entity_id';
+/* Поле: Пользователь: Uid */
+$handler->display->display_options['fields']['uid_1']['id'] = 'uid_1';
+$handler->display->display_options['fields']['uid_1']['table'] = 'users';
+$handler->display->display_options['fields']['uid_1']['field'] = 'uid';
+$handler->display->display_options['fields']['uid_1']['label'] = 'revision_id';
+/* Поле: Глобальный: Пользовательский текст */
+$handler->display->display_options['fields']['nothing_3']['id'] = 'nothing_3';
+$handler->display->display_options['fields']['nothing_3']['table'] = 'views';
+$handler->display->display_options['fields']['nothing_3']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing_3']['label'] = 'language';
+$handler->display->display_options['fields']['nothing_3']['alter']['text'] = 'und';
+/* Поле: Глобальный: Пользовательский текст */
+$handler->display->display_options['fields']['nothing_4']['id'] = 'nothing_4';
+$handler->display->display_options['fields']['nothing_4']['table'] = 'views';
+$handler->display->display_options['fields']['nothing_4']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing_4']['label'] = 'delta';
+$handler->display->display_options['fields']['nothing_4']['alter']['text'] = '0';
+/* Поле: Пользователь: numéro de téléphone pour les Admins */
+$handler->display->display_options['fields']['field_telephone_1']['id'] = 'field_telephone_1';
+$handler->display->display_options['fields']['field_telephone_1']['table'] = 'field_data_field_telephone';
+$handler->display->display_options['fields']['field_telephone_1']['field'] = 'field_telephone';
+$handler->display->display_options['fields']['field_telephone_1']['label'] = 'field_uphone_value';
+$handler->display->display_options['fields']['field_telephone_1']['exclude'] = TRUE;
+$handler->display->display_options['fields']['field_telephone_1']['hide_empty'] = TRUE;
+$handler->display->display_options['fields']['field_telephone_1']['click_sort_column'] = 'phonenumber';
+$handler->display->display_options['fields']['field_telephone_1']['type'] = 'phonefield_plain';
+$handler->display->display_options['fields']['field_telephone_1']['settings'] = array(
+  'field_formatter_class' => '',
+);
+/* Поле: Глобальный: PHP */
+$handler->display->display_options['fields']['php_2']['id'] = 'php_2';
+$handler->display->display_options['fields']['php_2']['table'] = 'views';
+$handler->display->display_options['fields']['php_2']['field'] = 'php';
+$handler->display->display_options['fields']['php_2']['label'] = 'field_uphone_value';
+$handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_2']['php_output'] = '<?php
+	$uid = $row->uid;
+	$user = user_load($uid);
+	$phone_empty  = $user->field_telephone;
+
+	if($phone_empty) {
+		$phone =  $phone_empty[\'und\'][0][\'phonenumber\'];
+
+		$explode = explode("/", $phone);
+		$explode_phone = $explode[0];
+
+		/* Count */
+		$count =  strlen($phone);
+		if($count == \'9\') {
+			echo \'+237\' . $explode_phone;
+		}elseif($count < \'9\') {
+			echo \'empty\';
+		}else{
+			echo $explode_phone;
+		}
+	}
+?>';
+$handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php_2']['php_click_sortable'] = '';
+/* Критерий сортировки: Пользователь: Дата создания */
+$handler->display->display_options['sorts']['created']['id'] = 'created';
+$handler->display->display_options['sorts']['created']['table'] = 'users';
+$handler->display->display_options['sorts']['created']['field'] = 'created';
+/* Критерий фильтра: Пользователь: Активный статус */
+$handler->display->display_options['filters']['status']['id'] = 'status';
+$handler->display->display_options['filters']['status']['table'] = 'users';
+$handler->display->display_options['filters']['status']['field'] = 'status';
+$handler->display->display_options['filters']['status']['value'] = '1';
+$handler->display->display_options['filters']['status']['group'] = 1;
+$handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+/* Критерий фильтра: Пользователь: ID пользователя */
+$handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
+$handler->display->display_options['filters']['uid_raw']['table'] = 'users';
+$handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
+$handler->display->display_options['filters']['uid_raw']['operator'] = '!=';
+$handler->display->display_options['filters']['uid_raw']['value']['value'] = '1';
+$handler->display->display_options['filters']['uid_raw']['group'] = 1;
+/* Критерий фильтра: Пользователь: numéro de téléphone pour les Admins (field_telephone:phonenumber) */
+$handler->display->display_options['filters']['field_telephone_phonenumber']['id'] = 'field_telephone_phonenumber';
+$handler->display->display_options['filters']['field_telephone_phonenumber']['table'] = 'field_data_field_telephone';
+$handler->display->display_options['filters']['field_telephone_phonenumber']['field'] = 'field_telephone_phonenumber';
+$handler->display->display_options['filters']['field_telephone_phonenumber']['operator'] = 'not';
+$handler->display->display_options['filters']['field_telephone_phonenumber']['value'] = 'empty';
+
+/* Display: Page */
+$handler = $view->new_display('page', 'Page', 'page');
+$handler->display->display_options['path'] = 'uhpone';
+
+/* Display: Экспорт данных */
+$handler = $view->new_display('views_data_export', 'Экспорт данных', 'views_data_export_1');
+$handler->display->display_options['pager']['type'] = 'some';
+$handler->display->display_options['pager']['options']['items_per_page'] = '670';
+$handler->display->display_options['pager']['options']['offset'] = '0';
+$handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+$handler->display->display_options['path'] = 'exp-uphone';
+$handler->display->display_options['displays'] = array(
+  'page' => 'page',
+  'default' => 0,
+);
+$translatables['uhpone_views'] = array(
+  t('Master'),
+  t('uhpone_views'),
+  t('ещё'),
+  t('Применить'),
+  t('Сбросить'),
+  t('Сортировать по'),
+  t('По возрастанию'),
+  t('По убыванию'),
+  t('Элементов на страницу'),
+  t('- Все -'),
+  t('Пропустить'),
+  t('« первая'),
+  t('‹ предыдущая'),
+  t('следующая ›'),
+  t('последняя »'),
+  t('entity_type'),
+  t('bundle'),
+  t('deleted'),
+  t('entity_id'),
+  t('revision_id'),
+  t('language'),
+  t('und'),
+  t('delta'),
+  t('field_uphone_value'),
+  t('Page'),
+  t('Экспорт данных'),
+);

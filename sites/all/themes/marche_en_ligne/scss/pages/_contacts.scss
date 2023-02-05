@@ -1,0 +1,152 @@
+/* Contacts */
+@import "../variables";
+@import "../breakpoints";
+
+.webform-client-form-17 input,
+.webform-client-form-17 textarea {
+  box-sizing: border-box;
+}
+
+.webform-client-form-17 {
+  display: block;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 35px;
+  font-family: serif;
+
+  .webform-progressbar{
+    display: none;
+  }
+}
+
+.webform-client-form-17 * {
+  font-family: $text-400;
+}
+
+.text-container {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+#text-container div {
+  display: block;
+  position: relative;
+  top: auto;
+  right: auto;
+}
+
+#text-container div p {
+  margin-bottom: 0;
+  color: #171718;
+  text-align: justify;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 500;
+}
+
+.webform-client-form-17 .webform-component label {
+  display: none;
+}
+
+.webform-client-form-17 .form-textarea {
+  overflow: auto;
+}
+
+.webform-client-form-17 .form-textarea::-webkit-scrollbar-track {
+  background-color: #c4c4c47d;
+  border-radius: 10px;
+}
+
+.webform-client-form-17 .form-textarea::-webkit-scrollbar-thumb {
+  background: #c4c4c4;
+}
+
+.webform-client-form-17 textarea,
+.webform-client-form-17 input {
+  margin-bottom: 15px;
+  padding: 10px 15px;
+  width: 100%;
+  border: 1.4px solid #017A61;
+  border-radius: 10px;
+  color: #017A61;
+  font-size: 16px;
+  line-height: 19.5px;
+  font-weight: 500;
+}
+
+.webform-client-form-17 input {
+  height: 46px;
+}
+
+.webform-client-form-17 textarea {
+  height: 170px;
+  resize: none;
+}
+
+.webform-client-form-17 .form-submit {
+  padding: 10px 15px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 21.94px;
+  font-weight: 700;
+  text-align: left;
+  background-color: #017A61;
+  cursor: pointer;
+}
+
+.webform-client-form-17 textarea::placeholder,
+.webform-client-form-17 input::placeholder {
+  color: #017A61;
+  font-size: 16px;
+  line-height: 19.5px;
+  font-weight: 500;
+}
+
+@media only screen and (min-width: 1024px) {
+  .webform-client-form-17 div {
+    display: flex;
+  }
+  .webform-client-form-17 .text-container {
+    display: block;
+    margin-right: 40px;
+    margin-bottom: 0;
+    width: 75%;
+    max-width: 400px;
+  }
+  #text-container div {
+    width: 100%;
+  }
+  #text-container div p {
+    font-size: 20px;
+    line-height: 25px;
+  }
+  .webform-client-form-17 .inputs-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 400px;
+  }
+  .webform-client-form-17 .webform-component-textarea {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: 360px;
+    height: 100%;
+  }
+  .webform-client-form-17 textarea {
+    height: 100%;
+  }
+  .webform-client-form-17 .webform-component-email,
+  .webform-client-form-17 .webform-component-phone,
+  .webform-client-form-17 .form-actions {
+    display: block;
+    width: 100%;
+    max-width: 360px;
+    height: 46px;
+  }
+  .webform-client-form-17 input {
+    margin-bottom: 0;
+  }
+}

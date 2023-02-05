@@ -1,0 +1,96 @@
+/* Submit ad unreg window */
+@import "../variables";
+@import "../breakpoints";
+
+#cboxContent {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+#cboxContent::after {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 0;
+  border-bottom-left-radius: 5px;
+  width: 100%;
+  height: 45px;
+  background-color: #017A61;
+}
+
+#cboxWrapper,
+#cboxContent {
+  background-color: transparent;
+}
+
+#cboxPrevious,
+#cboxNext,
+#cboxClose {
+  background: none;
+}
+
+#cboxPrevious,
+#cboxNext,
+#cboxCurrent {
+  bottom: 10px;
+  z-index: 5;
+}
+
+#cboxPrevious {
+  left: 30%;
+}
+
+#cboxNext {
+  left: auto;
+  right: 30%;
+}
+
+#cboxPrevious::before,
+#cboxNext::before,
+#cboxClose::before {
+  content: "\e90c";
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $marche;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  font-size: 25px;
+  text-indent: 0;
+}
+
+#cboxPrevious::before,
+#cboxNext::before,
+#cboxCurrent {
+  color: #fff;
+}
+
+#cboxClose {
+  top: 15px;
+  bottom: auto;
+  right: 15px;
+}
+#cboxCurrent {
+  width: auto!important;
+}
+
+
+#cboxClose::before {
+  content: "\e90e";
+  color: #017A61;
+}
+
+#cboxPrevious::before {
+  transform: rotate(180deg);
+}
+
+#cboxCurrent {
+  left: calc(50% - 25px);
+  width: 50px;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}

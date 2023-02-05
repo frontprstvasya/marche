@@ -1,0 +1,13 @@
+name = DM Reviews
+description = Reviews for add or CV.
+core = 7.x
+php = 7.3
+
+package = Custom
+
+files[]= include/dm_reviews.inc
+files[]= include/dm_reviews_form.inc
+
+
+; Adding CSS && JS
+stylesheets[all][] = css/dm-reviews.css

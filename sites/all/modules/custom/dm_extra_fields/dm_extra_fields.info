@@ -1,0 +1,6 @@
+name = DM Extra Fields.
+description = Create extra filds for site.
+core = 7.x
+version = 1.0
+package = Custom
+

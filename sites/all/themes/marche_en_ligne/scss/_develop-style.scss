@@ -1,0 +1,21 @@
+/* Develop style */
+@import "variables";
+@import "breakpoints";
+
+// Temp disable BTN sms
+.sms-relative{
+  .field-btn-chat{
+    pointer-events: none!important;
+  }
+}
+
+// Disable icon message
+.menu-li-6645,
+.menu-li-540{
+  pointer-events: none!important;
+}
+
+// Disable link CREATE message on user page.
+.privatemsg-send-link-profile{
+  display: none!important;
+}

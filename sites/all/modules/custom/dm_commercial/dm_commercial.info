@@ -1,0 +1,7 @@
+name = DM Commercial
+description = View commercial row in views.
+core = 7.x
+version = 1.0
+package = Custom
+
+files[] = dm_commercial.inc

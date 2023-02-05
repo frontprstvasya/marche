@@ -1,0 +1,244 @@
+/* Premium */
+@import "../variables";
+@import "../breakpoints";
+
+.premium {
+  padding-top: 10px;
+}
+
+.premium * {
+  font-family: $text-400;
+  box-sizing: border-box;
+}
+
+.premium .pay-btn {
+  display: block;
+  margin: 0 auto 30px auto;
+  padding: 12px 30px;
+  border-radius: 9px;
+  max-width: 570px;
+  color: #017A61;
+  font-size: 15px;
+  line-height: 18px;
+  font-weight: 600;
+  text-align: center;
+  background-color: #FCD216;
+}
+
+.premium .pay-btn-2 {
+  margin-bottom: 0;
+  color: #fff;
+  background-color: #CD1426;
+}
+
+.premium .field-item,
+.premium .field-label {
+  margin-bottom: 15px;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+  color: #171718;
+}
+
+.premium .field-name-field-description-triple .even {
+  font-weight: 700;
+}
+
+.premium .field-label {
+  font-weight: 700;
+}
+
+.premium .offers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.premium-offer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 35px 12px;
+  max-width: 290px;
+  height: 265px;
+  background-color: #FCD216;
+}
+
+.premium-offer:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.bottom-offer {
+  margin: 0 auto 30px auto;
+}
+
+.premium-offer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 100%;
+  width: 35px;
+  height: 100%;
+  background-color: #017A61;
+}
+
+.premium-offer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 35px;
+  height: 100%;
+  background-color: #017A61;
+}
+
+.premium-offer .field-type-link-field {
+  position: relative;
+}
+
+.premium .premium-offer .field-item {
+  margin-bottom: auto;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: center;
+}
+
+.premium .premium-offer .field-label {
+  display: block;
+  margin-bottom: 15px;
+  padding: 12px 0;
+  border-radius: 9px;
+  color: #fff;
+  font-size: 15px;
+  line-height: 18px;
+  font-weight: 700;
+  text-align: center;
+  background: #CD1426;
+}
+
+.premium .price-pay {
+  position: relative;
+  display: block;
+  padding: 14px 52px 14px 27px;
+  border: 1px solid rgba(89, 98, 115, 0.5);
+  border-radius: 9px;
+  background: #017A61;
+  color: #fff;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.premium .field-type-link-field .field-label {
+  position: absolute;
+  bottom: 17px;
+  left: 27px;
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  line-height: 18px;
+  color: #fff;
+  background: none;
+  z-index: 10;
+}
+
+.premium .price-pay::after {
+  content: 'XAF';
+  position: absolute;
+  bottom: 17px;
+  right: 14px;
+  font-size: 15px;
+  line-height: 18px;
+  color: #fff;
+}
+
+@media only screen and (min-width: 320px) {
+  .premium .price-pay::before {
+    opacity: 1;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .premium .offers {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .premium-offer {
+    margin-bottom: 0;
+    transform: scale(0.9);
+  }
+  .premium-offer:first-child {
+    margin-bottom: 0;
+    margin-right: 60px;
+    transform: scale(0.9) translateX(-5%);
+  }
+  .premium-offer:last-child {
+    transform: scale(0.9) translateX(5%);
+  }
+  .bottom-offer {
+    margin: 0 auto 30px auto;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .premium .pay-btn {
+    margin: 0 0 30px 0;
+    padding: 23px 30px;
+    border-radius: 18px;
+    font-size: 30px;
+    line-height: 30px;
+  }
+  .premium .pay-btn:hover {
+    background-color: #95C11F;
+    color: #fff;
+    transition: all .3s ease;
+  }
+  .premium .pay-btn-2:hover {
+    background-color: #017A61;
+  }
+  .premium-offer:first-child {
+    transform: scale(0.9) translateX(-2%);
+  }
+  .premium-offer:last-child {
+    transform: scale(0.9) translateX(2%);
+  }
+  .premium .price-pay:hover {
+    transition: 0.3s;
+    background: #7BA37D;
+  }
+  .premium .field-item,
+  .premium .field-label {
+    margin-bottom: 30px;
+    font-size: 18px;
+    line-height: 20px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .premium .field-item,
+  .premium .field-label,
+  .premium .field-name-field-short-text .field-item {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  .premium .offers {
+    justify-content: space-between;
+  }
+  .premium-offer,
+  .premium-offer:first-child,
+  .premium-offer:last-child {
+    transform: none;
+  }
+  .premium-offer:first-child,
+  .premium-offer:last-child {
+    margin: 0 35px;
+  }
+  .premium .bottom-offer {
+    margin: 0 auto 30px auto;
+  }
+}

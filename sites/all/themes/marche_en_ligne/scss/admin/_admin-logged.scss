@@ -1,0 +1,69 @@
+/* Admin logged */
+@import "../variables";
+@import "../breakpoints";
+
+.logged-in{
+  #hidden-menu{
+    .menu-li-1233,
+    .menu-li-3663{
+      display: none;
+    }
+  }
+
+  #block-menu-menu-menu-btn-banner{
+    .menu-li-1234{
+      display: none;
+    }
+  }
+
+  #stick-mobile{
+    .menu-li-1235,
+    .menu-li-3664{
+      display: none;
+    }
+  }
+}
+
+// Media
+@media only screen and ($ipad-pro) {
+  .logged-in{
+    .menu-li-541{
+      a{
+        opacity: 0;
+      }
+    }
+
+    .menu-li-6266{
+      display: block!important;
+      opacity: 0;
+    }
+
+    //.profile-logged{
+    //  display: inline-block;
+    //  position: absolute;
+    //  width: 12%;
+    //  right: 230px;
+    //  top: 43px;
+    //}
+  }
+}
+
+@media only screen and ($desktop1200) {
+  .logged-in{
+
+    .menu-li-541{
+      a{
+        opacity: 0;
+      }
+    }
+
+    //
+    //.profile-logged{
+    //  display: inline-block;
+    //  position: absolute;
+    //  right: 270px;
+    //  width: 132px;
+    //}
+  }
+}
+

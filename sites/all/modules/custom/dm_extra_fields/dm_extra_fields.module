@@ -1,0 +1,67 @@
+<?php
+/**
+ * Implements hook_field_extra_fields().
+ */
+function dm_extra_fields_field_extra_fields() {
+
+  /* Transfer title to extra field */
+  $extra_fields['node']['submit_an_ad']['display']['extra_title'] = array(
+    'label' => t('Title extra'),
+    'description' => t('Transfer title to extra field'),
+    'weight' => 0,
+  );
+
+  /* View data crate node . */
+  $extra_fields['node']['submit_an_ad']['display']['extra_data'] = array(
+    'label' => t('Data extra'),
+    'description' => t('View data crate node.'),
+    'weight' => 0,
+  );
+
+  /* View data crate node for article blog. */
+  $extra_fields['node']['page_blog']['display']['extra_data_2'] = array(
+    'label' => t('Data extra'),
+    'description' => t('View data crate node.'),
+    'weight' => 0,
+  );
+  return $extra_fields;
+}
+
+/**
+ * Implements hook_node_view().
+ */
+function dm_extra_fields_node_view($node, $view_mode, $langcode) {
+  static $extra_fields_info = array();
+
+  $extra_field_cache_key = $node->type . ':' . $view_mode;
+  if (!isset($extra_fields_info[$extra_field_cache_key])) {
+    $extra_fields_info[$extra_field_cache_key] = field_extra_fields_get_display('node', $node->type, $view_mode);
+  }
+
+  /* Transfer title to extra field */
+  if (!empty($extra_fields_info[$extra_field_cache_key]['extra_title']['visible'])) {
+    $node->content['extra_title'] = array(
+      '#markup' => '<h1>' . $node->title . '</h1>',
+      '#weight' => $extra_fields_info[$extra_field_cache_key]['extra_title']['weight'],
+    );
+  }
+
+  /* View data crate node. */
+  if (!empty($extra_fields_info[$extra_field_cache_key]['extra_data']['visible'])) {
+    $timestamp = $node->created;
+    $node->content['extra_data'] = array(
+      '#markup' => '<div class="extra-data">' . date('d.m.Y', $timestamp) .'</div>',
+      '#weight' => $extra_fields_info[$extra_field_cache_key]['extra_data']['weight'],
+    );
+  }
+
+  /* View data crate node format 2. */
+  if (!empty($extra_fields_info[$extra_field_cache_key]['extra_data_2']['visible'])) {
+    $timestamp = $node->created;
+    $node->content['extra_data_2'] = array(
+      '#markup' => '<div class="extra-data">' . date('d M G:i', $timestamp) .'</div>',
+      '#weight' => $extra_fields_info[$extra_field_cache_key]['extra_data_2']['weight'],
+    );
+  }
+
+}

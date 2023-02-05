@@ -1,0 +1,332 @@
+/* Section content  VIES ROW STYLE */
+@import "../variables";
+@import "../breakpoints";
+
+.field .field-label {
+  font-family: 'Mulish', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #017A61;
+  position: relative;
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 0 35px;
+  width: 100%;
+}
+
+.field .field-label::before {
+  content: '\e90b';
+  position: absolute;
+  font-family: 'new-marche';
+  font-size: 20px;
+  color: #017A61;
+  right: 10%;
+}
+
+.views-row {
+  max-width: 410px;
+  background-color: #fff;
+  margin: 25px 20px;
+  border-radius: 12px;
+  display: block;
+  box-shadow: 1px 2px 4px 2px rgba(0, 0, 0, 0.15);
+}
+
+.views-row:hover {
+  background-color: #BBDFD8;
+  transition: all 200ms ease;
+  cursor: pointer;
+}
+
+.views-row-first {
+  background-color: #FCD216;
+}
+
+.views-container {
+  display: block;
+  margin: 10px;
+}
+
+.item-1 {
+  display: flex;
+  padding: 10px;
+}
+
+.field-photos a img {
+  border-radius: 12px;
+  width: 147px;
+  height: 145px;
+}
+
+.field-title-container {
+  margin-left: 10px;
+}
+
+.field-title-container-1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.description--field-title {
+  margin-bottom: 1px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 15px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  color: #777777;
+  padding-right: 5px;
+  width: calc(100% - 30px);
+}
+
+.description--field-title a {
+  font-family: 'Mulish', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  color: #494949;
+  text-decoration: none;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.flag-bookmarks {
+  position: relative;
+  overflow: hidden;
+}
+
+.flag-bookmarks::before {
+  content: '\e905';
+  position: absolute;
+  font-family: 'new-marche';
+  font-size: 30px;
+  color: #CD1426;
+}
+
+.flag-processed {
+  display: block;
+  text-indent: -1000px;
+  width: 30px;
+}
+
+.description--field-created {
+  font-family: 'Mulish', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 15px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  color: #777777;
+}
+
+.field--location {
+  margin-bottom: 20px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 15px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  color: #777777;
+  position: relative;
+  padding-left: 10px;
+}
+
+.field--location::before {
+  content: '\e90a';
+  position: absolute;
+  font-family: 'new-marche';
+  font-size: 13px;
+  color: #777777;
+  left: -3px;
+  bottom: 1px;
+}
+
+.views-container .field-title-container .field-title {
+  display: flex;
+}
+
+.php-btn--wrap {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 10px;
+  gap: 10px;
+}
+
+.field--description p {
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  font-family: 'Mulish', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 15px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  color: #777777;
+  margin: 0;
+}
+
+.description--field-price {
+  font-family: 'Mulish', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  color: #017A61;
+}
+
+.sms-relative {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  min-width: 48%;
+  height: 38px;
+}
+
+.sms-relative a {
+  font-family: 'Mulish', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: -0.03em;
+  text-align: center;
+  color: #494949;
+  text-decoration: none;
+}
+
+.field-btn-chat {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: -0.03em;
+  text-align: center;
+  color: #494949;
+  text-decoration: none;
+  border: 1px solid #017A61;
+  position: relative;
+  min-width: 100px;
+}
+
+.frontpage-content {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.feedback-btn {
+  align-items: center;
+  background: #bcb6c3;
+  width: 100%;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  border: 1px solid #017A61;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 38px;
+}
+
+.icon-nm_21-msg {
+  margin-right: 30px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.icon-nm_21-msg::before {
+  content: '\e914';
+  position: absolute;
+  font-family: 'new-marche';
+  font-size: 20px;
+  color: #494949;
+}
+
+.icon-nm_20-call {
+  margin-right: 30px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.icon-nm_20-call::before {
+  content: '\e913';
+  position: absolute;
+  font-family: 'new-marche';
+  font-size: 20px;
+  color: #494949;
+}
+/* Media */
+
+@media only screen and (max-width: 359px) {
+  .field-photos a img {
+    border-radius: 12px;
+    width: 125px;
+    height: 125px;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  /* .sms-relative {
+      min-width: 150px;
+  } */
+  .sms-relative::before {
+    left: 45px;
+  }
+  .field-btn-chat {
+    min-width: 150px;
+  }
+  .field-btn-chat::before {
+    left: 45px;
+  }
+  .field-title-container {
+    margin-left: 25px;
+  }
+  .field-photos a img {
+    border-radius: 12px;
+    width: 184px;
+    height: 145px;
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  .sms-relative::before {
+    left: 52px;
+  }
+  .field-btn-chat {
+    min-width: 160px;
+  }
+  .field-btn-chat::before {
+    left: 52px;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .view-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-right: 20px;
+  }
+}
+
+@media only screen and (min-width: 1140px) {
+  .views-row {
+    width: 44%;
+  }
+}

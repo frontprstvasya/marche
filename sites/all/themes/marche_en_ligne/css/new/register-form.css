@@ -1,0 +1,363 @@
+    .section-messente .section-content {
+        padding-bottom: 60px;
+        position: relative;
+    }
+    
+    .section-messente .main-content form {
+        position: relative;
+        margin-bottom: 145px;
+        padding: 25px 13px;
+        background: white;
+        box-shadow: 1px 2px 4px 2px #00000026;
+        border-radius: 12px;
+    }
+    
+    .section-messente .user-register-title {
+        text-align: left;
+        padding: 0;
+    }
+    
+    .section-messente select {
+        appearance: none;
+        text-indent: 0.01px;
+        text-overflow: '';
+    }
+    
+    .section-messente #children_parent {
+        position: relative;
+    }
+    
+    .section-messente #children_parent::after {
+        content: '\e919';
+        position: absolute;
+        bottom: 11px;
+        right: 15px;
+        font-family: 'new-marche';
+        color: #94B6AF;
+    }
+    
+    .section-messente #SelectListMask {
+        display: inline-block;
+        padding-left: 32px;
+        width: 100%;
+        height: 40px;
+        background: #FFFFFF;
+        border: 0.5px solid #017A61;
+        border-radius: 12px;
+    }
+    
+    .section-messente .form-item-phone-and-mail {
+        margin-top: 20px;
+    }
+    
+    .section-messente .main-content form h2 {
+        margin-bottom: 18px;
+        font-size: 16px;
+        font-weight: 700;
+        /* text-align: center;
+        color: #494949; */
+    }
+    
+    .section-messente .required-field-sign {
+        color: #CD1426;
+    }
+    
+    .section-messente #block_inputs_pincodes,
+    .section-messente #block_pincode_msg_time {
+        max-width: 251px;
+        text-align: center;
+        margin: 35px auto 50px;
+    }
+    
+    .section-messente .main-content form .registration-congrats,
+    .page-messente form .messente_title_step,
+    .section-messente .main-content form h2 {
+        text-align: left;
+        color: #017A61;
+    }
+    
+    .section-messente .main-content form .registration-congrats {
+        background-image: url('/sites/default/files/commercial-icon/Frame.svg');
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        padding-left: 55px;
+    }
+    
+    .page-messente .main-content main {
+        margin: 0 20px 50px;
+    }
+    
+    .page-messente-register-form #edit-next {
+        margin: 0;
+    }
+    
+    .page-messente-register-form .form-actions #edit-request-code {
+        position: absolute;
+        right: 15px;
+        bottom: 25px;
+    }
+    
+    .page-messente #SelectItemMask .link_mask,
+    .page-messente .form-text {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: -0.03em;
+        text-align: left;
+        color: #017A61;
+    }
+    /* .page-messente-register-form .form-actions #edit-request-code {
+        position: inherit;
+    } */
+    
+    .page-messente-register-form .div_chilgren {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .page-messente-register-form .div_chilgren #block_inputs_pincodes {
+        order: 2;
+        display: flex;
+        max-width: 251px;
+    }
+    
+    .page-messente .div_chilgren #block_pincode_msg_time {
+        order: 1;
+        max-width: 251px;
+        margin: 0 auto;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: -0.03em;
+        text-align: center;
+        color: #777777;
+    }
+    
+    .page-messente-register-form .div_chilgren #edit-actions {
+        order: 3;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .page-messente-register-form #back-to-change-number {
+        order: 2;
+    }
+    
+    .page-messente #edit-next,
+    .page-messente #edit-submit {
+        position: absolute;
+        bottom: -80px;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 45px;
+        border-radius: 12px;
+        color: #FFFFFF;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20px;
+        background: #017A61;
+        cursor: pointer;
+    }
+    
+    .page-messente #edit-next:hover,
+    .page-messente #edit-submit:hover {
+        background-color: #8bcdbf;
+        color: #494949;
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+    }
+    
+    .page-messente #edit-back {
+        position: absolute;
+        bottom: -150px;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 45px;
+        border-radius: 12px;
+        color: #777;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20px;
+        background: #f5b4b4;
+        cursor: pointer;
+    }
+    
+    .page-messente #edit-back:hover {
+        background-color: #cd1426;
+        color: #fff;
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+    }
+    
+    .page-messente #prefix_upload_btn {
+        position: relative;
+        display: flex;
+        height: 100px;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        border-radius: 12px;
+        font-size: 0;
+        float: left;
+        background-color: #BBDFD8;
+        cursor: pointer;
+    }
+    
+    .page-messente #prefix_upload_btn::after {
+        content: '\e90c';
+        font-family: 'new-marche';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        color: #017A61;
+        font-size: 50px;
+        transform: translate(-50%, -50%);
+    }
+    
+    .page-messente #container_file_upload span {
+        color: #777;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+    }
+    
+    .page-messente #container_file_upload strong {
+        color: #494949;
+    }
+    
+    .page-messente .main-content .upload-photo-title {
+        line-height: 20px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+    
+    .page-messente .file_uplod_text_valid {
+        display: flex;
+        flex-direction: column;
+        max-width: 314px;
+    }
+    
+    .page-messente #container_file_upload {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .page-messente .upload-photo-title {
+        order: 1;
+    }
+    
+    .page-messente .file_uplod_text_valid {
+        order: 3;
+    }
+    
+    .page-messente #container_upload_prefix {
+        order: 2;
+        margin-bottom: 20px;
+    }
+    
+    .page-messente #messente_error_block,
+    .page-messente .messages.error.messages-inline {
+        text-align: center;
+        margin: 15px auto 30px;
+        color: #CD1426;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 20px;
+    }
+    
+    .page-messente .messages.error.messages-inline {
+        max-width: 330px;
+    }
+    
+    .page-messente #messente_error_block span,
+    .page-messente .messages.error.messages-inline {
+        padding-left: 35px;
+        position: relative;
+    }
+    
+    .page-messente #messente_error_block span::before,
+    .page-messente .messages.error.messages-inline::before {
+        content: '\e920';
+        position: absolute;
+        left: -10px;
+        color: #F5B4B4;
+        font-family: 'new-marche';
+        font-size: 34px;
+    }
+    /* messente request form*/
+    
+    .page-messente-request-form.is-not-admin .form-item .confirm-parent label {
+        width: auto;
+    }
+    
+    .page-messente-request-form .div_chilgren #block_inputs_pincodes {
+        order: 2;
+    }
+    
+    .page-messente .div_chilgren #block_pincode_msg_time {
+        order: 1;
+    }
+    
+    .page-messente-request-form .div_chilgren {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    @media only screen and (max-width: 1023px) {
+        .page-messente-request-form .profile-enter a::before {
+            left: 0px;
+        }
+    }
+    
+    @media only screen and (max-width: 481px) {
+        .page-messente #prefix_upload_btn {
+            width: calc(50% - 11px);
+        }
+    }
+    
+    @media only screen and (min-width: 479px) {
+        /* .page-messente-register-form .confirm-parent label[for=edit-pass-pass2] {
+            width: auto !important;
+        } */
+        .page-messente .div_chilgren #block_inputs_pincodes,
+        .page-messente .div_chilgren #block_pincode_msg_time {
+            max-width: 340px;
+        }
+        .section-messente #block_inputs_pincodes .pincode__input {
+            padding: 5px;
+            width: 44px;
+            height: 54px;
+            text-align: center;
+        }
+    }
+    
+    @media only screen and (min-width: 479px) and (max-width: 769px) {
+        .page-messente #prefix_upload_btn {
+            width: calc(33% - 11px);
+        }
+    }
+    
+    @media only screen and (min-width: 767px) {
+        .page-messente #prefix_upload_btn {
+            position: relative;
+            display: flex;
+            height: 97px;
+            width: calc(20% - 15px)
+        }
+        .page-messente #container_file_upload {
+            position: relative;
+        }
+        .page-messente-register-form .file_uplod_text_valid {
+            position: absolute;
+            right: calc(100% - 465px);
+            top: 50px;
+        }
+    }

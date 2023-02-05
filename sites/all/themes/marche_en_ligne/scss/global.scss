@@ -1,0 +1,79 @@
+@import "variables";
+@import "breakpoints";
+
+/* First css */
+@import "main/reset";
+@import 'main/scrollBar';
+@import 'main/filter-sidebar';
+
+@import 'main/section-content-filters';
+
+// Submit AD
+@import "submit-ad-node/submit-ad--node-gallery";
+@import "submit-ad-node/submit-ad--body";
+
+// Categories Page
+@import "categories/categories-general";
+@import "categories/categories-filter";
+@import "categories/categories-subtiitle";
+@import "categories/categories-empty";
+
+// Page Search
+
+// PAGES
+@import "pages/about-us";
+@import "pages/contacts";
+@import "pages/rules-page";
+@import "pages/premium";
+@import "pages/favorite";
+@import "pages/maintenance";
+
+
+// Webform
+@import "webform/webform";
+
+// Administration
+@import "admin/admin_tabs";
+@import "admin/admin-not-logged";
+
+// Message
+@import "message/messages";
+@import "message/message-new";
+@import "message/message-view";
+
+// Error
+@import "error/error";
+
+// User
+@import "page-user/user-page-body";
+@import "page-user/user-page-comment";
+@import "page-user/user-page-bookmarks";
+@import "page-user/user-page-login";
+@import "page-user/users";
+
+// Edit && Create NODE
+@import 'edit-create-node/edit-create-node-style';
+
+// add Node
+@import 'add-node/add-node-submit-ad';
+@import 'add-node/add-node-category-hide-dynamic';
+
+// Vasiliy
+@import 'submit-ad-node/submit-ad-popup';
+@import 'pages/ulogin';
+
+// Develop style
+@import 'develop-style';
+
+
+/* First css */
+@import 'main/hidden-menu';
+@import 'main/header';
+@import 'main/advertise';
+@import 'main/body';
+@import 'main/content';
+
+@import 'main/footer';
+@import 'main/classes';
+
+@import 'main/stick-mobile';
